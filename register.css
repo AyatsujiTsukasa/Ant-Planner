@@ -1,0 +1,11 @@
+.validText {
+	color: green;
+}
+
+.invalidText {
+	color: red;
+}
+
+.warning {
+	font-size: 12px;
+}
