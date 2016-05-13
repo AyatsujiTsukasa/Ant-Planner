@@ -1,5 +1,5 @@
 function validateEmail() {
-	var emailValidation = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+	var emailValidation = /^\w+@[a-zA-Z0-9_]+?\.[a-zA-Z]{2,3}$/;
 	if(!emailValidation.test($('#email')[0].value)) {
 		$('#emailWarning').html(" Please enter a valid email address");
 		$('#emailWarning').removeClass('validText');
