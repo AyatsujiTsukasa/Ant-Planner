@@ -1,6 +1,5 @@
 var emailValid = false;
 var passwordValid = false;
-var passwordMatch = false;
 
 function validateEmail() {
 	var emailValidation = /^\w+@[a-zA-Z0-9_]+?\.[a-zA-Z]{2,3}$/;
@@ -15,20 +14,6 @@ function validateEmail() {
 		$('#emailWarning').addClass('validText');
 		emailValid = true;
 		// Check if the email already exists. (After setting up database)
-	}
-}
-
-function matchPassword() {
-	if($('#password')[0].value !== $('#password2')[0].value) {
-		$('#retypePasswordWarning').html(" Two passwords do not match");
-		$('#retypePasswordWarning').removeClass('validText');
-		$('#retypePasswordWarning').addClass('invalidText');
-		passwordMatch = false;
-	} else {
-		$('#retypePasswordWarning').html(" Passwords match");
-		$('#retypePasswordWarning').removeClass('invalidText');
-		$('#retypePasswordWarning').addClass('validText');
-		passwordMatch = true;
 	}
 }
 
@@ -55,16 +40,15 @@ function validatePassword() {
 	}
 }
 
+function confirmSubmission() {
+	if(emailValid&&passwordValid){
+		$('#loginForm')[0].submit();
+	}
+}
+
 function validate() {
-	matchPassword();
 	validateEmail();
 	validatePassword();
 }
 
-function confirmSubmission() {
-	if(passwordMatch&&emailValid&&passwordValid){
-		$('#registerForm')[0].submit();
-	}
-}
-
-setInterval(validate, 300);
+setInterval(validate, 100);
