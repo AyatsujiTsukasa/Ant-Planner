@@ -34,6 +34,7 @@ function validatePassword() {
 	if(passwordValid){
 		$('#passwordWarning').removeClass('invalidText');
 		$('#passwordWarning').addClass('validText');
+		$('#passwordWarning').html(" Valid password");
 	} else {
 		$('#passwordWarning').removeClass('validText');
 		$('#passwordWarning').addClass('invalidText');
@@ -51,4 +52,4 @@ function validate() {
 	validatePassword();
 }
 
-setInterval(validate, 100);
+$('#loginForm').on("keyup", "input.validateLocally", validate);

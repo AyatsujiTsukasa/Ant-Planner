@@ -6,25 +6,25 @@
 	<link rel="stylesheet" type="text/css" href="register.css">
 </head>
 <body>
-	<form id="registerForm">
+	<form id="registerForm" method="POST" >
 		<table>
 			<tr>
 				<td><label for="email">Enter your email:</label><span id="emailWarning" class="warning"></span></td>
 			</tr>
 			<tr>
-				<td><input type="email" name="email" id="email" /></td>
+				<td><input type="email" name="email" id="email" class="validateLocally" /></td>
 			</tr>
 			<tr>
 				<td><label for="password">Enter your password:</label><span id="passwordWarning" class="warning"></span></td>
 			</tr>
 			<tr>
-				<td><input type="password" name="password" id="password" maxlength="15" /></td>
+				<td><input type="password" name="password" id="password" maxlength="15" class="validateLocally" /></td>
 			</tr>
 			<tr>
 				<td><label for="password2">Retype password:</label><span id="retypePasswordWarning" class="warning"></span></td>
 			</tr>
 			<tr>
-				<td><input type="password" name="password2" id="password2" maxlength="15" /></td>
+				<td><input type="password" name="password2" id="password2" maxlength="15" class="validateLocally" /></td>
 			</tr>
 			<tr>
 				<td><input type="button" name="registerbutton" value="Register" id="registerButton" onclick="confirmSubmission()"></td>

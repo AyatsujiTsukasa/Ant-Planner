@@ -67,4 +67,4 @@ function confirmSubmission() {
 	}
 }
 
-setInterval(validate, 300);
+$('#registerForm').on("keyup", "input.validateLocally", validate);
