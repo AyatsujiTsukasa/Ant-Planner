@@ -3,7 +3,7 @@ var passwordValid = false;
 var passwordMatch = false;
 
 function validateEmail() {
-	var emailValidation = /^\w+@[a-zA-Z0-9_]+?\.[a-zA-Z]{2,3}$/;
+	var emailValidation = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[_a-z0-9-]+)*(\.[a-z]{2,4})$/;
 	if(!emailValidation.test($('#email')[0].value)) {
 		$('#emailWarning').html(" Please enter a valid email address");
 		$('#emailWarning').removeClass('validText');
