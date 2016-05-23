@@ -5,8 +5,8 @@ var usernameValid = false;
 
 function validateUsername() {
 	var usernameValidation = /^[a-zA-Z0-9 ]{3,20}$/;
-	if(!usernameValidation.test($('#username')[0].value)) {
-		$('#usernameWarning').html(" Uername can only contain alphabetical characters and spaces, and within length 3-20");
+	if(!usernameValidation.test($.trim($('#username')[0].value))) {
+		$('#usernameWarning').html(" The username can only contain letters, numbers and spaces, and 3-20 characters");
 		$('#usernameWarning').removeClass('validText');
 		$('#usernameWarning').addClass('invalidText');
 		usernameValid = false;
@@ -21,7 +21,7 @@ function validateUsername() {
 
 function validateEmail() {
 	var emailValidation = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[_a-z0-9-]+)*(\.[a-z]{2,4})$/;
-	if(!emailValidation.test($('#email')[0].value)) {
+	if(!emailValidation.test($.trim($('#email')[0].value))) {
 		$('#emailWarning').html(" Please enter a valid email address");
 		$('#emailWarning').removeClass('validText');
 		$('#emailWarning').addClass('invalidText');
@@ -36,7 +36,7 @@ function validateEmail() {
 }
 
 function matchPassword() {
-	if($('#password')[0].value !== $('#password2')[0].value) {
+	if($('#password')[0].value !== $('#password2')[0].value || $('#password2')[0].value === "") {
 		$('#retypePasswordWarning').html(" Two passwords do not match");
 		$('#retypePasswordWarning').removeClass('validText');
 		$('#retypePasswordWarning').addClass('invalidText');
@@ -50,9 +50,9 @@ function matchPassword() {
 }
 
 function validatePassword() {
-	var str = $('#password')[0].value;
-	if(!(/[0-9]/.test(str) && /[a-zA-Z]/.test(str))){
-		$('#passwordWarning').html(" The password should be alphanumeric");
+	var str = $.trim($('#password')[0].value);
+	if(!(/^(?=.*[a-zA-Z])(?=.*[0-9])/.test(str))){
+		$('#passwordWarning').html(" The password should contain both letters and numbers");
 		passwordValid = false;
 	} else if (str.length < 6) {
 		$('#passwordWarning').html(" The password should contain at least 6 characters");
@@ -64,6 +64,7 @@ function validatePassword() {
 		passwordValid = true;
 	}
 	if(passwordValid){
+		$('#passwordWarning').html("Valid password")
 		$('#passwordWarning').removeClass('invalidText');
 		$('#passwordWarning').addClass('validText');
 	} else {
@@ -77,12 +78,20 @@ function validate() {
 	validateEmail();
 	validatePassword();
 	validateUsername();
-}
-
-function confirmSubmission() {
-	if(passwordMatch&&emailValid&&passwordValid){
-		$('#registerForm')[0].submit();
+	if(emailValid&&passwordValid&&passwordMatch&&usernameValid){
+		$('#registerButton').removeAttr('disabled');
+	} else {
+		$('#registerButton').attr('disabled', 'disabled');
 	}
 }
 
-$('#registerForm').on("keyup", "input.validateLocally", validate);
+$('#registerForm').submit(function (e) {
+	e.preventDefault();
+	var _this = $(this),
+		action = _this.attr("action");
+	$.post(action, _this.serialize(), function (data) {
+		$('.ajaxMsg').html(data).show();
+	});
+});
+
+setInterval(validate, 100);

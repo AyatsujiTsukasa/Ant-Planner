@@ -6,7 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="login.css">
 </head>
 <body>
-	<form id="loginForm">
+	<form id="loginForm" method="post" action="login.php">
 		<table>
 			<tr>
 				<td><label for="email">Enter your email:</label><span id="emailWarning" class="warning"></span></td>
@@ -21,11 +21,12 @@
 				<td><input type="password" name="password" id="password" maxlength="15" class="validateLocally" /></td>
 			</tr>
 			<tr>
-				<td><input type="button" name="loginButton" value="Login" id="loginButton" onclick="confirmSubmission()"></td>
+				<td><input type="submit" name="loginButton" value="Login" id="loginButton"></td>
 			</tr>
 		</table>
 	</form>
-
+	<!-- AJAX message box. After form submission, communicate with server and return data. -->
+	<div class="ajaxMsg"></div>
 	<script type="text/javascript" src="login.js"></script>
 </body>
 </html>

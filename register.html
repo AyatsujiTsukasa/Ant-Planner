@@ -9,7 +9,7 @@
 	<form id="registerForm" method="post" action="register.php">
 		<table>
 			<tr>
-				<td><label for="email">Enter your username:</label><span id="usernameWarning" class="warning"></span></td>
+				<td><label for="username">Enter your username:</label><span id="usernameWarning" class="warning"></span></td>
 			</tr>
 			<tr>
 				<td><input type="text" name="username" id="username" maxlength="20" class="validateLocally" /></td>
@@ -33,11 +33,12 @@
 				<td><input type="password" name="password2" id="password2" maxlength="15" class="validateLocally" /></td>
 			</tr>
 			<tr>
-				<td><input type="button" name="registerbutton" value="Create Account" id="registerButton" onclick="confirmSubmission()"></td>
+				<td><input type="submit" name="registerbutton" value="Create Account" id="registerButton"></td>
 			</tr>
 		</table>
 	</form>
-
+	<!-- AJAX message box. After form submission, communicate with server and return data. -->
+	<div class="ajaxMsg"></div>
 	<script type="text/javascript" src="register.js"></script>
 </body>
 </html>

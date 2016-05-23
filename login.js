@@ -3,7 +3,7 @@ var passwordValid = false;
 
 function validateEmail() {
 	var emailValidation = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[_a-z0-9-]+)*(\.[a-z]{2,4})$/;
-	if(!emailValidation.test($('#email')[0].value)) {
+	if(!emailValidation.test($.trim($('#email')[0].value))) {
 		$('#emailWarning').html(" Please enter a valid email address");
 		$('#emailWarning').removeClass('validText');
 		$('#emailWarning').addClass('invalidText');
@@ -18,9 +18,9 @@ function validateEmail() {
 }
 
 function validatePassword() {
-	var str = $('#password')[0].value;
+	var str = $.trim($('#password')[0].value);
 	if(!(/[0-9]/.test(str) && /[a-zA-Z]/.test(str))){
-		$('#passwordWarning').html(" The password should be alphanumeric");
+		$('#passwordWarning').html(" The password should contain both letters and numbers");
 		passwordValid = false;
 	} else if (str.length < 6) {
 		$('#passwordWarning').html(" The password should contain at least 6 characters");
@@ -41,15 +41,14 @@ function validatePassword() {
 	}
 }
 
-function confirmSubmission() {
-	if(emailValid&&passwordValid){
-		$('#loginForm')[0].submit();
-	}
-}
-
 function validate() {
 	validateEmail();
 	validatePassword();
+	if(emailValid&&passwordValid){
+		$('#loginButton').removeAttr('disabled');
+	} else {
+		$('#loginButton').attr('disabled', 'disabled');
+	}
 }
 
-$('#loginForm').on("keyup", "input.validateLocally", validate);
+setInterval(validate, 100);
