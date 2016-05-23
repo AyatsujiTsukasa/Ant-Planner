@@ -13,7 +13,6 @@ function validateEmail() {
 		$('#emailWarning').removeClass('invalidText');
 		$('#emailWarning').addClass('validText');
 		emailValid = true;
-		// Check if the email already exists. (After setting up database)
 	}
 }
 
@@ -51,4 +50,5 @@ function validate() {
 	}
 }
 
-setInterval(validate, 100);
+// setInterval(validate, 100);
+$('#loginForm').on("keyup", "input.validateLocally", validate);
