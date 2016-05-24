@@ -1,0 +1,22 @@
+.navbar {
+	background-color: white;
+	padding-right: 8%;
+	padding-left: 8%;
+}
+
+.logo{
+	float: left;
+	height: 50px;
+	width: 200px;
+}
+
+.nav-item{
+	font-size:16px;
+	margin-top: 10px;
+}
+
+.myForm{
+	background-color: white;
+	margin-top:2%;
+	padding: 30px;
+}
