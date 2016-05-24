@@ -1,36 +1,21 @@
-var valid = true;
+var emailValid = false;
+var passwordValid = false;
+var passwordMatch = false;
+var usernameValid = false;
 
 function validateUsername() {
 	var usernameValidation = /^[a-zA-Z0-9 ]{3,20}$/;
 	if(!usernameValidation.test($.trim($('#username')[0].value))) {
-		$('#usernameWarning').html(" The username can only contain letters, numbers and spaces, and 3-20 characters");
-		$('#usernameWarning').removeClass('validText');
-		$('#usernameWarning').addClass('invalidText');
-		valid = false;
+		$('#usernameWarning').html(" Please use only letters, numbers and spaces, and 3-20 characters");
+		$('#usernameWarning').removeClass('text-success');
+		$('#usernameWarning').addClass('text-danger');
+		usernameValid = false;
 	} else {
-        if (window.XMLHttpRequest) {
-            // for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                if(xmlhttp.responseText === "exist") {
-                	$('#usernameWarning').html(" Username already taken");
-					$('#usernameWarning').removeClass('validText');
-					$('#usernameWarning').addClass('invalidText');
-					valid = false;
-                } else {
-                	$('#usernameWarning').html(" Valid username");
-					$('#usernameWarning').removeClass('invalidText');
-					$('#usernameWarning').addClass('validText');
-                }
-            }
-        };
-        xmlhttp.open("get", "checkExist.php?q=" + $.trim($('#username')[0].value) + "&para=username", true);
-        xmlhttp.send();
+		$('#usernameWarning').html(" Valid username");
+		$('#usernameWarning').removeClass('text-danger');
+		$('#usernameWarning').addClass('text-success');
+		usernameValid = true;
+		// Check if the username already exists. (After setting up database)
 	}
 }
 
@@ -38,52 +23,34 @@ function validateEmail() {
 	var emailValidation = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[_a-z0-9-]+)*(\.[a-z]{2,4})$/;
 	if(!emailValidation.test($.trim($('#email')[0].value))) {
 		$('#emailWarning').html(" Please enter a valid email address");
-		$('#emailWarning').removeClass('validText');
-		$('#emailWarning').addClass('invalidText');
-		valid = false;
+		$('#emailWarning').removeClass('text-success');
+		$('#emailWarning').addClass('text-danger');
+		emailValid = false;
 	} else {
-        if (window.XMLHttpRequest) {
-            // for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                if(xmlhttp.responseText === "exist") {
-                	$('#emailWarning').html(" Email already taken");
-					$('#emailWarning').removeClass('validText');
-					$('#emailWarning').addClass('invalidText');
-					valid = false;
-                } else {
-                	$('#emailWarning').html(" Valid email address");
-					$('#emailWarning').removeClass('invalidText');
-					$('#emailWarning').addClass('validText');
-                }
-            }
-        };
-        xmlhttp.open("get", "checkExist.php?q=" + $.trim($('#email')[0].value) + "&para=email", true);
-        xmlhttp.send();
+		$('#emailWarning').html(" Valid email address");
+		$('#emailWarning').removeClass('text-danger');
+		$('#emailWarning').addClass('text-success');
+		emailValid = true;
+		// Check if the email already exists. (After setting up database)
 	}
 }
 
 function matchPassword() {
 	if($('#password')[0].value !== $('#password2')[0].value || $('#password2')[0].value === "") {
 		$('#retypePasswordWarning').html(" Two passwords do not match");
-		$('#retypePasswordWarning').removeClass('validText');
-		$('#retypePasswordWarning').addClass('invalidText');
-		valid = false;
+		$('#retypePasswordWarning').removeClass('text-success');
+		$('#retypePasswordWarning').addClass('text-danger');
+		passwordMatch = false;
 	} else {
 		$('#retypePasswordWarning').html(" Passwords match");
-		$('#retypePasswordWarning').removeClass('invalidText');
-		$('#retypePasswordWarning').addClass('validText');
+		$('#retypePasswordWarning').removeClass('text-danger');
+		$('#retypePasswordWarning').addClass('text-success');
+		passwordMatch = true;
 	}
 }
 
 function validatePassword() {
 	var str = $.trim($('#password')[0].value);
-	var passwordValid = true;
 	if(!(/^(?=.*[a-zA-Z])(?=.*[0-9])/.test(str))){
 		$('#passwordWarning').html(" The password should contain both letters and numbers");
 		passwordValid = false;
@@ -93,15 +60,16 @@ function validatePassword() {
 	} else if (str.length > 15) {
 		$('#passwordWarning').html(" The password should contain at most 15 characters");
 		passwordValid = false;
+	} else {
+		passwordValid = true;
 	}
 	if(passwordValid){
 		$('#passwordWarning').html("Valid password")
-		$('#passwordWarning').removeClass('invalidText');
-		$('#passwordWarning').addClass('validText');
+		$('#passwordWarning').removeClass('text-danger');
+		$('#passwordWarning').addClass('text-success');
 	} else {
-		$('#passwordWarning').removeClass('validText');
-		$('#passwordWarning').addClass('invalidText');
-		valid = false;
+		$('#passwordWarning').removeClass('text-success');
+		$('#passwordWarning').addClass('text-danger');
 	}
 }
 
@@ -110,7 +78,7 @@ function validate() {
 	validateEmail();
 	validatePassword();
 	validateUsername();
-	if(valid){
+	if(emailValid&&passwordValid&&passwordMatch&&usernameValid){
 		$('#registerButton').removeAttr('disabled');
 	} else {
 		$('#registerButton').attr('disabled', 'disabled');
@@ -126,5 +94,4 @@ $('#registerForm').submit(function (e) {
 	});
 });
 
-// setInterval(validate, 100);
-$('#registerForm').on("keyup", "input.validateLocally", validate);
+setInterval(validate, 100);
