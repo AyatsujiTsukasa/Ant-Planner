@@ -3,9 +3,9 @@ var valid = true;
 function validateUsername() {
 	var usernameValidation = /^[a-zA-Z0-9 ]{3,20}$/;
 	if(!usernameValidation.test($.trim($('#username')[0].value))) {
-		$('#usernameWarning').html(" The username can only contain letters, numbers and spaces, and 3-20 characters");
-		$('#usernameWarning').removeClass('validText');
-		$('#usernameWarning').addClass('invalidText');
+		$('#usernameWarning').html(" Please use only letters, numbers and spaces, and 3-20 characters");
+		$('#usernameWarning').removeClass('text-success');
+		$('#usernameWarning').addClass('text-danger');
 		valid = false;
 	} else {
         if (window.XMLHttpRequest) {
@@ -19,13 +19,13 @@ function validateUsername() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 if(xmlhttp.responseText === "exist") {
                 	$('#usernameWarning').html(" Username already taken");
-					$('#usernameWarning').removeClass('validText');
-					$('#usernameWarning').addClass('invalidText');
+					$('#usernameWarning').removeClass('text-success');
+					$('#usernameWarning').addClass('text-danger');
 					valid = false;
                 } else {
                 	$('#usernameWarning').html(" Valid username");
-					$('#usernameWarning').removeClass('invalidText');
-					$('#usernameWarning').addClass('validText');
+					$('#usernameWarning').removeClass('text-danger');
+					$('#usernameWarning').addClass('text-success');
                 }
             }
         };
@@ -38,8 +38,8 @@ function validateEmail() {
 	var emailValidation = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[_a-z0-9-]+)*(\.[a-z]{2,4})$/;
 	if(!emailValidation.test($.trim($('#email')[0].value))) {
 		$('#emailWarning').html(" Please enter a valid email address");
-		$('#emailWarning').removeClass('validText');
-		$('#emailWarning').addClass('invalidText');
+		$('#emailWarning').removeClass('text-success');
+		$('#emailWarning').addClass('text-danger');
 		valid = false;
 	} else {
         if (window.XMLHttpRequest) {
@@ -53,13 +53,13 @@ function validateEmail() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 if(xmlhttp.responseText === "exist") {
                 	$('#emailWarning').html(" Email already taken");
-					$('#emailWarning').removeClass('validText');
-					$('#emailWarning').addClass('invalidText');
+					$('#emailWarning').removeClass('text-success');
+					$('#emailWarning').addClass('text-danger');
 					valid = false;
                 } else {
                 	$('#emailWarning').html(" Valid email address");
-					$('#emailWarning').removeClass('invalidText');
-					$('#emailWarning').addClass('validText');
+					$('#emailWarning').removeClass('text-danger');
+					$('#emailWarning').addClass('text-success');
                 }
             }
         };
@@ -71,13 +71,13 @@ function validateEmail() {
 function matchPassword() {
 	if($('#password')[0].value !== $('#password2')[0].value || $('#password2')[0].value === "") {
 		$('#retypePasswordWarning').html(" Two passwords do not match");
-		$('#retypePasswordWarning').removeClass('validText');
-		$('#retypePasswordWarning').addClass('invalidText');
+		$('#retypePasswordWarning').removeClass('text-success');
+		$('#retypePasswordWarning').addClass('text-danger');
 		valid = false;
 	} else {
 		$('#retypePasswordWarning').html(" Passwords match");
-		$('#retypePasswordWarning').removeClass('invalidText');
-		$('#retypePasswordWarning').addClass('validText');
+		$('#retypePasswordWarning').removeClass('text-danger');
+		$('#retypePasswordWarning').addClass('text-success');
 	}
 }
 
@@ -96,11 +96,11 @@ function validatePassword() {
 	}
 	if(passwordValid){
 		$('#passwordWarning').html("Valid password")
-		$('#passwordWarning').removeClass('invalidText');
-		$('#passwordWarning').addClass('validText');
+		$('#passwordWarning').removeClass('text-danger');
+		$('#passwordWarning').addClass('text-success');
 	} else {
-		$('#passwordWarning').removeClass('validText');
-		$('#passwordWarning').addClass('invalidText');
+		$('#passwordWarning').removeClass('text-success');
+		$('#passwordWarning').addClass('text-danger');
 		valid = false;
 	}
 }
