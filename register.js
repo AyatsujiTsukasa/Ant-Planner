@@ -1,4 +1,7 @@
-var valid = true;
+var usernameValid = false;
+var emailValid = false;
+var passwordValid = false;
+var passwordMatch = false;
 
 function validateUsername() {
 	var usernameValidation = /^[a-zA-Z0-9 ]{3,20}$/;
@@ -6,13 +9,12 @@ function validateUsername() {
 		$('#usernameWarning').html(" Please use only letters, numbers and spaces, and 3-20 characters");
 		$('#usernameWarning').removeClass('text-success');
 		$('#usernameWarning').addClass('text-danger');
-		valid = false;
+		usernameValid = false;
 	} else {
+		var xmlhttp = undefined;
         if (window.XMLHttpRequest) {
-            // for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
         } else {
-            // for IE6, IE5
             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
         xmlhttp.onreadystatechange = function() {
@@ -21,11 +23,12 @@ function validateUsername() {
                 	$('#usernameWarning').html(" Username already taken");
 					$('#usernameWarning').removeClass('text-success');
 					$('#usernameWarning').addClass('text-danger');
-					valid = false;
+					usernameValid = false;
                 } else {
                 	$('#usernameWarning').html(" Valid username");
 					$('#usernameWarning').removeClass('text-danger');
 					$('#usernameWarning').addClass('text-success');
+					usernameValid = true;
                 }
             }
         };
@@ -36,17 +39,16 @@ function validateUsername() {
 
 function validateEmail() {
 	var emailValidation = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[_a-z0-9-]+)*(\.[a-z]{2,4})$/;
-	if(!emailValidation.test($.trim($('#email')[0].value))) {
+	if(!emailValidation.test($.trim($('#email').val()))) {
 		$('#emailWarning').html(" Please enter a valid email address");
 		$('#emailWarning').removeClass('text-success');
 		$('#emailWarning').addClass('text-danger');
-		valid = false;
+		emailValid = false;
 	} else {
+		var xmlhttp = undefined;
         if (window.XMLHttpRequest) {
-            // for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
         } else {
-            // for IE6, IE5
             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
         xmlhttp.onreadystatechange = function() {
@@ -55,11 +57,12 @@ function validateEmail() {
                 	$('#emailWarning').html(" Email already taken");
 					$('#emailWarning').removeClass('text-success');
 					$('#emailWarning').addClass('text-danger');
-					valid = false;
+					emailValid = false;
                 } else {
                 	$('#emailWarning').html(" Valid email address");
 					$('#emailWarning').removeClass('text-danger');
 					$('#emailWarning').addClass('text-success');
+					emailValid = true;
                 }
             }
         };
@@ -73,17 +76,18 @@ function matchPassword() {
 		$('#retypePasswordWarning').html(" Two passwords do not match");
 		$('#retypePasswordWarning').removeClass('text-success');
 		$('#retypePasswordWarning').addClass('text-danger');
-		valid = false;
+		passwordMatch = false;
 	} else {
 		$('#retypePasswordWarning').html(" Passwords match");
 		$('#retypePasswordWarning').removeClass('text-danger');
 		$('#retypePasswordWarning').addClass('text-success');
+		passwordMatch = true;
 	}
 }
 
 function validatePassword() {
-	var str = $.trim($('#password')[0].value);
-	var passwordValid = true;
+	var str = $.trim($('#password').val());
+	passwordValid = true;
 	if(!(/^(?=.*[a-zA-Z])(?=.*[0-9])/.test(str))){
 		$('#passwordWarning').html(" The password should contain both letters and numbers");
 		passwordValid = false;
@@ -101,7 +105,6 @@ function validatePassword() {
 	} else {
 		$('#passwordWarning').removeClass('text-success');
 		$('#passwordWarning').addClass('text-danger');
-		valid = false;
 	}
 }
 
@@ -110,7 +113,7 @@ function validate() {
 	validateEmail();
 	validatePassword();
 	validateUsername();
-	if(valid){
+	if(usernameValid&&emailValid&&passwordValid&&passwordMatch){
 		$('#registerButton').removeAttr('disabled');
 	} else {
 		$('#registerButton').attr('disabled', 'disabled');
@@ -126,5 +129,4 @@ $('#registerForm').submit(function (e) {
 	});
 });
 
-// setInterval(validate, 100);
-$('#registerForm').on("keyup", "input.validateLocally", validate);
+setInterval(validate, 100);

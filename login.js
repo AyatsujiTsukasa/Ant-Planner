@@ -50,5 +50,4 @@ function validate() {
 	}
 }
 
-// setInterval(validate, 100);
-$('#loginForm').on("keyup", "input.validateLocally", validate);
+setInterval(validate, 100);
