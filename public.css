@@ -17,8 +17,15 @@
 
 .myForm{
 	background-color: white;
+	margin: auto;
 	margin-top:2%;
 	padding: 30px;
+}
+
+@media screen and (min-width: 500px) {
+	.myForm{
+		width: 500px;
+	}
 }
 
 .warning{
