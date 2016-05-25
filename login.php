@@ -13,6 +13,7 @@ if(!$_POST) {
 
 $email = $_POST["email"];
 $password = $_POST["password"];
+$time = $_POST["remember"] === "remember" ? 300 : 3600*24*90;
 
 $valid = true;
 $errorMsg = "Error: <ul>";
@@ -50,9 +51,10 @@ if($EmailResult->num_rows === 0){
 }
 
 if($valid){
+	$username = $row['username'];
+	setcookie("username", $username, time()+$time, "/");
 	echo "<script>
 			window.location = 'userhome.html';
-			sessionStorage.setItem('email', '".$email."');
 		  </script>";
 } else {
 	echo $errorMsg."</ul>";

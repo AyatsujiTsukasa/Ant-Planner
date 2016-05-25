@@ -1,0 +1,154 @@
+@font-face {
+    font-family: icon;
+    src: url(Fonts/icomoon.woff);
+}
+
+.icon {
+    margin: 0px 3px 0px 3px;
+    font-size: 30px;
+}
+
+.importance1:before {
+    font-family: icon;
+    content: "\e9d9\e9d7\e9d7";
+}
+.importance2:before {
+    font-family: icon;
+    content: "\e9d9\e9d9\e9d7";
+}
+.importance3:before {
+    font-family: icon;
+    content: "\e9d9\e9d9\e9d9";
+}
+
+.planTable {
+    font-size: 25px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    text-align: center;
+    color: white;
+}
+
+.topHeader {
+    background-color: cyan;
+}
+
+.planTagHeader {
+    background-color: cyan;
+}
+
+.planTagHeaderIcon:before {
+    content: "\e9bf";
+    font-family: icon;
+}
+
+.due {
+    background-color: darkseagreen;
+}
+
+.dueTag {
+    background-color: darkgoldenrod;
+}
+
+.planName {
+    background-color: blue;
+}
+
+.customTagHeader {
+    background-color: orange;
+    width: 3px;
+}
+
+.infoTagHeader {
+    background-color: chartreuse;
+    width: 3px;
+}
+
+.empty {
+    background-color: transparent;
+}
+
+.newCustomTag {
+    background-color: lightgray;
+}
+
+.newCustomTagIcon:before {
+    content: "\ea0a";
+    font-family: icon;
+}
+
+.planDesc {
+    background-color: lightblue;
+}
+
+.reminderTag {
+    background-color: red;
+}
+
+.reminderTagIcon:before {
+    content: "\e950";
+    font-family: icon;
+}
+
+.phonePush {
+    background-color: darkcyan;
+}
+
+.phoneAlarm {
+    background-color: violet;
+}
+
+.desktopPush {
+    background-color: slateblue;
+}
+
+.urlTag {
+    background-color: mediumpurple;
+}
+
+.urlTagIcon:before {
+    content: "\e9cb";
+    font-family: icon;
+}
+
+.url {
+    background-color: rosybrown;
+}
+
+.locationTag {
+    background-color: tomato;
+}
+
+.locationTagIcon:before {
+    content: "\e947";
+    font-family: icon;
+}
+
+.phonePushIcon:before {
+    content: "\e958";
+    font-family: icon;
+}
+
+.phoneAlarmIcon:before {
+    content: "\e958";
+    font-family: icon;
+}
+
+.desktopPushIcon:before {
+    content: "\e956";
+    font-family: icon;
+}
+
+.location {
+    background-color: firebrick;
+}
+
+.map {
+    background-color: violet;
+    height: 180px;
+}
+
+.dueTagIcon:before {
+    content: "\e9b8";
+    font-family: icon;
+}

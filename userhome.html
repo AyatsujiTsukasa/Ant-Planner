@@ -1,9 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
 	<title>Ant Planner</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="public.css">
+	<link rel="stylesheet" type="text/css" href="planStyle.css">
 </head>
 <body>
-	<p>Welcome!</p>
+	<h3 id="welcomeMsg"></h3>
+	<div class="plan">
+		<table class="planTable">
+			<tr>
+				<td rowspan="1" class="topHeader"></td><td colspan="1" class="planTagHeader"><p class="planTagHeaderIcon icon"></p></td>
+				<td colspan="3" class="planName"><input type="text" name="name" class="planNameText" /><span class="importance1 importance icon"></span></td>
+			</tr>
+			<tr>
+				<td rowspan="1" class="customTagHeader"></td><td class="newCustomTag"><p class="newCustomTagIcon icon"></p></td>
+				<td rowspan="1" colspan="3" class="planDesc"><textarea name="desc" class="planDescText"></textarea></td>
+			</tr>
+			<tr>
+				<td rowspan="4" class="infoTagHeader"></td><td class="dueTag"><p class="dueTagIcon icon"></p></td><td colspan="3" class="due"><input type="datetime-local" name="due" class="dueDateTime" /></td>
+			</tr>
+			<tr>
+				<td class="reminderTag"><p class="reminderTagIcon icon"></p></td><td class="phoneAlarm"><p class="phoneAlarmIcon icon">Alarm</p></td><td class="phonePush"><p class="phonePushIcon icon">Push</p></td><td class="desktopPush"><p class="desktopPushIcon icon"> Push</p></td>
+			</tr>
+			<tr>
+				<td class="urlTag"><p class="urlTagIcon icon"></p></td><td colspan="3" class="url"><input type="text" name="url" class="urlText" /></td>
+			</tr>
+			<tr>
+				<td class="locationTag"><p class="locationTagIcon icon"></p></td><td colspan="3" class="location"><input type="text" name="locationText" /></td>
+			</tr>
+			<tr>
+				<td class="empty"></td><td class="empty"></td><td colspan="3" class="map">Map</td>
+			</tr>
+		</table>
+		<p>这个table就是plan的基本框架，请你把前端做一下～</p>
+		<ol>
+		<li>一开始就是最上面一栏，点击下拉按钮就会展开下面的部分</li>
+		<li>下面的部分一开始全是暗色，然后点左边某一个按钮就会enable这一行，变成亮色（除了Notification）</li>
+		<li>Notification的部分，点了按钮之后右边也全是暗色，然后点右边某一个的话就会变成亮色，再点就变暗</li>
+		<li>Map的部分，就弄一个合适的size就好</li>
+		<li>这些是我的想法😂基本框架目前为止也够了，location和map的话等过两天再加。前段拜托了🙏</li>
+		</ol>
+	</div>
+
+	<script type="text/javascript" src="userhome.js"></script>
 </body>
 </html>
