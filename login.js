@@ -5,13 +5,13 @@ function validateEmail() {
 	var emailValidation = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[_a-z0-9-]+)*(\.[a-z]{2,4})$/;
 	if(!emailValidation.test($.trim($('#email')[0].value))) {
 		$('#emailWarning').html(" Please enter a valid email address");
-		$('#emailWarning').removeClass('validText');
-		$('#emailWarning').addClass('invalidText');
+		$('#emailWarning').removeClass('text-success');
+		$('#emailWarning').addClass('text-danger');
 		emailValid = false;
 	} else {
 		$('#emailWarning').html(" Valid email Address");
-		$('#emailWarning').removeClass('invalidText');
-		$('#emailWarning').addClass('validText');
+		$('#emailWarning').removeClass('text-danger');
+		$('#emailWarning').addClass('text-success');
 		emailValid = true;
 	}
 }
@@ -31,12 +31,12 @@ function validatePassword() {
 		passwordValid = true;
 	}
 	if(passwordValid){
-		$('#passwordWarning').removeClass('invalidText');
-		$('#passwordWarning').addClass('validText');
+		$('#passwordWarning').removeClass('text-danger');
+		$('#passwordWarning').addClass('text-success');
 		$('#passwordWarning').html(" Valid password");
 	} else {
-		$('#passwordWarning').removeClass('validText');
-		$('#passwordWarning').addClass('invalidText');
+		$('#passwordWarning').removeClass('text-success');
+		$('#passwordWarning').addClass('text-danger');
 	}
 }
 

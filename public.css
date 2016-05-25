@@ -20,3 +20,26 @@
 	margin-top:2%;
 	padding: 30px;
 }
+
+.warning{
+	font-size: 14px;
+}
+
+.lineWithWords {
+   color: #c7c7c7;
+   width: 100%; 
+   text-align: center; 
+   border-bottom: 1px solid #c7c7c7; 
+   line-height: 0.1em;
+   margin: 40px 0 20px; 
+} 
+
+.lineWithWords span { 
+    background:#fff; 
+    padding:0 10px; 
+}
+
+.centerImg {
+	display: block;
+    margin: 0 auto;
+}

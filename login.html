@@ -1,35 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Ant Planner</title>
+	<!-- Required meta tags -->
+ 	<meta charset="utf-8">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	
+	<title>Login - Ant Planner</title>
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="login.css">
+	<link rel="stylesheet" type="text/css" href="public.css">
 </head>
-<body>
-	<form id="loginForm" method="post" action="login.php">
-		<table>
-			<tr>
-				<td><label for="email">Enter your email:</label><span id="emailWarning" class="warning"></span></td>
-			</tr>
-			<tr>
-				<td><input type="email" name="email" id="email" class="validateLocally" /></td>
-			</tr>
-			<tr>
-				<td><label for="password">Enter your password:</label><span id="passwordWarning" class="warning"></span></td>
-			</tr>
-			<tr>
-				<td><input type="password" name="password" id="password" maxlength="15" class="validateLocally" /></td>
-			</tr>
-			<tr>
-				<td><input type="checkbox" name="remember" value="remember" id="remember"><label for="remember">Remember me on this computer (Recommended)</label></td>
-			</tr>
-			<tr>
-				<td><input type="submit" name="loginButton" value="Login" id="loginButton"></td>
-			</tr>
-		</table>
-	</form>
+<body style="background-color: #f1f1f1">
+	<!-- Navigation bar -->
+	<nav class="navbar navbar-light navbar-static-top">
+		<a href="userhome.html">
+			<img class="logo" src="Images/AntPlannerLogo.png" alt="Ant Planner logo">
+		</a>
+		<ul class="nav navbar-nav pull-xs-right">
+			<li class="nav-item"><a class="nav-link" href="login.html">Log in</a></li>
+			<li class="nav-item"><a class="nav-link" href="register.html">Sign up</a></li>
+		</ul>
+	</nav>
+	<!-- Registration form -->
+	<div class="myForm col-sm-offset-4 col-sm-4">
+		<form id="loginForm" method="post" action="login.php">
+			<h2 style="text-align:center">Log in to Ant Planner</h2><br/>
+			<fieldset class="form-group">
+				<input type="email" name="email" id="email" placeholder="Email" class="validateLocally form-control" autofocus="" />
+				<span id="emailWarning" class="warning"></span>
+			</fieldset>
+			<fieldset class="form-group">
+				<input type="password" name="password" id="password" placeholder="Password" maxlength="15" class="validateLocally form-control" />
+				<span id="passwordWarning" class="warning"></span>
+			</fieldset>
+			<input class="btn btn-primary btn-block" type="submit" name="loginButton" value="Login" id="loginButton" />
+		</form>
+
+		<p class="lineWithWords"><span>Or</span></p>
+		<!-- Temporary place holder. Will change to actual button. --> 
+		<div>
+			<img src="Images/google.png" alt="Google sign in" class="centerImg"> 
+		</div><br/>
+		<div style="text-align:center">Don't have an account? <a href="register.html">Sign Up</a></div>
+	</div>
 	<!-- AJAX message box. After form submission, communicate with server and return data. -->
 	<div class="ajaxMsg"></div>
 	<script type="text/javascript" src="login.js"></script>
+
+	<script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script><!-- Tether for Bootstrap --> 
+ 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
 </body>
 </html>
