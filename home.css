@@ -1,0 +1,66 @@
+.bg-1{
+	background-color:#4da6ff;
+	padding: 5%;
+	color: white;
+	text-align: center;
+	font-family: source-sans-pro, sans-serif;
+}
+
+h1{
+	line-height: 150%;
+	font-style: bold;
+	font-weight: 700;
+}
+
+img{
+	height:256px;
+}
+
+.btn{
+	color:#ff3300;
+	border:2px solid #ff3300;
+}
+
+.btn:hover, .btn:active{
+	color:#e62e00;
+	border:2px solid #cc2900;
+}
+
+.marketing h2 {
+  font-weight: normal;
+}
+
+/* Featurettes
+------------------------- */
+
+.p{
+	color: #5a5a5a;
+}
+
+.featurette-divider {
+  margin: 5rem 0; /* Space out the Bootstrap <hr> more */
+}
+
+/* Thin out the marketing headings */
+.featurette-heading {
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -.05rem;
+}
+
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+
+@media (min-width: 40em) {
+  .featurette-heading {
+    font-size: 50px;
+  }
+}
+
+@media (min-width: 62em) {
+  .featurette-heading {
+    margin-top: 7rem;
+  }
+}
+
