@@ -15,6 +15,14 @@
 	margin-top: 10px;
 }
 
+.nav a{ 
+	color: grey !important; 
+}
+
+.nav a:hover, .nav a:active{ 
+	color: black !important; 
+}
+
 .myForm{
 	background-color: white;
 	margin: auto;
