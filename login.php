@@ -52,7 +52,9 @@ if($EmailResult->num_rows === 0){
 
 if($valid){
 	$username = $row['username'];
+	$id = $row['id'];
 	setcookie("username", $username, time()+$time, "/");
+	setcookie("id", $id, time()+$time, "/");
 	echo "<script>
 			window.location = 'userhome.html';
 		  </script>";
