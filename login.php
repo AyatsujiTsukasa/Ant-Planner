@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
-$name = "cnitna_antinc";
-$password = "Zyh2FXwxpTsmVQCx";
+$name = "antinc";
+$password = "AntInc_AntInc123";
 $dbname = "Ant_Planner";
 $conn = mysqli_connect($servername, $name, $password, $dbname);
 if (!$conn) {

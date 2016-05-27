@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
-$name = "cnitna_antinc";
-$password = "Zyh2FXwxpTsmVQCx";
+$name = "antinc";
+$password = "AntInc_AntInc123";
 $dbname = "Ant_Planner";
 $conn = mysqli_connect($servername, $name, $password, $dbname);
 if (!$conn) {
@@ -61,7 +61,7 @@ if($EmailResult->num_rows > 0){
 }
 
 if($valid){
-	$sql = "insert into Users (username, email, password) values('".$username."','".$email."','".$password."')";
+	$sql = "insert into Users (username, email, password, friends) values('".$username."','".$email."','".$password."','')";
 	if($conn->query($sql) === true) {
 		echo "<p>Account Created!</p><p>Details:</p><ul><li>Username: ".$username."</li><li>Email: ".$email."</li><li>Password: ".str_repeat("*", strlen($password))."</ul>";
 	} else {
