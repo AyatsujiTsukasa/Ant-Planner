@@ -13,7 +13,11 @@ if(!$_POST) {
 
 $email = $_POST["email"];
 $password = $_POST["password"];
-$time = $_POST["remember"] === "remember" ? 300 : 3600*24*90;
+if(isset($_POST["remember"])) {
+	$time = 3600*24*90;
+} else {
+	$time = 300;
+}
 
 $valid = true;
 $errorMsg = "Error: <ul>";
