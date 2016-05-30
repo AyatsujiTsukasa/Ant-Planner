@@ -41,6 +41,55 @@ $('.reminder').on("click", function() {
 	}
 });
 
-// function plan(){
-// 	var _html = "<div class='plan'></div>"
-// }
+$('.planTagHeader').on("click", function() {
+	var sib = $(this).parent().siblings();
+	if(/subHidden/.test(sib.attr("class"))){
+		sib.removeClass("subHidden");
+		$(this).children().removeClass("planTagHeaderIconDown").addClass("planTagHeaderIconUp");
+	} else {
+		sib.addClass("subHidden");
+		$(this).children().removeClass("planTagHeaderIconUp").addClass("planTagHeaderIconDown");
+	}
+});
+
+$('.location').on("keyup", function () {
+	url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + $(this).children().val();
+	var xhr = new XMLHttpRequest();
+	var _this = $(this);
+    xhr.onreadystatechange = function () {
+    	if (this.readyState == 4) {
+	        try {
+	            if(this.status == 0) {
+	                throw('Status = 0');
+	            }
+	            res = jQuery.trim(this.responseText).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+	            response = JSON.parse(res);
+	            var lst = response.results.slice(0, 5);
+	            _this.children()[1].innerHTML = lst.map(function(x){return mapchoice(x.formatted_address, x.geometry.location.lat, x.geometry.location.lng);}).join("");
+	        } catch (e) {
+	        	console.log(e);
+	    	}
+	    }
+    }
+    try {
+        xhr.open("get", url, true);
+        xhr.send("");
+    }
+    catch(e){
+        console.log(e);
+    }
+});
+
+function initializeMap(ele){
+	var mapOptions = {
+    	center: new google.maps.LatLng(ele.getAttribute('lat'), ele.getAttribute('lng')),
+    	zoom: 8,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(ele.parentElement.parentElement.parentElement.parentElement.nextElementSibling.children[2].children[0], mapOptions);
+    ele.parentElement.parentElement.innerHTML = "";
+}
+
+function mapchoice(name, lat, lng) {
+	return "<li><div class='mapChoice', onclick=initializeMap(this) lat='" + lat + "', lng='" + lng + "'>" + name + "</div></li>";
+}

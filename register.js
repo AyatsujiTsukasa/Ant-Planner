@@ -131,3 +131,4 @@ $('#registerForm').submit(function (e) {
 
 // setInterval(validate, 100);
 $('#registerForm').on("keyup", "input.validateLocally", validate);
+validate();

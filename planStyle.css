@@ -26,7 +26,7 @@
     border-collapse: collapse;
     border-spacing: 0;
     text-align: center;
-    color: white;
+    color: rebeccapurple;
 }
 
 .topHeader {
@@ -37,8 +37,13 @@
     background-color: cyan;
 }
 
-.planTagHeaderIcon:before {
+.planTagHeaderIconDown:before {
     content: "\e9bf";
+    font-family: icon;
+}
+
+.planTagHeaderIconUp:before {
+    content: "\e9c0";
     font-family: icon;
 }
 
@@ -139,6 +144,19 @@
     font-family: icon;
 }
 
+.repeatTagIcon:before {
+    content: "\ea2d";
+    font-family: icon;
+}
+
+.repeatTag {
+    background-color: sienna;
+}
+
+.repeat {
+    background-color: salmon;
+}
+
 .location {
     background-color: firebrick;
 }
@@ -158,5 +176,26 @@
 }
 
 .reminderEnabled {
-    #background-color: #AAAAAA;
+    background-color: #AAAAAA;
+}
+
+.cancel {
+    background-color: gray;
+}
+
+.cancelIcon:before {
+    content: "\ea0d";
+    font-family: icon;
+}
+
+.subHidden {
+    display: none;
+}
+
+.mapChoice {
+    background-color: black;
+    width: 320px;
+    border-bottom-color: white;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
 }
