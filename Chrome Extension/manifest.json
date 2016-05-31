@@ -1,0 +1,14 @@
+{
+  "manifest_version": 2,
+
+  "name": "Ant Planner",
+  "description": "Ant Planner Chrome Extension",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "helper.html"
+  },
+
+  "permissions": ["activeTab", "http://*/*", "https://*/*"]
+}

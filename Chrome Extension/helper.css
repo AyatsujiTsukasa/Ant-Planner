@@ -1,0 +1,31 @@
+body {
+	margin: 0px;
+	background-color: #dddddd;
+}
+
+button {
+	width: 200px;
+	height: 32px;
+	background-color: #ffffff;
+	border-style: solid;
+	border-color: #cccccc;
+}
+
+#toMainPage {
+	border-width: 1px 0px 1px 0px;
+	margin-bottom: 8px;
+}
+
+#signIn {
+	border-width: 1px 0px 0px 0px;
+}
+
+#signUp {
+	border-width: 1px 0px 1px 0px;
+}
+
+* {
+	outline: none;
+	font-size: 17px;
+	text-align: left;
+}
