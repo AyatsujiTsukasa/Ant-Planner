@@ -1,6 +1,7 @@
 .bg-1{
 	background-color:#4da6ff;
 	padding: 5%;
+	margin-bottom: 4rem;
 	color: white;
 	text-align: center;
 	font-family: source-sans-pro, sans-serif;
@@ -12,7 +13,11 @@ h1{
 	font-weight: 700;
 }
 
-img{
+p{
+	margin-bottom: 5rem;
+}
+
+.logo-2{
 	height:256px;
 }
 
@@ -30,37 +35,42 @@ img{
   font-weight: normal;
 }
 
-/* Featurettes
-------------------------- */
-
-.p{
-	color: #5a5a5a;
+/* Center align the text within the three columns below the carousel */
+.marketing .col-lg-4 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+.marketing h2 {
+  font-weight: normal;
+}
+.marketing .col-lg-4 p {
+  margin-right: .75rem;
+  margin-left: .75rem;
+  text-align: left;
 }
 
-.featurette-divider {
-  margin: 5rem 0; /* Space out the Bootstrap <hr> more */
+@font-face {
+    font-family: icon;
+    src: url(Fonts/icomoon.woff);
 }
 
-/* Thin out the marketing headings */
-.featurette-heading {
-  font-weight: 300;
-  line-height: 1;
-  letter-spacing: -.05rem;
+.todo:before {
+    content: "\e9ba";
+    font-family: icon;
+    font-size: 120px;
+    color: #4da6ff;
 }
 
-
-/* RESPONSIVE CSS
--------------------------------------------------- */
-
-@media (min-width: 40em) {
-  .featurette-heading {
-    font-size: 50px;
-  }
+.alarm:before {
+    content: "\e950";
+    font-family: icon;
+    font-size:120px;
+    color: #ffbf00;
 }
 
-@media (min-width: 62em) {
-  .featurette-heading {
-    margin-top: 7rem;
-  }
+.timer:before {
+    content: "\e952";
+    font-family: icon;
+    font-size:120px;
+    color: #ff3300;
 }
-

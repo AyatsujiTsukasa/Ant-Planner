@@ -1,0 +1,167 @@
+/*
+ * Sidebar
+ */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -12rem;
+  width: 12rem;
+  bottom: 0;
+  display: block;
+  padding: 20px;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  background-color: #fafafa;
+  border-right: 1px solid #eee;
+}
+
+@media (min-width: 544px) {
+  .sidebar {
+    left: 0;
+  }
+}
+
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -21px; /* 20px padding + 1px border */
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+.nav-sidebar > li {
+  padding-right: 20px;
+  padding-left: 20px;
+  line-height: 2.5rem;
+}
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+  color: #fff;
+}
+
+.active{
+  background-color: #ff5c33;
+}
+
+.nav > li > a,
+.nav > li > a:hover,
+.nav > li > a:focus {
+  color: #ff5c33;
+}
+
+.friends{
+  color: #ff5c33;
+}
+
+.friend-list {
+  position: fixed;
+  top: 0;
+  width: 16rem;
+  right: -16rem;
+  bottom: 0;
+  z-index: 1000;
+  display: block;
+  padding: 20px;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  background-color: #fafafa;
+  border-left: 1px solid #eee;
+}
+
+@media (min-width: 992px) {
+  .friend-list {
+    right: 0;
+  }
+}
+
+/*
+ * Icon
+ */
+
+@font-face {
+  font-family: icon;
+  src: url(Fonts/icomoon.woff);
+}
+
+.add:before {
+  content: "\ea0a";
+  font-family: icon;
+}
+
+.menu:before {
+  content: "\e9bd";
+  font-family: icon;
+  font-size: 1.5rem;
+  color: #ff5c33;
+}
+
+.close-menu:before{
+  content: "\ea0f";
+  font-family: icon;
+  color: #ff5c33;
+}
+
+.close-friend:before{
+  content: "\ea0f";
+  font-family: icon;
+  color: #ff5c33;
+}
+
+.sync:before{
+  content: "\ea2e";
+  font-family: icon;
+  color: #ff5c33;
+}
+
+.sync{
+  color: #ff5c33;
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}
+
+/*
+ * Main content
+ */
+
+.main {
+  padding: 20px;
+  padding-top:40px;
+  position: fixed;
+  left: 12rem;
+  right: 0;
+}
+
+@media (max-width: 543px) {
+  .main {
+    left: 0;
+  }
+}
+
+@media (min-width: 992px) {
+  .main {
+    right: 16rem;
+  }
+}
+
+/* Add a plan */
+.btn{
+  color:white;
+  background-color: #ff5c33;
+  border-color: #ff5c33;
+}
+
+.btn:hover, .btn:focus, .btn:active, .btn.active{
+  color: #f2f2f2;
+  background-color: #ff3300;
+  border-color: #ff3300;
+}
+
+.extra-padding{
+  padding: 0.5rem;
+}
+
+/* Display plans */
+.plans{
+  border: 2px solid #ff5c33;
+}
