@@ -12,4 +12,47 @@ function getCookie(c_name){
 	}
 	return "";
 }
-$('#welcomeMsg').html("Welcome, " + getCookie("username").replace(/\+/g, " ") + "!");
+$("#usernameSide").html(getCookie("username").replace(/\+/g, " "));
+$("#usernameBar").html(getCookie("username").replace(/\+/g, " "));
+$("#welcomeMsg").html("Hi " + getCookie("username").replace(/\+/g, " ") + "! Have a productive day:)");
+
+function toggleMenu() {
+	$(".menu").click(function() {
+		$(".sidebar").animate({
+    		left: "0rem"
+    	}, 100);
+    	$(".main").animate({
+    		left: "12rem"
+    	}, 100);
+  	});
+
+  	$(".close-menu").click(function() {
+    	$(".sidebar").animate({
+    		left: "-12rem"
+    	}, 100);
+    	$(".main").animate({
+    		left: "0rem"
+    	}, 100);
+    	$(".menu").removeClass("hidden-sm-up");
+  	});
+
+  	$(".friends").click(function() {
+		$(".friend-list").animate({
+    		right: "0rem"
+    	}, 100);
+    	$(".main").animate({
+    		right: "16rem"
+    	}, 0);
+  	});
+
+  	$(".close-friend").click(function() {
+		$(".friend-list").animate({
+    		right: "-16rem"
+    	}, 100);
+    	$(".main").animate({
+    		right: "0rem"
+    	}, 0);
+  	});
+}
+
+$(document).ready(toggleMenu);
