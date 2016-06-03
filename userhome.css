@@ -90,7 +90,7 @@
 }
 
 .menu{
-	color:#ff5c33;
+  color:#ff5c33;
 }
 
 .close-menu:before{
@@ -100,9 +100,9 @@
 }
 
 .friends:before{
-	content: "\e972";
-	font-family: icon;
-	color: #ff5c33;
+  content: "\e972";
+  font-family: icon;
+  color: #ff5c33;
 }
 
 .friends{
