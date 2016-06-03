@@ -7,70 +7,111 @@
 	<script>
 		function initializeMap(){
 			navigator.geolocation.getCurrentPosition(showPosition);
-        }
+		}
 
-        function showPosition(position) {
-        	var mapOptions = {
-	        	center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
-	        	zoom: 8,
-	            mapTypeId: google.maps.MapTypeId.ROADMAP
-	        };
-	        var map = new google.maps.Map(
-                      document.getElementById("demoMap"),
-                      mapOptions);
-        }
+		function showPosition(position) {
+			var mapOptions = {
+				center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+				zoom: 8,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+			var map = new google.maps.Map(
+				document.getElementById("demoMap"),
+				mapOptions);
+		}
 	</script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="public.css">
 	<link rel="stylesheet" type="text/css" href="planStyle.css">
+	<link rel="stylesheet" type="text/css" href="datetimepicker/jquery.datetimepicker.css"/ >
 </head>
 <body>
-	<div class="plan">
+	<div class="container-fluid">
 		<form class="planForm" id="planForm" method="get" >
-			<table class="planTable">
-				<tr>
-					<td rowspan="1" class="topHeader"></td><td colspan="1" class="planTagHeader"><p class="planTagHeaderIconDown icon">Menu</p></td>
+			<div class="form-group row header">
+				<div class="col-sm-2 planTagHeader"><p class="planTagHeaderIconDown icon"> Options</p></div>
+				<div class="col-sm-10 planName">
 					<!-- 我把两个hidden的input放在了td里面的最前面，不需要改它们的顺序。js里要用这个顺序。加element的话加在它们后面 -->
-					<td colspan="3" class="planName"><input type="hidden" name="importance" value="1" /><input type="hidden" name="ownerId" /><input type="text" name="name" class="planNameText" /><span class="importance1 importance icon"></span></td><td class="cancel"><p class="cancelIcon icon">Remove</p></td>
-				</tr>
-				<tr class="subHidden">
-					<td rowspan="1" class="customTagHeader"></td><td class="newCustomTag"><p class="newCustomTagIcon icon"></p></td>
-					<td rowspan="1" colspan="3" class="planDesc"><textarea name="desc" class="planDescText"></textarea></td>
-				</tr>
-				<tr class="subHidden">
-					<td rowspan="5" class="infoTagHeader"></td><td class="dueTag"><p class="dueTagIcon icon">Due</p></td><td colspan="3" class="due"><input type="datetime-local" name="due" class="dueDateTime" /></td>
-				</tr>
-				<tr class="subHidden">
-					<td class="repeatTag"><p class="repeatTagIcon icon">Repeat</p><td colspan="3" class="repeat"><input type="text" name="repeat"></td></td>
-				</tr>
-				<tr class="subHidden">
-					<!-- 这里也一样，这个tr里所有td里的input全是hidden，都在最前面，不用改顺序。要加element的话就加在它们后面 -->
-					<td class="reminderTag"><p class="reminderTagIcon icon">Reminder</p></td>
-					<td class="phoneAlarm"><input type="hidden" name="phoneAlarm" value="0" /><p class="reminder phoneAlarmIcon icon reminderDisabled">Alarm</p></td>
-					<td class="phonePush"><input type="hidden" name="phonePush" value="0" /><p class="reminder phonePushIcon icon reminderDisabled">Push</p></td>
-					<td class="desktopPush"><input type="hidden" name="desktopPush" value="0" /><p class="reminder desktopPushIcon icon reminderDisabled"> Push</p></td>
-				</tr>
-				<tr class="subHidden">
-					<td class="urlTag"><p class="urlTagIcon icon">Url</p></td><td colspan="3" class="url"><input type="text" name="url" class="urlText" /></td>
-				</tr>
-				<tr class="subHidden">
-					<td class="locationTag"><p class="locationTagIcon icon">Location</p></td><td colspan="3" class="location"><input type="text" name="locationText" /><ul class="dropDownList"></ul></td>
-				</tr>
-				<tr class="subHidden">
-					<td class="empty"></td><td class="empty"></td><td colspan="3" class="map"><div id="map" style="height:280px;width:400px;"></div></td>
-				</tr>
+					<input type="hidden" name="importance" value="1" /><input type="hidden" name="ownerId" />
+					<div class="col-sm-9">			
+						<input type="text" name="name" class="planName-input form-control" placeholder="Write down your plan" />
+					</div>
+					<span class="importance1 importance icon">&nbsp;&nbsp;</span>
+					<span class="cancel icon" data-toggle="tooltip" data-placement="bottom" title="Cancel">&nbsp;&nbsp;</span> 
+					<span class="submit icon" data-toggle="tooltip" data-placement="bottom" title="Add"></span>
 				</div>
-			</table>
+			</div>
+			<div class="form-group row subHidden planDesc">
+				<label for="planDesc" class="col-sm-2 form-control-label planDescIcon icon"> Details</label>
+				<div class="col-sm-10">
+					<textarea class="form-control planDesc-input" name="planDesc"></textarea>
+				</div>
+			</div>
+			<div class="form-group row subHidden tags">
+				<label for="tags" class="col-sm-2 form-control-label newCustomTagIcon icon"> Tag</label>
+				<div class="col-sm-10">
+					<input class="form-control tags-input" name="tags" list="commonTags" />
+					<datalist id="commonTags">
+						<option value="Work">
+						<option value="Study">
+						<option value="Family">
+						<option value="Personal">
+					</datalist> 
+				</div>
+			</div>
+			<div class="form-group row subHidden due">
+				<label for="due" class="col-sm-2 form-control-label dueTagIcon icon"> Due</label>
+				<div class="col-sm-10">
+					<input type="text" name="due" class="form-control dueDateTime due-input" id="datetimepicker" />
+				</div>
+			</div>
+			<div class="form-group row subHidden repeat">
+				<label for="repeat" class="col-sm-2 form-control-label repeatTagIcon icon"> Repeat</label>
+				<div class="col-sm-10">
+					<select class="form-control c-select repeat-input" name="repeat">
+						<option value="never">Never</option>
+						<option value="day">Every day</option>
+						<option value="week">Every week</option>
+						<option value="month">Every month</option>
+						<option value="year">Every year</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group row subHidden reminderRow">
+				<!-- 这里也一样，这个tr里所有td里的input全是hidden，都在最前面，不用改顺序。要加element的话就加在它们后面 -->
+				<label for="reminder" class="col-sm-2 form-control-label reminderTagIcon icon"> Reminder</label>
+				<div class="col-sm-10">
+					<div class="col-sm-4 phoneAlarm">
+						<input type="hidden" name="phoneAlarm" value="0" class="form-control" /><p class="reminder phoneAlarmIcon icon reminderDisabled"> Alarm</p>
+					</div>
+					<div class="col-sm-4 phonePush">
+						<input type="hidden" name="phonePush" value="0" /><p class="reminder phonePushIcon icon reminderDisabled" data-toggle="modal" data-target="#reminderTime"> Push</p>
+					</div>
+					<div class="col-sm-4 desktopPush">
+						<input type="hidden" name="desktopPush" value="0" /><p class="reminder desktopPushIcon icon reminderDisabled" data-toggle="modal" data-target="#setReminderTime"> Push</p>
+					</div>
+				</div>
+			</div>
+			<div class="form-group row subHidden url">
+				<label for="url" class="col-sm-2 form-control-label urlTagIcon icon"> Url</label>
+				<div class="col-sm-10 url">
+					<input type="url" name="url" class="form-control urlText url-input" />
+				</div>
+			</div>
+			<div class="form-group row subHidden locationRow">
+				<label for="location" class="col-sm-2 form-control-label locationTagIcon icon">Location</p></label>
+				<div class="col-sm-10 location">
+					<input type="text" name="location" class="form-control location-input" /><ul class="dropDownList list-group"></ul>
+				</div>
+				<div class="col-sm-10 col-sm-offset-2">
+					<div class="map">
+						<div id="map" style="height:280px"></div>
+					</div>
+				</div>
+			</div>
 		</form>
 	</div>
-	<p>这个div就是plan的基本框架，请你把前端做一下～</p>
-		<ol>
-		<li>一开始就是最上面一栏，点击下拉按钮就会展开下面的部分</li>
-		<li>下面的部分一开始全是暗色，然后点左边某一个按钮就会enable这一行，变成亮色（除了Notification）</li>
-		<li>加号那个我是想这样：点一下加一个custom tag（family，school什么的），然后这个部分用户可以自己选择图标，tag名什么的。因为关系到其它布局我就还没做</li>
-		</ol>
-
 	<script type="text/javascript" src="plan.js"></script>
+	<script src="datetimepicker/jquery.datetimepicker.full.min.js"></script>
 </body>
 </html>

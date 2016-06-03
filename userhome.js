@@ -19,40 +19,45 @@ $("#welcomeMsg").html("Hi " + getCookie("username").replace(/\+/g, " ") + "! Hav
 function toggleMenu() {
 	$(".menu").click(function() {
 		$(".sidebar").animate({
-    		left: "0rem"
-    	}, 100);
-    	$(".main").animate({
-    		left: "12rem"
-    	}, 100);
-  	});
+			left: "0rem"
+		}, 100);
+		$(".main").animate({
+			left: "12rem"
+		}, 100);
+		$(".menu").hide();
+	});
 
-  	$(".close-menu").click(function() {
-    	$(".sidebar").animate({
-    		left: "-12rem"
-    	}, 100);
-    	$(".main").animate({
-    		left: "0rem"
-    	}, 100);
-    	$(".menu").removeClass("hidden-sm-up");
-  	});
+	$(".close-menu").click(function() {
+		$(".sidebar").animate({
+			left: "-12rem"
+		}, 100);
+		$(".main").animate({
+			left: "0rem"
+		}, 100);
+		$(".menu").removeClass("hidden-sm-up");
+		$(".menu").show();
+	});
 
-  	$(".friends").click(function() {
+	$(".friends").click(function() {
 		$(".friend-list").animate({
-    		right: "0rem"
-    	}, 100);
-    	$(".main").animate({
-    		right: "16rem"
-    	}, 0);
-  	});
+			right: "0rem"
+		}, 100);
+		$(".main").animate({
+			right: "16rem"
+		}, 0);
+		$(".friends").hide();
+	});
 
-  	$(".close-friend").click(function() {
+	$(".close-friend").click(function() {
 		$(".friend-list").animate({
-    		right: "-16rem"
-    	}, 100);
-    	$(".main").animate({
-    		right: "0rem"
-    	}, 0);
-  	});
+			right: "-16rem"
+		}, 100);
+		$(".main").animate({
+			right: "0rem"
+		}, 0);
+		$(".friends").removeClass("hidden-md-up");
+		$(".friends").show();
+	});
 }
 
 $(document).ready(toggleMenu);
