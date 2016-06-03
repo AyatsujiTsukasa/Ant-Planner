@@ -3,38 +3,34 @@
     src: url(Fonts/icomoon.woff);
 }
 
-.icon {
-    margin: 0px 3px 0px 3px;
-    font-size: 30px;
+.planForm {
+    padding: 1rem;
+    color: darkgrey;
 }
 
 .importance1:before {
     font-family: icon;
     content: "\e9d9\e9d7\e9d7";
+    cursor: pointer;
 }
 .importance2:before {
     font-family: icon;
     content: "\e9d9\e9d9\e9d7";
+    cursor: pointer;
 }
 .importance3:before {
     font-family: icon;
     content: "\e9d9\e9d9\e9d9";
+    cursor: pointer;
 }
 
-.planTable {
-    font-size: 25px;
-    border-collapse: collapse;
-    border-spacing: 0;
-    text-align: center;
-    color: rebeccapurple;
+/* Header */
+.header {
+    color: #ff3300;
 }
 
-.topHeader {
-    background-color: cyan;
-}
-
-.planTagHeader {
-    background-color: cyan;
+.planTagHeader{
+    cursor: pointer;
 }
 
 .planTagHeaderIconDown:before {
@@ -47,86 +43,114 @@
     font-family: icon;
 }
 
-.due {
-    background-color: darkseagreen;
+.planName-input{
+    border-color: #ff3300;
 }
 
-.dueTag {
-    background-color: darkgoldenrod;
+.planName-input:focus{
+    border-color: #ff3300;
+    box-shadow: 0 0 2px red;
 }
 
-.planName {
-    background-color: blue;
-}
-
-.customTagHeader {
-    background-color: orange;
-    width: 3px;
-}
-
-.infoTagHeader {
-    background-color: chartreuse;
-    width: 3px;
-}
-
-.empty {
-    background-color: transparent;
-}
-
-.newCustomTag {
-    background-color: lightgray;
-}
-
-.newCustomTagIcon:before {
+/* Plan Description */
+.planDescIcon:before {
     content: "\ea0a";
     font-family: icon;
 }
 
-.planDesc {
-    background-color: lightblue;
+.planDesc-active {
+    color: #ff8000;
 }
 
-.reminderTag {
-    background-color: red;
+.planDesc-active-input{
+    border-color:#ff8000;
 }
 
+.planDesc-input:focus{
+    border-color:#ff8000;
+    box-shadow: 0 0 2px orange;
+}
+
+/* Custom Tag */
+.newCustomTagIcon:before {
+    content: "\e935";
+    font-family: icon;
+}
+
+.tags-active{
+    color: #ffcc00;
+}
+
+.tags-active-input{
+    border-color:#ffcc00;
+}
+
+.tags-input:focus{
+    border-color:#ffcc00;
+    box-shadow: 0 0 2px yellow;
+}
+
+/* Due */
+.dueTagIcon:before {
+    content: "\e953";
+    font-family: icon;
+}
+
+.due-active{
+    color: #009900;
+}
+
+.due-active-input{
+    border-color:#009900;
+}
+
+.due-input:focus{
+    border-color:#009900;
+    box-shadow: 0 0 2px green;
+}
+
+/* Repeat */
+.repeatTagIcon:before {
+    content: "\ea2d";
+    font-family: icon;
+}
+
+.repeat-active{
+    color: #3399ff;
+}
+
+.repeat-active-input{
+    border-color: #3399ff;
+}
+
+.repeat-input:focus{
+    border-color: #3399ff;
+    box-shadow: 0 0 2px dodgerblue;
+}
+
+/* Reminder */
 .reminderTagIcon:before {
-    content: "\e950";
+    content: "\e951";
     font-family: icon;
 }
 
-.phonePush {
-    background-color: darkcyan;
+.reminderTagIcon-active{
+    color: #5353c6;
 }
 
-.phoneAlarm {
-    background-color: violet;
+.reminder{
+    text-align: center;
+    cursor: pointer;
+    color: white;
 }
 
-.desktopPush {
-    background-color: slateblue;
+.reminderDisabled {
+    background-color: darkgrey;
 }
 
-.urlTag {
-    background-color: mediumpurple;
-}
-
-.urlTagIcon:before {
-    content: "\e9cb";
-    font-family: icon;
-}
-
-.url {
-    background-color: rosybrown;
-}
-
-.locationTag {
-    background-color: tomato;
-}
-
-.locationTagIcon:before {
-    content: "\e947";
-    font-family: icon;
+.reminderEnabled {
+    background-color: #5353c6;
+    color: white;
 }
 
 .phonePushIcon:before {
@@ -135,7 +159,7 @@
 }
 
 .phoneAlarmIcon:before {
-    content: "\e958";
+    content: "\e950";
     font-family: icon;
 }
 
@@ -144,58 +168,65 @@
     font-family: icon;
 }
 
-.repeatTagIcon:before {
-    content: "\ea2d";
+/* Url */
+.urlTagIcon:before {
+    content: "\e9cb";
     font-family: icon;
 }
 
-.repeatTag {
-    background-color: sienna;
+.url-active {
+    color: rebeccapurple;
 }
 
-.repeat {
-    background-color: salmon;
+.url-active-input{
+    border-color: rebeccapurple;
 }
 
-.location {
-    background-color: firebrick;
+.url-input:focus{
+    border-color: rebeccapurple;
+    box-shadow: 0 0 2px darkviolet;
+}
+
+/* Location */
+.locationTagIcon:before {
+    content: "\e947";
+    font-family: icon;
+}
+
+.locationTagIcon-active {
+    color: #c6538c;
+}
+
+.location-active-input{
+    border-color: #c6538c;
+}
+
+.location-input:focus{
+    border-color: #c6538c;
+    box-shadow: 0 0 2px #c65370;
 }
 
 .map {
-    background-color: violet;
-    height: 180px;
+    background-color: darkgrey;
 }
 
-.dueTagIcon:before {
-    content: "\e9b8";
+.cancel:before {
+    content: "\ea0f";
     font-family: icon;
+    color:gray;
+    cursor: pointer;
 }
 
-.reminderDisabled {
-    background-color: #222222;
-}
-
-.reminderEnabled {
-    background-color: #AAAAAA;
-}
-
-.cancel {
-    background-color: gray;
-}
-
-.cancelIcon:before {
-    content: "\ea0d";
+.submit:before{
+    content: "\ea10";
     font-family: icon;
+    cursor: pointer;
 }
 
 .subHidden {
     display: none;
 }
 
-.mapChoice {
-    background-color: black;
-    width: 320px;
-    border-bottom-color: white;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
+.dropDownList {
+    color: black;
 }

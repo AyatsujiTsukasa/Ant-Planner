@@ -38,17 +38,13 @@
   color: #fff;
 }
 
-.active{
+.nav-sidebar> .active{
   background-color: #ff5c33;
 }
 
 .nav > li > a,
 .nav > li > a:hover,
 .nav > li > a:focus {
-  color: #ff5c33;
-}
-
-.friends{
   color: #ff5c33;
 }
 
@@ -90,13 +86,26 @@
 .menu:before {
   content: "\e9bd";
   font-family: icon;
-  font-size: 1.5rem;
   color: #ff5c33;
+}
+
+.menu{
+	color:#ff5c33;
 }
 
 .close-menu:before{
   content: "\ea0f";
   font-family: icon;
+  color: #ff5c33;
+}
+
+.friends:before{
+	content: "\e972";
+	font-family: icon;
+	color: #ff5c33;
+}
+
+.friends{
   color: #ff5c33;
 }
 
@@ -126,7 +135,6 @@
 
 .main {
   padding: 20px;
-  padding-top:40px;
   position: fixed;
   left: 12rem;
   right: 0;
