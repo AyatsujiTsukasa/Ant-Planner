@@ -135,7 +135,7 @@
 
 .main {
   padding: 20px;
-  position: fixed;
+  position: absolute;
   left: 12rem;
   right: 0;
 }
@@ -155,14 +155,31 @@
 /* Add a plan */
 .btn{
   color:white;
+  border-width: 0px;
+}
+
+.btnAddPlan {
   background-color: #ff5c33;
-  border-color: #ff5c33;
+}
+.btnFoldAll {
+  background-color: #ff7f18;
+}
+.btnUnfoldAll {
+  background-color: #ffaa00;
 }
 
 .btn:hover, .btn:focus, .btn:active, .btn.active{
   color: #f2f2f2;
+}
+
+.btnAddPlan:hover, .btnAddPlan:focus, .btnAddPlan:active, .btnAddPlan.active {
   background-color: #ff3300;
-  border-color: #ff3300;
+}
+.btnFoldAll:hover, .btnFoldAll:focus, .btnFoldAll:active, .btnFoldAll.active {
+  background-color: #ff5c33;
+}
+.btnUnfoldAll:hover, .btnUnfoldAll:focus, .btnUnfoldAll:active, .btnUnfoldAll.active {
+  background-color: #ff7f18;
 }
 
 .extra-padding{

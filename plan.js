@@ -159,13 +159,11 @@ function locationRowMouseleave(ele){
     $(ele).children().children().removeClass("location-active-input");
 }
 
-var test = undefined;
 function resetForm(ele) {
-    $(ele).parent().parent().parent()[0].reset();
+    $(ele).parent().parent().parent().parent().parent().remove();
 }
 
 function submitForm(ele) {
-    test = ele;
     $(document.getElementsByName('ownerId')).val(getCookie("id"));
     $(ele).parent().parent().parent()[0].submit();
 }
