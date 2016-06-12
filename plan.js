@@ -49,9 +49,21 @@ function dropMenu (ele) {
     }
 }
 
+function getLocation(ele) {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var mapOptions = {
+                center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+                zoom: 8,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(ele, mapOptions);
+        });
+    }
+}
+
 function searchMap (ele) {
-    test = ele;
-    url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + $(ele).children().val();
+    var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + $(ele).children().val();
     var xhr = new XMLHttpRequest();
     var _ele = $(ele);
     xhr.onreadystatechange = function () {
