@@ -12,17 +12,46 @@ if(!$_POST) {
 	die("This file cannot be accessed directly!");
 }
 
-$ownerId = $_POST["ownerId"];
-$importance = $_POST["importance"];
+$id = $_POST["planId"];
+$ownerId = intval($_POST["ownerId"]);
+$importance = intval($_POST["importance"]);
 $planName = $_POST["name"];
-$planDesc = $_POST["desc"];
+$planDesc = $_POST["planDesc"];
 $due = $_POST["due"];
-$repeat = $_POST["repeat"];
+switch ($_POST["repeat"]) {
+	case 'day':
+		$repeat = 1;
+		break;
+	case 'week':
+		$repeat = 2;
+		break;
+	case 'month':
+		$repeat = 3;
+		break;
+	case 'year':
+		$repeat = 4;
+		break;
+	default:
+		$repeat = 0;
+		break;
+}
 $phoneAlarm = $_POST["phoneAlarm"];
 $phonePush = $_POST["phonePush"];
 $desktopPush = $_POST["desktopPush"];
 $url = $_POST["url"];
-$location = $_POST["locationText"];
+$location = $_POST["location"];
+$lat = $_POST["lat"];
+$lng = $_POST["lng"];
+$tags = $_POST["tags"];
+
+if($id === ""){
+	$sql = "insert into Plans (ownerId, name, description, due, importance, phonePush, phoneAlarm, desktopPush, customTags, url, lat, lng, location, rep) values('".$ownerId."','".$planName."','".$planDesc."','".$due."','".$importance."','".$phonePush."','".$phoneAlarm."','".$desktopPush."','".$tags."','".$url."','".$lat."','".$lng."','".$location."','".$repeat."')";
+	$conn->query($sql);
+}
+
+// $EmailCheckQuery = "select * from Users where email='".$email."'";
+// $EmailResult = $conn->query($EmailCheckQuery);
+
 
 
 ?>
