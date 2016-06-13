@@ -10,7 +10,6 @@
 
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
-
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="public.css">
 	<link rel="icon" href="Images/AntPlannerIcon.png">
@@ -26,10 +25,11 @@
 			<li class="nav-item"><a class="nav-link" href="register.html">Sign up</a></li>
 		</ul>
 	</nav>
-	<!-- Registration form -->
 	<div class="myForm">
 		<form id="loginForm" method="post" action="login.php">
 			<h2 style="text-align:center">Log in to Ant Planner</h2><br/>
+			<!-- Ajax Message box here!!! -->
+			<div class="ajaxMsg"></div>
 			<fieldset class="form-group">
 				<input type="email" name="email" id="email" placeholder="Email" class="validateLocally form-control" autofocus="" />
 				<span id="emailWarning" class="warning"></span>
@@ -39,11 +39,10 @@
 				<span id="passwordWarning" class="warning"></span>
 			</fieldset>
 			<div class="checkbox">
-        			<label><input type="checkbox" name="remember" value="remember" id="remember"> Remember me</label>
+        			<label><input type="checkbox" name="remember" value="remember" id="remember" checked> Remember me</label>
      			</div>
 			<input class="btn btn-primary btn-block" type="submit" name="loginButton" value="Login" id="loginButton" />
 		</form>
-
 		<p class="lineWithWords"><span>Or</span></p>
 		<!-- Temporary place holder. Will change to actual button. --> 
 		<div>
@@ -52,8 +51,6 @@
 		<div style="text-align:center">Don't have an account? <a href="register.html">Sign Up</a></div>
 	</div>
 	<!-- AJAX message box. After form submission, communicate with server and return data. -->
-	<div class="ajaxMsg"></div>
-
 	<script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script><!-- Tether for Bootstrap --> 
  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
  	<script type="text/javascript" src="login.js"></script>

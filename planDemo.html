@@ -11,7 +11,8 @@
 </head>
 <body>
 	<div class="container-fluid">
-		<form class="planForm" id="planForm" method="get" >
+		<form class="planForm" id="planForm" method="post" action="plan.php">
+			<input type="hidden" name="planId" id="planId">
 			<div class="form-group row header">
 				<div class="col-sm-2 planTagHeader" onclick="dropMenu(this)"><p class="planTagHeaderIconDown icon"> Options</p></div>
 				<div class="col-sm-10 planName">
@@ -83,7 +84,7 @@
 			<div class="form-group row subHidden locationRow" onmouseenter="locationRowMouseenter(this)" onmouseleave="locationRowMouseleave(this)">
 				<label for="location" class="col-sm-2 form-control-label locationTagIcon icon">Location</p></label>
 				<div class="col-sm-10 location" onkeyup="searchMap(this)">
-					<input type="text" name="location" class="form-control location-input" /><ul class="dropDownList list-group"></ul>
+					<input type="text" name="location" class="form-control location-input" /><input type="hidden" name="lat" /><input type="hidden" name="lng" /><ul class="dropDownList list-group"></ul>
 				</div>
 				<div class="col-sm-10 col-sm-offset-2">
 					<div class="map">

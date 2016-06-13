@@ -51,52 +51,112 @@ function dropMenu (ele) {
 
 function getLocation(ele) {
     if (navigator.geolocation) {
+        var latInput = ele.parentElement.parentElement.previousElementSibling.children[1];
+        var lngInput = latInput.nextElementSibling;
         navigator.geolocation.getCurrentPosition(function (position) {
+            var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            latInput.value = position.coords.latitude;
+            lngInput.value = position.coords.longitude;
             var mapOptions = {
-                center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+                center: latlng,
                 zoom: 8,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
             var map = new google.maps.Map(ele, mapOptions);
+            google.maps.event.addListener(map, 'click', function(event){
+                addMarker(event.latLng);
+                latInput.value = event.latLng.lat();
+                lngInput.value = event.latLng.lng();
+            });
+            var marker = new google.maps.Marker({
+                position: latlng,
+                map: map,
+                draggable:true
+            });
+            function addMarker(latLng){       
+                if(marker != null){
+                    marker.setMap(null);
+                }
+                marker = new google.maps.Marker({
+                    position: latLng,
+                    map: map,
+                    draggable:true
+                });
+                google.maps.event.addListener(marker, 'dragend', function(){
+                    myCircle.setCenter(this.position);
+                });     
+            }
         });
     }
 }
 
 function searchMap (ele) {
-    var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + $(ele).children().val();
-    var xhr = new XMLHttpRequest();
-    var _ele = $(ele);
-    xhr.onreadystatechange = function () {
-        if (this.readyState == 4) {
-            try {
-                if(this.status == 0) {
-                    throw('Status = 0');
+    var adr = $.trim($(ele).children().val());
+    if(adr !== ""){
+        var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + adr;
+        var xhr = new XMLHttpRequest();
+        var _ele = $(ele);
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4) {
+                try {
+                    if(this.status == 0) {
+                        throw('Status = 0');
+                    }
+                    res = jQuery.trim(this.responseText).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                    response = JSON.parse(res);
+                    var lst = response.results.slice(0, 5);
+                    _ele.children()[3].innerHTML = lst.map(function(x){return mapchoice(x.formatted_address, x.geometry.location.lat, x.geometry.location.lng);}).join("");
+                } catch (e) {
+                    console.log(e);
                 }
-                res = jQuery.trim(this.responseText).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-                response = JSON.parse(res);
-                var lst = response.results.slice(0, 5);
-                _ele.children()[1].innerHTML = lst.map(function(x){return mapchoice(x.formatted_address, x.geometry.location.lat, x.geometry.location.lng);}).join("");
-            } catch (e) {
-                console.log(e);
             }
         }
-    }
-    try {
-        xhr.open("get", url, true);
-        xhr.send("");
-    }
-    catch(e){
-        console.log(e);
+        try {
+            xhr.open("get", url, true);
+            xhr.send("");
+        }
+        catch(e){
+            console.log(e);
+        }
     }
 }
 
 function initializeMap(ele){
+    ele.parentElement.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.value = ele.innerHTML;
+    var latlng = new google.maps.LatLng(ele.getAttribute('lat'), ele.getAttribute('lng'))
+    var lngInput = ele.parentElement.parentElement.previousElementSibling;
+    var latInput = lngInput.previousElementSibling;
+    latInput.value = ele.getAttribute('lat');
+    lngInput.value = ele.getAttribute('lng');
 	var mapOptions = {
-    	center: new google.maps.LatLng(ele.getAttribute('lat'), ele.getAttribute('lng')),
+    	center: latlng,
     	zoom: 8,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     var map = new google.maps.Map(ele.parentElement.parentElement.parentElement.nextElementSibling.children[0].children[0], mapOptions);
+    var marker = new google.maps.Marker({
+        position: latlng,
+        map: map,
+        draggable:true
+    });
+    google.maps.event.addListener(map, 'click', function(event){
+        addMarker(event.latLng);
+        latInput.value = event.latLng.lat();
+        lngInput.value = event.latLng.lng();
+    });
+    function addMarker(latLng){       
+        if(marker != null){
+            marker.setMap(null);
+        }
+        marker = new google.maps.Marker({
+            position: latLng,
+            map: map,
+            draggable:true
+        });
+        google.maps.event.addListener(marker, 'dragend', function(){
+            myCircle.setCenter(this.position);
+        });     
+    }
     ele.parentElement.parentElement.innerHTML = "";
 }
 
@@ -176,6 +236,12 @@ function resetForm(ele) {
 }
 
 function submitForm(ele) {
-    $(document.getElementsByName('ownerId')).val(getCookie("id"));
-    $(ele).parent().parent().parent()[0].submit();
+    if($.trim($(ele).prev().prev().prev().children().val()) !== ""){
+        var form = $(ele).parent().parent().parent();
+        $(document.getElementsByName('ownerId')).val(getCookie("ownerId"));
+        var action = form.attr("action");
+        $.post(action, form.serialize());
+    } else {
+        alert("The name of this plan is empty.");
+    }
 }
