@@ -1,0 +1,39 @@
+@font-face {
+  font-family: icon;
+  src: url(Fonts/icomoon.woff);
+}
+
+.addIcon:before {
+    content: "\e973";
+    font-family: icon;
+}
+
+.searchIcon:before {
+  content: "\e986";
+  font-family: icon;
+  font-size: 0.8rem;
+}
+
+.searchForm{
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
+
+.friend-list > ul > li{
+	line-height: 2rem;
+}
+
+.shareIcon:before {
+  content: "\ea7d";
+  font-family: icon;
+}
+
+.messageIcon:before {
+  content: "\e96c";
+  font-family: icon;
+}
+
+.deleteIcon:before {
+  content: "\e9ac";
+  font-family: icon;
+}
