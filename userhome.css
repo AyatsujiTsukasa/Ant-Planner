@@ -8,6 +8,7 @@
   width: 12rem;
   bottom: 0;
   display: block;
+  z-index: -1;
   padding: 20px;
   overflow-x: hidden;
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
@@ -49,12 +50,11 @@
 }
 
 .friend-list {
-  position: fixed;
+  position: absolute;
   top: 0;
   width: 16rem;
   right: -16rem;
   bottom: 0;
-  z-index: 1000;
   display: block;
   padding: 20px;
   overflow-x: hidden;
@@ -99,6 +99,10 @@
   color: #ff5c33;
 }
 
+.close-menu{
+  margin-bottom: 15px;
+}
+
 .friends:before{
   content: "\e972";
   font-family: icon;
@@ -113,6 +117,10 @@
   content: "\ea0f";
   font-family: icon;
   color: #ff5c33;
+}
+
+.close-friend{
+  margin-bottom: 15px;
 }
 
 .sync:before{
@@ -136,6 +144,7 @@
 .main {
   padding: 20px;
   position: absolute;
+  z-index: -2;
   left: 12rem;
   right: 0;
 }
