@@ -1,18 +1,3 @@
-function getCookie (c_name) {
-	if (document.cookie.length>0){
-		c_start=document.cookie.indexOf(c_name + "=");
-		if (c_start!=-1){
-			c_start=c_start + c_name.length+1;
-			c_end=document.cookie.indexOf(";",c_start);
-			if (c_end==-1) {
-				c_end=document.cookie.length;
-			}
-			return unescape(document.cookie.substring(c_start,c_end));
-		}
-	}
-	return "";
-}
-
 function importanceChange (event, ele) {
     var starWidth = $(ele).width()/3;
     var v = (event.pageX - $(ele).offset().left)/starWidth;
@@ -63,6 +48,7 @@ function getLocation(ele) {
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
             var map = new google.maps.Map(ele, mapOptions);
+            google.maps.event.trigger(map, 'resize');
             google.maps.event.addListener(map, 'click', function(event){
                 addMarker(event.latLng);
                 latInput.value = event.latLng.lat();
@@ -82,9 +68,6 @@ function getLocation(ele) {
                     map: map,
                     draggable:true
                 });
-                google.maps.event.addListener(marker, 'dragend', function(){
-                    myCircle.setCenter(this.position);
-                });     
             }
         });
     }
@@ -123,7 +106,7 @@ function searchMap (ele) {
 
 function initializeMap(ele){
     ele.parentElement.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.value = ele.innerHTML;
-    var latlng = new google.maps.LatLng(ele.getAttribute('lat'), ele.getAttribute('lng'))
+    var latlng = new google.maps.LatLng(ele.getAttribute('lat'), ele.getAttribute('lng'));
     var lngInput = ele.parentElement.parentElement.previousElementSibling;
     var latInput = lngInput.previousElementSibling;
     latInput.value = ele.getAttribute('lat');
@@ -134,6 +117,7 @@ function initializeMap(ele){
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     var map = new google.maps.Map(ele.parentElement.parentElement.parentElement.nextElementSibling.children[0].children[0], mapOptions);
+    google.maps.event.trigger(map, 'resize');
     var marker = new google.maps.Marker({
         position: latlng,
         map: map,
@@ -153,9 +137,6 @@ function initializeMap(ele){
             map: map,
             draggable:true
         });
-        google.maps.event.addListener(marker, 'dragend', function(){
-            myCircle.setCenter(this.position);
-        });     
     }
     ele.parentElement.parentElement.innerHTML = "";
 }

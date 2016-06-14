@@ -47,6 +47,9 @@ $tags = $_POST["tags"];
 if($id === ""){
 	$sql = "insert into Plans (ownerId, name, description, due, importance, phonePush, phoneAlarm, desktopPush, customTags, url, lat, lng, location, rep) values('".$ownerId."','".$planName."','".$planDesc."','".$due."','".$importance."','".$phonePush."','".$phoneAlarm."','".$desktopPush."','".$tags."','".$url."','".$lat."','".$lng."','".$location."','".$repeat."')";
 	$conn->query($sql);
+} else {
+	$sql = "update Plans set ownerId='".$ownerId."',name='".$planName."',description='".$planDesc."',due='".$due."',importance='".$importance."',phonePush='".$phonePush."',phoneAlarm='".$phoneAlarm."',desktopPush='".$desktopPush."',customTags='".$tags."',url='".$url."',lat='".$lat."',lng='".$lng."',location='".$location."',rep='".$repeat."' where id='".$id."'";
+	$conn->query($sql);
 }
 
 // $EmailCheckQuery = "select * from Users where email='".$email."'";
