@@ -213,16 +213,30 @@ function locationRowMouseleave(ele){
 }
 
 function resetForm(ele) {
+    var form = $(ele).parent().parent().parent();
+    var planId = form.find("[name='planId']").val();
+    if(planId !== "" && planId !== "-1"){
+        var data = "id="+planId+"&ownerId="+getCookie("ownerId")+"&password="+getCookie("password");
+        $.post("removePlan.php", data);
+    }
     $(ele).parent().parent().parent().parent().parent().remove();
 }
 
 function submitForm(ele) {
-    if($.trim($(ele).prev().prev().prev().children().val()) !== ""){
-        var form = $(ele).parent().parent().parent();
-        $(document.getElementsByName('ownerId')).val(getCookie("ownerId"));
-        var action = form.attr("action");
-        $.post(action, form.serialize());
-    } else {
-        alert("The name of this plan is empty.");
+    var form = $(ele).parent().parent().parent();
+    var planId = form.find("[name='planId']");
+    if(planId.val() !== -1){
+        if($.trim($(ele).prev().prev().prev().children().val()) !== ""){
+            if(planId.val() === ""){
+                planId.val(-1);
+            }
+            $(document.getElementsByName('ownerId')).val(getCookie("ownerId"));
+            var action = form.attr("action");
+            $.post(action, form.serialize()+"&password="+getCookie("password"), function (data) {
+                planId.val(data);
+            });
+        } else {
+            alert("The name of this plan is empty.");
+        }
     }
 }

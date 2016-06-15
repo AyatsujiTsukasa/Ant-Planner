@@ -85,13 +85,13 @@ $('.sync').parent().on("click", function(){
 		}
 	})
 })
-
 $.post("sync.php", {ownerId: getCookie("ownerId"), password: getCookie("password")}, function(data){
 	if(data === "Success"){
 		$('.plans').html("");
 		getPlans();
 	}
 })
+
 function getPlans() {
 	var numPlans = parseInt(getCookie("numPlans"));
 	for (var i=0; i<numPlans; i++) {
@@ -112,7 +112,9 @@ function getPlans() {
 			case "3":
 				plan.find(".importance").removeClass("importance1").removeClass("importance2").addClass("importance3");
 		}
-		plan.find("[name='due']").val(getCookie("due_"+i));
+		var dueVal = getCookie("due_"+i).replace(/\-/g, "/");
+		dueVal = dueVal === "0000/00/00 00:00:00" ? "" : dueVal;
+		plan.find("[name='due']").val(dueVal);
 		var repVal = getCookie("rep_"+i);
 		plan.find("[name='repeat']").val(repVal === "0" ? "never" : repVal === "1" ? "day" : repVal === "2" ? "week" : repVal === "3" ? "month" : "year");
 		var phoneAlarmVal = getCookie("phoneAlarm_"+i);
@@ -173,7 +175,9 @@ function getPlans() {
 		plan.find("[name='tags']").val(getCookie("tags_"+i));
 		plan.find("#datetimepicker").datetimepicker();
 		$('ul.plans').append(plan);
-		google.maps.event.trigger(map, 'resize');
-		map.panTo(marker.getPosition());
+		if(locationVal !== ""){
+			google.maps.event.trigger(map, 'resize');
+			map.panTo(marker.getPosition());
+		}
 	}
 }
