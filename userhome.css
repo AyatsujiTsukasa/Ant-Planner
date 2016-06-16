@@ -27,27 +27,20 @@
   margin-right: -21px; /* 20px padding + 1px border */
   margin-bottom: 20px;
   margin-left: -20px;
+  color: #ff5c33;
 }
 .nav-sidebar > li {
   padding-right: 20px;
   padding-left: 20px;
   line-height: 2.5rem;
 }
-.nav-sidebar > .active > a,
-.nav-sidebar > .active > a:hover,
-.nav-sidebar > .active > a:focus {
-  color: #fff;
-}
 
-.nav-sidebar> .active{
+.nav-sidebar > .active{
   background-color: #ff5c33;
+  color: white;
 }
 
-.nav > li > a,
-.nav > li > a:hover,
-.nav > li > a:focus {
-  color: #ff5c33;
-}
+
 
 .friend-list {
   position: absolute;
@@ -81,6 +74,10 @@
 .add:before {
   content: "\ea0a";
   font-family: icon;
+}
+
+.add {
+  color: #ff5c33
 }
 
 .menu:before {
@@ -189,6 +186,10 @@
 }
 .btnUnfoldAll:hover, .btnUnfoldAll:focus, .btnUnfoldAll:active, .btnUnfoldAll.active {
   background-color: #ff7f18;
+}
+
+.activeTag {
+  background-color: #b9332f;
 }
 
 .extra-padding{

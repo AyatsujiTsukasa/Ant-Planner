@@ -25,13 +25,13 @@
 					<span class="submit icon" data-toggle="tooltip" data-placement="bottom" onclick="submitForm(this)" title="Add"></span>
 				</div>
 			</div>
-			<div class="form-group row subHidden planDesc" onmouseenter="planDescMouseenter(this)" onmouseleave="planDescMouseleave(this)">
+			<div class="form-group row planDesc" onmouseenter="planDescMouseenter(this)" onmouseleave="planDescMouseleave(this)">
 				<label for="planDesc" class="col-sm-2 form-control-label planDescIcon icon"> Details</label>
 				<div class="col-sm-10">
 					<textarea class="form-control planDesc-input" name="planDesc"></textarea>
 				</div>
 			</div>
-			<div class="form-group row subHidden tags" onmouseenter="tagsMouseenter(this)" onmouseleave="tagsMouseleave(this)">
+			<div class="form-group row tags" onmouseenter="tagsMouseenter(this)" onmouseleave="tagsMouseleave(this)">
 				<label for="tags" class="col-sm-2 form-control-label newCustomTagIcon icon"> Tag</label>
 				<div class="col-sm-10">
 					<input class="form-control tags-input" name="tags" list="commonTags" />
@@ -43,13 +43,13 @@
 					</datalist> 
 				</div>
 			</div>
-			<div class="form-group row subHidden due" onmouseenter="dueMouseenter(this)" onmouseleave="dueMouseleave(this)">
+			<div class="form-group row due" onmouseenter="dueMouseenter(this)" onmouseleave="dueMouseleave(this)">
 				<label for="due" class="col-sm-2 form-control-label dueTagIcon icon"> Due</label>
 				<div class="col-sm-10">
 					<input type="text" name="due" class="form-control dueDateTime due-input" id="datetimepicker" />
 				</div>
 			</div>
-			<div class="form-group row subHidden repeat" onmouseenter="repeatMouseenter(this)" onmouseleave="repeatMouseleave(this)">
+			<div class="form-group row repeat" onmouseenter="repeatMouseenter(this)" onmouseleave="repeatMouseleave(this)">
 				<label for="repeat" class="col-sm-2 form-control-label repeatTagIcon icon"> Repeat</label>
 				<div class="col-sm-10">
 					<select class="form-control c-select repeat-input" name="repeat">
@@ -61,7 +61,7 @@
 					</select>
 				</div>
 			</div>
-			<div class="form-group row subHidden reminderRow" onmouseenter="reminderRowMouseenter(this)" onmouseleave="reminderRowMouseleave(this)">
+			<div class="form-group row reminderRow" onmouseenter="reminderRowMouseenter(this)" onmouseleave="reminderRowMouseleave(this)">
 				<label for="reminder" class="col-sm-2 form-control-label reminderTagIcon icon"> Reminder</label>
 				<div class="col-sm-10">
 					<div class="col-sm-4 phoneAlarm">
@@ -75,13 +75,13 @@
 					</div>
 				</div>
 			</div>
-			<div class="form-group row subHidden url" onmouseenter="urlMouseenter(this)" onmouseleave="urlMouseleave(this)">
+			<div class="form-group row url" onmouseenter="urlMouseenter(this)" onmouseleave="urlMouseleave(this)">
 				<label for="url" class="col-sm-2 form-control-label urlTagIcon icon"> Url</label>
 				<div class="col-sm-10 url">
 					<input type="url" name="url" class="form-control urlText url-input" />
 				</div>
 			</div>
-			<div class="form-group row subHidden locationRow" onmouseenter="locationRowMouseenter(this)" onmouseleave="locationRowMouseleave(this)">
+			<div class="form-group row locationRow" onmouseenter="locationRowMouseenter(this)" onmouseleave="locationRowMouseleave(this)">
 				<label for="location" class="col-sm-2 form-control-label locationTagIcon icon">Location</p></label>
 				<div class="col-sm-10 location" onkeyup="searchMap(this)">
 					<input type="text" name="location" class="form-control location-input" /><input type="hidden" name="lat" /><input type="hidden" name="lng" /><ul class="dropDownList list-group"></ul>

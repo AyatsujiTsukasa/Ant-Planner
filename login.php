@@ -59,25 +59,7 @@ if($valid){
 	$id = $row['id'];
 	setcookie("username", $username, time()+$time, "/");
 	setcookie("ownerId", $id, time()+$time, "/");
-	$getPlans = "select * from Plans where ownerId='".$row['id']."'";
-	$plans = $conn->query($getPlans);
-	for($i=0; $plan = mysqli_fetch_array($plans); $i++){
-		setcookie("planId_".$i, $plan['id'], time()+$time, "/");
-		setcookie("ownerId_".$i, $plan['ownerId'], time()+$time, "/");
-		setcookie("name_".$i, $plan['name'], time()+$time, "/");
-		setcookie("description_".$i, $plan['description'], time()+$time, "/");
-		setcookie("due_".$i, $plan['due'], time()+$time, "/");
-		setcookie("importance_".$i, $plan['importance'], time()+$time, "/");
-		setcookie("phonePush_".$i, $plan['phonePush'], time()+$time, "/");
-		setcookie("phoneAlarm_".$i, $plan['phoneAlarm'], time()+$time, "/");
-		setcookie("desktopPush_".$i, $plan['desktopPush'], time()+$time, "/");
-		setcookie("tags_".$i, $plan['customTags'], time()+$time, "/");
-		setcookie("url_".$i, $plan['url'], time()+$time, "/");
-		setcookie("lat_".$i, $plan['lat'], time()+$time, "/");
-		setcookie("lng_".$i, $plan['lng'], time()+$time, "/");
-		setcookie("location_".$i, $plan['location'], time()+$time, "/");
-		setcookie("rep_".$i, $plan['rep'], time()+$time, "/");
-	}
+	setcookie("password", $password, time()+$time, "/");
 	echo "<script>
 			window.location = 'userhome.html';
 		  </script>";

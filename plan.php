@@ -13,6 +13,7 @@ if(!$_POST) {
 }
 
 $id = $_POST["planId"];
+$password = $_POST["password"];
 $ownerId = intval($_POST["ownerId"]);
 $importance = intval($_POST["importance"]);
 $planName = $_POST["name"];
@@ -44,14 +45,27 @@ $lat = $_POST["lat"];
 $lng = $_POST["lng"];
 $tags = $_POST["tags"];
 
-if($id === ""){
-	$sql = "insert into Plans (ownerId, name, description, due, importance, phonePush, phoneAlarm, desktopPush, customTags, url, lat, lng, location, rep) values('".$ownerId."','".$planName."','".$planDesc."','".$due."','".$importance."','".$phonePush."','".$phoneAlarm."','".$desktopPush."','".$tags."','".$url."','".$lat."','".$lng."','".$location."','".$repeat."')";
-	$conn->query($sql);
+$verificationPW = "select password from Users where id='".$ownerId."'";
+$pw = mysqli_fetch_array($conn->query($verificationPW))["password"];
+
+if($pw === $password){
+	if($id === "-1"){
+		$sql = "insert into Plans (ownerId, name, description, due, importance, phonePush, phoneAlarm, desktopPush, customTags, url, lat, lng, location, rep) values('".$ownerId."','".$planName."','".$planDesc."','".$due."','".$importance."','".$phonePush."','".$phoneAlarm."','".$desktopPush."','".$tags."','".$url."','".$lat."','".$lng."','".$location."','".$repeat."');";
+		$conn->query($sql);
+		$id = $conn->insert_id;
+		echo $id;
+	} else {
+		$verificationID = "select ownerId from Plans where id='".$id."'";
+		$oI = mysqli_fetch_array($conn->query($verificationID))["ownerId"];
+		if(intval($oI) === intval($ownerId)){
+			$sql = "update Plans set ownerId='".$ownerId."',name='".$planName."',description='".$planDesc."',due='".$due."',importance='".$importance."',phonePush='".$phonePush."',phoneAlarm='".$phoneAlarm."',desktopPush='".$desktopPush."',customTags='".$tags."',url='".$url."',lat='".$lat."',lng='".$lng."',location='".$location."',rep='".$repeat."' where id='".$id."'";
+			$conn->query($sql);
+		}
+		echo $id;
+	}
+} else {
+	echo $id;
 }
-
-// $EmailCheckQuery = "select * from Users where email='".$email."'";
-// $EmailResult = $conn->query($EmailCheckQuery);
-
 
 
 ?>

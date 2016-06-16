@@ -7,6 +7,7 @@
 	<title>Ant Planner</title>
 	<script src="https://maps.googleapis.com/maps/api/js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="datetimepicker/jquery.datetimepicker.full.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="planStyle.css">
 	<link rel="stylesheet" type="text/css" href="datetimepicker/jquery.datetimepicker.css"/ >
@@ -58,14 +59,14 @@
 				<li><p class="nav-brand" id="usernameSide"><p></li>
 			</ul>
 			<ul class="nav nav-sidebar">
-				<li><a href="planDemo.html"><span class="add"> Add a plan</span></a></li>
-				<li><span class="sync cursor-pointer"> Syncronize</span></li>
+				<li onclick="addPlan()"><span class="add cursor-pointer"> Add a plan</span></li>
+				<li onclick="sync('All')"><span class="sync cursor-pointer"> Syncronize</span></li>
 			</ul>
-			<ul class="nav nav-sidebar">
-				<li class="active"><a href="userhome.html">Today</a></li>
-				<li><a href="#">Tomorrow</a></li>
-				<li><a href="#">Next 7 days</a></li>
-				<li><a href="#">All</a></li>
+			<ul class="nav nav-sidebar" id="timeFilter" value="All">
+				<li class="timeTag active">All</li>
+				<li class="timeTag">Today</li>
+				<li class="timeTag">Tomorrow</li>
+				<li class="timeTag">Next 7 days</li>
 			</ul>
 		</div>
 		<div class="main">
@@ -73,8 +74,15 @@
 			<span class="friends hidden-md-up pull-xs-right cursor-pointer"> Friends</span><br>
 			<h3 class="extra-padding" id="welcomeMsg"></h3>
 			<div class="extra-padding btn btn-danger btnAddPlan">Add a plan</div>
-			<div class="extra-padding btn btn-danger btnFoldAll">Fold all</div>
 			<div class="extra-padding btn btn-danger btnUnfoldAll">Unfold all</div>
+			<div class="extra-padding btn btn-danger btnFoldAll">Fold all</div>
+			<div style="float: right" id="tagFilter" value="All">
+				<div class="extra-padding btn btn-danger btnTag btnAll">All</div>
+				<div class="extra-padding btn btn-danger btnTag btnWork">Work</div>
+				<div class="extra-padding btn btn-danger btnTag btnStudy">Study</div>
+				<div class="extra-padding btn btn-danger btnTag btnFamily">Family</div>
+				<div class="extra-padding btn btn-danger btnTag btnPersonal">Personal</div>
+			</div>
 			<div class="extra-padding">
 				<ul class="plans list-group list-group-flush"></ul>
 			</div>			
@@ -84,6 +92,5 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="userhome.js"></script>
 	<script type="text/javascript" src="plan.js"></script>
-	<script src="datetimepicker/jquery.datetimepicker.full.min.js"></script>
 </body>
 </html>
