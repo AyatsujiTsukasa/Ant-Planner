@@ -7,11 +7,9 @@ $('#loginForm').submit(function (e) {
 	});
 });
 
-var xhr;
-
 function onSignIn(googleUser) {
 	var profile = googleUser.getBasicProfile();
-	xhr = new XMLHttpRequest();
+	var xhr = new XMLHttpRequest();
 	xhr.open("POST", "googleSignIn.php");
 	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	xhr.onload = function() {
