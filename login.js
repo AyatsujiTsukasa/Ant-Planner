@@ -6,3 +6,16 @@ $('#loginForm').submit(function (e) {
 		$('.ajaxMsg').html(data).show();
 	});
 });
+
+var xhr;
+
+function onSignIn(googleUser) {
+	var profile = googleUser.getBasicProfile();
+	xhr = new XMLHttpRequest();
+	xhr.open("POST", "googleSignIn.php");
+	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xhr.onload = function() {
+  		$('.ajaxMsg').html(xhr.responseText).show();
+	};
+	xhr.send("username=" + profile.getName() + "&email=" + profile.getEmail());
+}
