@@ -14,6 +14,8 @@ if(!$_POST) {
 
 $ownerId = $_POST["ownerId"];
 $password = $_POST["password"];
+$timeFilter = $_POST["timeFilter"];
+$tagFilter = $_POST["tagFilter"];
 $time = 300;
 
 $verification = "select password from Users where id='".$ownerId."'";
@@ -21,6 +23,24 @@ $pw = mysqli_fetch_array($conn->query($verification))["password"];
 
 if($pw === $password){
 	$getPlans = "select * from Plans where ownerId='".$ownerId."'";
+	if($tagFilter !== "All"){
+		$getPlans .= " and customTags='".$tagFilter."'";
+	}
+	$date = getdate();
+	$formattedDate = $date['year']."-".$date['mon']."-".$date['mday'];
+	switch ($timeFilter) {
+		case 'Today':
+			$getPlans .= " and due <= date_add('".$formattedDate."', interval 1 day)";
+			break;
+		case 'Tomorrow':
+			$getPlans .= " and due <= date_add('".$formattedDate."', interval 2 day)";
+			break;
+		case 'Next 7 days':
+			$getPlans .= " and due <= date_add('".$formattedDate."', interval 8 day)";
+			break;
+		default:
+			break;
+	}
 	$plans = $conn->query($getPlans);
 	for($i=0; $plan = mysqli_fetch_array($plans); $i++){
 		setcookie("planId_".$i, $plan['id'], time()+$time, "/");
