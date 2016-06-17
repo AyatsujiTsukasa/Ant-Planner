@@ -29,6 +29,8 @@
 	<div class="myForm">
 		<form id="registerForm" method="post" action="register.php">
 			<h2 style="text-align:center">Sign up for Ant Planner</h2><br/>
+			<!-- Ajax Message box here!!! -->
+			<div class="ajaxMsg"></div>
 			<fieldset class="form-group">
 				<input type="text" name="username" id="username" placeholder="Username" maxlength="20" class="validateLocally form-control" />
 				<span id="usernameWarning" class="warning"></span>
@@ -49,9 +51,7 @@
 		</form><br/>
 		<div style="text-align:center">Have an account already? <a href="login.html">Log in</a></div>
 	</div>
-	<div class="ajaxMsg"></div>
 	<script type="text/javascript" src="register.js"></script>
-	
 	<script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script><!-- Tether for Bootstrap --> 
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
 </body>

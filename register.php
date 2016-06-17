@@ -17,7 +17,7 @@ $password = $_POST["password"];
 $password2 = $_POST["password2"];
 
 $valid = true;
-$errorMsg = "Error: <ul>";
+$errorMsg = "<div class='alert alert-danger' role='alert'><ul>";
 
 $usernameValidation = '/^[a-zA-Z0-9 ]{3,20}$/';
 $emailValidation = '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[_a-z0-9-]+)*(\.[a-z]{2,4})$/';
@@ -50,25 +50,26 @@ if (strlen($password) > 15) {
 $UsernameCheckQuery = "select * from Users where username='".$username."'";
 $usernameResult = $conn->query($UsernameCheckQuery);
 if($usernameResult->num_rows > 0){
-	$errorMsg .= "<li>Username already exists</li>";
+	$errorMsg .= "<li>Username already taken</li>";
 	$valid = false;
 }
 $EmailCheckQuery = "select * from Users where email='".$email."'";
 $EmailResult = $conn->query($EmailCheckQuery);
 if($EmailResult->num_rows > 0){
-	$errorMsg .= "<li>Email already exists</li>";
+	$errorMsg .= "<li>Email already taken</li>";
 	$valid = false;
 }
 
 if($valid){
 	$sql = "insert into Users (username, email, password, friends) values('".$username."','".$email."','".$password."','')";
 	if($conn->query($sql) === true) {
-		echo "<p>Account Created!</p><p>Details:</p><ul><li>Username: ".$username."</li><li>Email: ".$email."</li><li>Password: ".str_repeat("*", strlen($password))."</ul>";
+		echo "<div class='alert alert-success' role='alert'><strong>Account Created!</strong><ul><li>Username: ".$username."</li><li>Email: ".$email."</li></ul></div>";
+		//能不能再加上三秒后自动登录，并跳转到userhome的功能？谢谢！
 	} else {
-		echo "<p>Connection error. Please try again later.</p>";
+		echo "<div class='alert alert-danger' role='alert'><p>Connection error. Please try again later.</p></div>";
 	}
 } else {
-	echo $errorMsg."</ul>";
+	echo $errorMsg."</ul></div>";
 }
 
 ?>

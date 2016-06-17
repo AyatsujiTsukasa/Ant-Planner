@@ -20,7 +20,7 @@ if(isset($_POST["remember"])) {
 }
 
 $valid = true;
-$errorMsg = "  Error: <ul>";
+$errorMsg = "<div class='alert alert-danger' role='alert'><ul>";
 
 $emailValidation = '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[_a-z0-9-]+)*(\.[a-z]{2,4})$/';
 $passwordValidation = '/^(?=.*[a-zA-Z])(?=.*[0-9])/';
@@ -44,12 +44,12 @@ if (strlen($password) > 15) {
 $EmailCheckQuery = "select * from Users where email='".$email."'";
 $EmailResult = $conn->query($EmailCheckQuery);
 if($EmailResult->num_rows === 0){
-	$errorMsg .= "<li>Email does not exist</li>";
+	$errorMsg .= "<li>The email does not match any account</li>";
 	$valid = false;
 } else {
 	$row = mysqli_fetch_array($EmailResult);
 	if($row['password'] !== $password) {
-		$errorMsg .= "<li>Incorrect password</li>";
+		$errorMsg .= "<li>The email and password do not match</li>";
 		$valid = false;
 	}
 }
@@ -64,7 +64,7 @@ if($valid){
 			window.location = 'userhome.html';
 		  </script>";
 } else {
-	echo $errorMsg."</ul>";
+	echo $errorMsg."</ul><div>";
 }
 
 ?>

@@ -5,9 +5,10 @@
  	<meta charset="utf-8">
  	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
  	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	
 	<title>Login - Ant Planner</title>
-
+	<!-- Google Sign in -->
+    <meta name="google-signin-client_id" content="1009069386934-dgbqi4fat9dc3rdf42p4dse1a2c55955.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -43,14 +44,10 @@
      			</div>
 			<input class="btn btn-primary btn-block" type="submit" name="loginButton" value="Login" id="loginButton" />
 		</form>
-		<p class="lineWithWords"><span>Or</span></p>
-		<!-- Temporary place holder. Will change to actual button. --> 
-		<div>
-			<img src="Images/google.png" alt="Google sign in" class="centerImg"> 
-		</div><br/>
-		<div style="text-align:center">Don't have an account? <a href="register.html">Sign Up</a></div>
+		<p class="lineWithWords"><span>Or</span></p><br/>
+		<div class="g-signin2 col-xs-offset-4 col-xs-4" data-onsuccess="onSignIn"></div><br/><br/><br/>
+		<div style="text-align:center">Don't have an account? <a href="register.html">Sign up</a></div>
 	</div>
-	<!-- AJAX message box. After form submission, communicate with server and return data. -->
 	<script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script><!-- Tether for Bootstrap --> 
  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
  	<script type="text/javascript" src="login.js"></script>

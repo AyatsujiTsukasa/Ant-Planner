@@ -56,7 +56,7 @@
   border-left: 1px solid #eee;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1176px) {
   .friend-list {
     right: 0;
   }
@@ -152,7 +152,7 @@
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1176px) {
   .main {
     right: 16rem;
   }
@@ -165,13 +165,13 @@
 }
 
 .btnAddPlan {
-  background-color: #ff5c33;
+  background-color: #ffaa00;
 }
 .btnFoldAll {
-  background-color: #ff7f18;
+  background-color: #ff5c33;
 }
 .btnUnfoldAll {
-  background-color: #ffaa00;
+  background-color: #ff7f18;
 }
 
 .btn:hover, .btn:focus, .btn:active, .btn.active{
@@ -179,13 +179,13 @@
 }
 
 .btnAddPlan:hover, .btnAddPlan:focus, .btnAddPlan:active, .btnAddPlan.active {
-  background-color: #ff3300;
+  background-color: #ff7f18;
 }
 .btnFoldAll:hover, .btnFoldAll:focus, .btnFoldAll:active, .btnFoldAll.active {
-  background-color: #ff5c33;
+  background-color: #ff3300;
 }
 .btnUnfoldAll:hover, .btnUnfoldAll:focus, .btnUnfoldAll:active, .btnUnfoldAll.active {
-  background-color: #ff7f18;
+  background-color: #ff5c33;
 }
 
 .activeTag {
@@ -193,7 +193,7 @@
 }
 
 .extra-padding{
-  padding: 0.5rem;
+  padding-top: 1rem;
 }
 
 /* Display plans */

@@ -54,11 +54,10 @@
     padding:0 10px; 
 }
 
-.centerImg {
-	display: block;
-    margin: 0 auto;
+.ajaxMsg {
+	display: none;
 }
 
-.ajaxMsg {
-	background-color: #ee0066;
+.ajaxMsg > ul{
+	padding-left: 14px;
 }
