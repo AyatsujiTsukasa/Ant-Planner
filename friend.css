@@ -8,6 +8,11 @@
     font-family: icon;
 }
 
+.refuseIcon:before{
+  content: "\ea0b";
+  font-family: icon;
+}
+
 .searchIcon:before {
   content: "\e986";
   font-family: icon;
@@ -34,7 +39,7 @@
 }
 
 .deleteIcon:before {
-  content: "\e9ac";
+  content: "\e974";
   font-family: icon;
 }
 
@@ -64,8 +69,8 @@
   color: white;
 }
 .cancelRequest:hover {
-  border-color: #b2292a;
-  background-color: #b2292a;
+  border-color: #d2494a;
+  background-color: #d2494a;
 }
 .cancelRequest:before {
   content: "\e974";
@@ -77,8 +82,8 @@
   color: white;
 }
 .sendRequest:hover {
-  border-color: #69aa6e;
-  background-color: #69aa6e;
+  border-color: #89ca8e;
+  background-color: #89ca8e;
 }
 .sendRequest:before {
   content: "\e973";
@@ -90,8 +95,8 @@
   color: white;
 }
 .deleteFriend:hover {
-  border-color: #b2292a;
-  background-color: #b2292a;
+  border-color: #d2494a;
+  background-color: #d2494a;
 }
 .deleteFriend:before {
   content: "\e974";
@@ -107,7 +112,7 @@
   content: "\e973";
   font-family: icon;
   font-size: 0.8rem;
-  color: #000000;
+  color: black;
 }
 .searchResult_Requested span {
   border-color: #ccc;
@@ -139,4 +144,69 @@
 #addFriendSearchResults {
   list-style-type: none;
   padding: 0px;
+}
+
+.friend {
+  width: 100%;
+  padding: 4px 10px 4px 10px;
+  border-bottom: #ccc solid 1px;
+}
+
+.friendItem {
+  list-style-type: none;
+  border: #ccc solid 1px;
+  border-radius: 5px;
+}
+
+.friendBtn {
+  display: inline-table;
+  width: 71px;
+  border-width: 0px;
+  border-radius: 0px;
+}
+
+.pendingBtn {
+  display: inline-table;
+  width: 106px;
+  border-width: 0px;
+  border-radius: 0px;
+}
+
+.btn-share {
+  background-color: #0275d8;
+  border-radius: 0px 0px 0px 4px;
+}
+.btn-share:hover {
+  background-color: #025aa5;
+}
+
+.btn-msg {
+  background-color: #5bc0de;
+}
+.btn-msg:hover {
+  background-color: #31b0d5;
+}
+
+.btn-delete {
+  background-color: #d9534f;
+  border-radius: 0px 0px 4px 0px;
+}
+.btn-delete:hover {
+  background-color: #c9302c;
+}
+
+.btn-add {
+  background-color: #99da9e;
+  border-radius: 0px 0px 0px 4px;
+}
+.btn-add:hover {
+  background-color: #89ca8e;
+}
+
+.btn-refuse {
+  background-color: #ccc;
+  border-radius: 0px 0px 4px 0px;
+}
+.btn-refuse:hover {
+  background-color: #bbb;
 }

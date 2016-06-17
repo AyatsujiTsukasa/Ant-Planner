@@ -27,7 +27,7 @@
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button><br/>
-							<form class="searchForm">
+							<form class="searchForm" autocomplete="off">
 								<div class="input-group input-group-sm" style="margin-bottom: 3px">
 									<span class="input-group-addon searchIcon"></span>
 									<input type="search" id="addFriendSearch" class="form-control" placeholder="Username" aria-describedby="search">
@@ -38,20 +38,14 @@
 					</div>
 				</div>
 			</div>
-			<form class="searchForm">
+			<form class="searchForm" autocomplete="off">
 				<div class="input-group input-group-sm">
 					<span class="input-group-addon searchIcon"></span>
 					<input type="search" name="friendsearch" class="form-control" placeholder="Search your friends" aria-describedby="search">
 				</div>
 			</form>
-			<ul class="list-group">
-				<li class="list-group-item">
-					Friend A<br/>
-					<button type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Share plans"><span class="shareIcon"></span></button>
-					<button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Send messages"><span class="messageIcon"></span></button>
-					<button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Delete friend"><span class="deleteIcon"></span></button>
-				</li>
-			</ul>
+			<ul class="list-group" id="friendsPart"></ul>
+			<ul class="list-group" id="pendingPart"></ul>
 		</div>
 		<div class="sidebar">
 			<div class="close-menu hidden-sm-up cursor-pointer pull-xs-right"></div><br>

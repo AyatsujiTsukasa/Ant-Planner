@@ -31,6 +31,11 @@ if($pw === $password){
 			    unset($friends[$key]);
 			}
 			$conn->query("update Users set friends='".join("&", $friends)."' where id='".$id."'");
+			$op = explode("&", mysqli_fetch_array($conn->query("select friends from Users where id='".$friendId."'"))["friends"]);
+			foreach (array_keys($op, $id) as $key) {
+			    unset($op[$key]);
+			}
+			$conn->query("update Users set friends='".join("&", $op)."' where id='".$friendId."'");
 			break;
 		case 'cancelRequest':
 			$conn->query("delete from Requests where Requests.from='".$id."' and Requests.to='".$friendId."'");

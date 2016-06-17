@@ -22,6 +22,18 @@ $verification = "select password from Users where id='".$ownerId."'";
 $pw = mysqli_fetch_array($conn->query($verification))["password"];
 
 if($pw === $password){
+	$friendIds = explode("&", mysqli_fetch_array($conn->query("select friends from Users where id='".$ownerId."'"))["friends"]);
+	$friends = "";
+	foreach ($friendIds as $value) {
+		$friends .= mysqli_fetch_array($conn->query("select username from Users where id='".$value."'"))["username"]."&";
+	}
+	$requestIds = $conn->query("select Requests.from from Requests where Requests.to = '".$ownerId."'");
+	$requests = "";
+	while ($value = mysqli_fetch_array($requestIds)["from"]) {
+		$requests .= mysqli_fetch_array($conn->query("select username from Users where id='".$value."'"))["username"]."&";
+	}
+	setcookie("friends", $friends, time()+$time, "/");
+	setcookie("requests", $requests, time()+$time, "/");
 	$getPlans = "select * from Plans where ownerId='".$ownerId."'";
 	if($tagFilter !== "All"){
 		$getPlans .= " and customTags='".$tagFilter."'";

@@ -57,7 +57,7 @@ function toggleMenu() {
 	});
 }
 
-var planHTML = "<li class='list-group-item'><div class='container-fluid'><form class='planForm' id='planForm' method='post' action='plan.php'><input type='hidden' name='planId' id='planId'><div class='form-group row header'><div class='col-sm-2 planTagHeader' onclick='dropMenu(this)'><p class='planTagHeaderIconDown icon'> Options</p></div><div class='col-sm-10 planName'><input type='hidden' name='importance' value='1' /><input type='hidden' name='ownerId' /><div class='col-sm-9'><input type='text' name='name' class='planName-input form-control' placeholder='Write down your plan' /></div><span class='importance1 importance icon' onmousemove='importanceChange(event, this)'>&nbsp;&nbsp;</span><span class='cancel icon' data-toggle='tooltip' data-placement='bottom' onclick='resetForm(this)' title='Cancel'>&nbsp;&nbsp;</span> <span class='submit icon' data-toggle='tooltip' data-placement='bottom' onclick='submitForm(this)' title='Add'></span></div></div><div class='form-group row planDesc' onmouseenter='planDescMouseenter(this)' onmouseleave='planDescMouseleave(this)'><label for='planDesc' class='col-sm-2 form-control-label planDescIcon icon'> Details</label><div class='col-sm-10'><textarea class='form-control planDesc-input' name='planDesc'></textarea></div></div><div class='form-group row tags' onmouseenter='tagsMouseenter(this)' onmouseleave='tagsMouseleave(this)'><label for='tags' class='col-sm-2 form-control-label newCustomTagIcon icon'> Tag</label><div class='col-sm-10'><input class='form-control tags-input' name='tags' list='commonTags' /><datalist id='commonTags'><option value='Work'><option value='Study'><option value='Family'><option value='Personal'></datalist> </div></div><div class='form-group row due' onmouseenter='dueMouseenter(this)' onmouseleave='dueMouseleave(this)'><label for='due' class='col-sm-2 form-control-label dueTagIcon icon'> Due</label><div class='col-sm-10'><input type='text' name='due' class='form-control dueDateTime due-input' id='datetimepicker' /></div></div><div class='form-group row repeat' onmouseenter='repeatMouseenter(this)' onmouseleave='repeatMouseleave(this)'><label for='repeat' class='col-sm-2 form-control-label repeatTagIcon icon'> Repeat</label><div class='col-sm-10'><select class='form-control c-select repeat-input' name='repeat'><option value='never'>Never</option><option value='day'>Every day</option><option value='week'>Every week</option><option value='month'>Every month</option><option value='year'>Every year</option></select></div></div><div class='form-group row reminderRow' onmouseenter='reminderRowMouseenter(this)' onmouseleave='reminderRowMouseleave(this)'><label for='reminder' class='col-sm-2 form-control-label reminderTagIcon icon'> Reminder</label><div class='col-sm-10'><div class='col-sm-4 phoneAlarm'><input type='hidden' name='phoneAlarm' value='0' /><p class='reminder phoneAlarmIcon icon reminderDisabled' onclick='toggleReminder(this)'> Alarm</p></div><div class='col-sm-4 phonePush'><input type='hidden' name='phonePush' value='0' /><p class='reminder phonePushIcon icon reminderDisabled' onclick='toggleReminder(this)'> Push</p></div><div class='col-sm-4 desktopPush'><input type='hidden' name='desktopPush' value='0' /><p class='reminder desktopPushIcon icon reminderDisabled' onclick='toggleReminder(this)'> Push</p></div></div></div><div class='form-group row url' onmouseenter='urlMouseenter(this)' onmouseleave='urlMouseleave(this)'><label for='url' class='col-sm-2 form-control-label urlTagIcon icon'> Url</label><div class='col-sm-10 url'><input type='url' name='url' class='form-control urlText url-input' /></div></div><div class='form-group row locationRow' onmouseenter='locationRowMouseenter(this)' onmouseleave='locationRowMouseleave(this)'><label for='location' class='col-sm-2 form-control-label locationTagIcon icon'>Location</p></label><div class='col-sm-10 location' onkeyup='searchMap(this)'><input type='text' name='location' class='form-control location-input' /><input type='hidden' name='lat' /><input type='hidden' name='lng' /><ul class='dropDownList list-group'></ul></div><div class='col-sm-10 col-sm-offset-2'><div class='map'><div id='map' style='height:280px'></div></div></div></div></form></div></li>";
+var planHTML = "<li class='list-group-item'><div class='container-fluid'><form autocomplete='off' class='planForm' id='planForm' method='post' action='plan.php'><input type='hidden' name='planId' id='planId'><div class='form-group row header'><div class='col-sm-2 planTagHeader' onclick='dropMenu(this)'><p class='planTagHeaderIconDown icon'> Options</p></div><div class='col-sm-10 planName'><input type='hidden' name='importance' value='1' /><input type='hidden' name='ownerId' /><div class='col-sm-9'><input type='text' name='name' class='planName-input form-control' placeholder='Write down your plan' /></div><span class='importance1 importance icon' onmousemove='importanceChange(event, this)'>&nbsp;&nbsp;</span><span class='cancel icon' data-toggle='tooltip' data-placement='bottom' onclick='resetForm(this)' title='Cancel'>&nbsp;&nbsp;</span> <span class='submit icon' data-toggle='tooltip' data-placement='bottom' onclick='submitForm(this)' title='Add'></span></div></div><div class='form-group row planDesc' onmouseenter='planDescMouseenter(this)' onmouseleave='planDescMouseleave(this)'><label for='planDesc' class='col-sm-2 form-control-label planDescIcon icon'> Details</label><div class='col-sm-10'><textarea class='form-control planDesc-input' name='planDesc'></textarea></div></div><div class='form-group row tags' onmouseenter='tagsMouseenter(this)' onmouseleave='tagsMouseleave(this)'><label for='tags' class='col-sm-2 form-control-label newCustomTagIcon icon'> Tag</label><div class='col-sm-10'><input class='form-control tags-input' name='tags' list='commonTags' /><datalist id='commonTags'><option value='Work'><option value='Study'><option value='Family'><option value='Personal'></datalist> </div></div><div class='form-group row due' onmouseenter='dueMouseenter(this)' onmouseleave='dueMouseleave(this)'><label for='due' class='col-sm-2 form-control-label dueTagIcon icon'> Due</label><div class='col-sm-10'><input type='text' name='due' class='form-control dueDateTime due-input' id='datetimepicker' /></div></div><div class='form-group row repeat' onmouseenter='repeatMouseenter(this)' onmouseleave='repeatMouseleave(this)'><label for='repeat' class='col-sm-2 form-control-label repeatTagIcon icon'> Repeat</label><div class='col-sm-10'><select class='form-control c-select repeat-input' name='repeat'><option value='never'>Never</option><option value='day'>Every day</option><option value='week'>Every week</option><option value='month'>Every month</option><option value='year'>Every year</option></select></div></div><div class='form-group row reminderRow' onmouseenter='reminderRowMouseenter(this)' onmouseleave='reminderRowMouseleave(this)'><label for='reminder' class='col-sm-2 form-control-label reminderTagIcon icon'> Reminder</label><div class='col-sm-10'><div class='col-sm-4 phoneAlarm'><input type='hidden' name='phoneAlarm' value='0' /><p class='reminder phoneAlarmIcon icon reminderDisabled' onclick='toggleReminder(this)'> Alarm</p></div><div class='col-sm-4 phonePush'><input type='hidden' name='phonePush' value='0' /><p class='reminder phonePushIcon icon reminderDisabled' onclick='toggleReminder(this)'> Push</p></div><div class='col-sm-4 desktopPush'><input type='hidden' name='desktopPush' value='0' /><p class='reminder desktopPushIcon icon reminderDisabled' onclick='toggleReminder(this)'> Push</p></div></div></div><div class='form-group row url' onmouseenter='urlMouseenter(this)' onmouseleave='urlMouseleave(this)'><label for='url' class='col-sm-2 form-control-label urlTagIcon icon'> Url</label><div class='col-sm-10 url'><input type='url' name='url' class='form-control urlText url-input' /></div></div><div class='form-group row locationRow' onmouseenter='locationRowMouseenter(this)' onmouseleave='locationRowMouseleave(this)'><label for='location' class='col-sm-2 form-control-label locationTagIcon icon'>Location</p></label><div class='col-sm-10 location' onkeyup='searchMap(this)'><input type='text' name='location' class='form-control location-input' /><input type='hidden' name='lat' /><input type='hidden' name='lng' /><ul class='dropDownList list-group'></ul></div><div class='col-sm-10 col-sm-offset-2'><div class='map'><div id='map' style='height:280px'></div></div></div></div></form></div></li>";
 
 function addPlan() {
 	var newPlan = $(planHTML);
@@ -92,8 +92,6 @@ $('.btnTag').on('click', function(){
 	}
 	sync();
 })
-
-// Initialization
 function sync() {
 	$.post("sync.php", {ownerId: getCookie("ownerId"), 
 						password: getCookie("password"), 
@@ -101,7 +99,7 @@ function sync() {
 						timeFilter: $('#timeFilter').val() === "" ? "All" : $('#timeFilter').val()}, function(data){
 		if(data === "Success"){
 			$('.plans').html("");
-			getPlans();
+			syncAll();
 		}
 	})
 }
@@ -136,13 +134,34 @@ $('#addFriendSearch').on('keyup', function(){
 	}
 })
 
+function share(element) {
+	console.log(element);
+}
+
+function sendMessage(element) {
+	console.log(element);
+}
+
+function addFriend(element) {
+	$.get("addFriend.php", {id: getCookie('ownerId'), password: getCookie('password'), friendName: $(element).siblings()[0].innerHTML}, sync);
+}
+
+function refuse(element) {
+	$.get("refuse.php", {id: getCookie('ownerId'), password: getCookie('password'), friendName: $(element).siblings()[0].innerHTML}, sync);
+}
+
+function deleteFriend(element) {
+	$.get("deleteFriend.php", {id: getCookie('ownerId'), password: getCookie('password'), friendName: $(element).siblings()[0].innerHTML}, sync);
+}
+
 function friendAction(Fid, action){
 	$.get("friendAction.php", {friendId: Fid, id: getCookie('ownerId'), password: getCookie('password'), action: action}, function () {
 		$('#addFriendSearch').trigger('keyup');
+		sync();
 	});
 }
 
-function getPlans() {
+function syncAll() {
 	var numPlans = parseInt(getCookie("numPlans"));
 	for (var i=0; i<numPlans; i++) {
 		var plan = $(planHTML);
@@ -240,11 +259,28 @@ function getPlans() {
 			map.panTo(marker.getPosition());
 		}
 	}
+	friendHTML = "";
+	requestHTML = "";
+	var friends = getCookie("friends").split("&");
+	for(var i in friends){
+		if(friends[i] !== "") {
+			friendHTML += "<li class='friendItem input-group'><div class='friend'>" + friends[i] + "</div><div class='btn btn-share friendBtn' onclick='share(this)' data-toggle='tooltip' data-placement='bottom' title='Share plans'><span class='shareIcon'></span></div><div class='btn btn-msg friendBtn' onclick='sendMessage(this)' data-toggle='tooltip' data-placement='bottom' title='Send messages'><span class='messageIcon'></span></div><div class='btn btn-delete friendBtn' onclick='deleteFriend(this)' data-toggle='tooltip' data-placement='bottom' title='Delete friend'><span class='deleteIcon'></span></div></li>";
+		}
+	}
+	var requests = getCookie("requests").split("&");
+	for(var i in requests){
+		if(requests[i] !== ""){
+			requestHTML += "<li class='friendItem input-group'><div class='friend'>" + requests[i] + "</div><div class='btn btn-add pendingBtn' onclick='addFriend(this)' data-toggle='tooltip' data-placement='bottom' title='Add Friend'><span class='addIcon'></span></div><div class='btn btn-refuse pendingBtn' onclick='refuse(this)' data-toggle='tooltip' data-placement='bottom' title='Refuse'><span class='refuseIcon'></span></div></li>";
+		}
+	}
+	$('#friendsPart').html(friendHTML);
+	$('#pendingPart').html(requestHTML);
 }
 
+// Initialization
 
 $("#usernameSide").html(getCookie("username"));
 $("#usernameBar").html(getCookie("username"));
 $("#welcomeMsg").html("Hi " + getCookie("username") + "! Have a productive day :)");
 $(document).ready(toggleMenu);
-sync('All');
+sync();
