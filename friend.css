@@ -15,12 +15,12 @@
 }
 
 .searchForm{
-	margin-top: 1rem;
-	margin-bottom: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .friend-list > ul > li{
-	line-height: 2rem;
+  line-height: 2rem;
 }
 
 .shareIcon:before {
@@ -36,4 +36,107 @@
 .deleteIcon:before {
   content: "\e9ac";
   font-family: icon;
+}
+
+.addFriendSearchResult {
+  margin-bottom: 1px;
+}
+.addFriendSearchResult div {
+  padding: 4.4px 12px 4.4px 12px;
+  display: inline-block;
+}
+
+.extraBtn {
+  border: solid 1px;
+  border-radius: 0px 3px 3px 0px;
+  width: 35%;
+  text-align: center;
+}
+
+.extraBtn:before{
+  font-family: icon;
+  font-size: 0.8em;
+}
+
+.cancelRequest {
+  border-color: #e2595a;
+  background-color: #e2595a;
+  color: white;
+}
+.cancelRequest:hover {
+  border-color: #b2292a;
+  background-color: #b2292a;
+}
+.cancelRequest:before {
+  content: "\e974";
+}
+
+.sendRequest {
+  border-color: #99da9e;
+  background-color: #99da9e;
+  color: white;
+}
+.sendRequest:hover {
+  border-color: #69aa6e;
+  background-color: #69aa6e;
+}
+.sendRequest:before {
+  content: "\e973";
+}
+
+.deleteFriend {
+  border-color: #e2595a;
+  background-color: #e2595a;
+  color: white;
+}
+.deleteFriend:hover {
+  border-color: #b2292a;
+  background-color: #b2292a;
+}
+.deleteFriend:before {
+  content: "\e974";
+}
+
+.addFriendSearchResultItem{
+  border: #ccc solid;
+  border-width: 1px 0px 1px 0px;
+  width: 65%;
+}
+
+.searchResult_Requested span:before {
+  content: "\e973";
+  font-family: icon;
+  font-size: 0.8rem;
+  color: #000000;
+}
+.searchResult_Requested span {
+  border-color: #ccc;
+  background-color: #ccc;
+}
+
+.searchResult_Normal span:before {
+  content: "\e971";
+  font-family: icon;
+  font-size: 0.8rem;
+  color: white;
+}
+.searchResult_Normal span {
+  border-color: #f0ad4e;
+  background-color:#f0ad4e;
+}
+
+.searchResult_Friend span:before {
+  content: "\e975";
+  font-family: icon;
+  font-size: 0.8rem;
+  color: white;
+}
+.searchResult_Friend span {
+  border-color: #99da9e;
+  background-color: #99da9e;
+}
+
+#addFriendSearchResults {
+  list-style-type: none;
+  padding: 0px;
 }

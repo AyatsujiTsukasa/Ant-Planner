@@ -106,6 +106,42 @@ function sync() {
 	})
 }
 
+$('#addFriendSearch').on('keyup', function(){
+	var key = $.trim($(this).val());
+	if(key !== ""){
+		$.post("addFriendSearch.php", {key: key, id: getCookie('ownerId')}, function (data) {
+			var results = "";
+			var lst = data.split('&');
+			for(var i in lst){
+				if(lst[i] !== ""){
+					var res = lst[i].split("+");
+					var btn = "";
+					switch (res[1]) {
+						case "searchResult_Requested":
+						btn = "<div class='extraBtn cancelRequest cursor-pointer' onclick=\"friendAction('" + res[2] + "', 'cancelRequest')\"> Cancel Request</div>";
+						break;
+						case "searchResult_Friend":
+						btn = "<div class='extraBtn deleteFriend cursor-pointer' onclick=\"friendAction('" + res[2] + "', 'deleteFriend')\"> Delete Friend</div>";
+						break;
+						default:
+						btn = "<div class='extraBtn sendRequest cursor-pointer' onclick=\"friendAction('" + res[2] + "', 'sendRequest')\"> Send Request</div>";
+					}
+					results += "<li class='addFriendSearchResult input-group input-group-sm " + res[1] + "'><span class='input-group-addon'></span><div class='addFriendSearchResultItem'>" + res[0] + "</div>" + btn + "</li>";
+				}
+			}
+			$('#addFriendSearchResults').html(results);
+		})
+	} else {
+		$('#addFriendSearchResults').html("");
+	}
+})
+
+function friendAction(Fid, action){
+	$.get("friendAction.php", {friendId: Fid, id: getCookie('ownerId'), password: getCookie('password'), action: action}, function () {
+		$('#addFriendSearch').trigger('keyup');
+	});
+}
+
 function getPlans() {
 	var numPlans = parseInt(getCookie("numPlans"));
 	for (var i=0; i<numPlans; i++) {

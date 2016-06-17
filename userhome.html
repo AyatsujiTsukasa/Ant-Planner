@@ -28,12 +28,12 @@
 								<span aria-hidden="true">&times;</span>
 							</button><br/>
 							<form class="searchForm">
-								<div class="input-group input-group-sm">
+								<div class="input-group input-group-sm" style="margin-bottom: 3px">
 									<span class="input-group-addon searchIcon"></span>
-									<input type="search" name="addFriendSearch" class="form-control" placeholder="Username" aria-describedby="search">
+									<input type="search" id="addFriendSearch" class="form-control" placeholder="Username" aria-describedby="search">
 								</div>
+								<ul id="addFriendSearchResults"></ul>
 							</form>
-							<p>// 根据username添加好友</p>
 						</div>
 					</div>
 				</div>
@@ -41,12 +41,12 @@
 			<form class="searchForm">
 				<div class="input-group input-group-sm">
 					<span class="input-group-addon searchIcon"></span>
-					<input type="search" name="friendsearch" class="form-control" placeholder="Search for your friends" aria-describedby="search">
+					<input type="search" name="friendsearch" class="form-control" placeholder="Search your friends" aria-describedby="search">
 				</div>
 			</form>
 			<ul class="list-group">
 				<li class="list-group-item">
-					(从数据库获取好友信息) Friend A<br/>
+					Friend A<br/>
 					<button type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Share plans"><span class="shareIcon"></span></button>
 					<button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Send messages"><span class="messageIcon"></span></button>
 					<button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Delete friend"><span class="deleteIcon"></span></button>
@@ -63,10 +63,10 @@
 				<li onclick="sync('All')"><span class="sync cursor-pointer"> Syncronize</span></li>
 			</ul>
 			<ul class="nav nav-sidebar" id="timeFilter" value="All">
-				<li class="timeTag active">All</li>
-				<li class="timeTag">Today</li>
-				<li class="timeTag">Tomorrow</li>
-				<li class="timeTag">Next 7 days</li>
+				<li class="cursor-pointer timeTag active">All</li>
+				<li class="cursor-pointer timeTag">Today</li>
+				<li class="cursor-pointer timeTag">Tomorrow</li>
+				<li class="cursor-pointer timeTag">Next 7 days</li>
 			</ul>
 		</div>
 		<div class="main">
