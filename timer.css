@@ -1,0 +1,90 @@
+.time-item { 
+    margin-right:5px;  
+    line-height: 49px;
+    font-size: 36px;
+    text-align: center;
+}
+
+.digit{	
+    padding: 8px;
+    border-radius: 8px;
+    color: #fff;
+    background: #5cb85c;
+}
+
+.countDiv{
+	color: #5cb85c;
+}
+
+@media screen and (min-width: 544px) {
+	.time-item{
+		line-height: 120px;
+    	font-size: 88px; 
+	}
+
+	.digit{
+		padding: 0 12px;
+		border-radius: 12px;
+	}
+}
+
+@font-face {
+    font-family: icon;
+    src: url(Fonts/icomoon.woff);
+}
+
+.start-btn:before {
+    content: "\ea15";
+    font-family: icon;
+}
+
+.start-btn{
+	color: #5cb85c;
+}
+
+.start-btn:hover, .stop-btn-green:hover{
+	color: seagreen;
+}
+
+.stop-btn:before{
+	content: "\ea17";
+	font-family: icon;
+}
+
+.stop-btn-green{
+	color: #5cb85c;
+}
+
+.stop-btn-blue{
+	color: #428bca;
+}
+
+.stop-btn-blue:hover{
+	color: #426dcA;
+}
+
+.ctrl-btn{
+	margin-top: 20px;
+	cursor: pointer;
+}
+
+.tomato{
+	height: 100px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.taskInput{
+	border: none;
+	border-bottom: 2px solid lightgrey;
+	margin-bottom: 20px;
+}
+
+.taskInput:focus{
+	border-color: grey;
+}
+
+.taskName{
+	text-align: center;
+	margin-bottom: 20px;
+}

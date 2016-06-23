@@ -4,20 +4,18 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title>Ant Planner</title>
-	<script src="https://maps.googleapis.com/maps/api/js"></script>
+	<title>Pomodoro Timer - Ant Planner</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<script src="datetimepicker/jquery.datetimepicker.full.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="planStyle.css">
-	<link rel="stylesheet" type="text/css" href="datetimepicker/jquery.datetimepicker.css"/ >
-	<link rel="stylesheet" type="text/css" href="userhome.css">
-	<link rel="stylesheet" type="text/css" href="friend.css">
 	<link rel="icon" href="Images/AntPlannerIcon.png">
+	<link rel="stylesheet" type="text/css" href="timer.css">
+	<link rel="stylesheet" type="text/css" href="friend.css">
+	<link rel="stylesheet" type="text/css" href="sidebar.css">
 </head>
 <body>
 	<div class="container-fluid">
-		<div class="friend-list">
+		<!-- 现在我只是把html相关部分从userhome复制过来，js相关部分还没有复制…… -->
+		<div class="friend-list" hidden="">
 			<div class="close-friend cursor-pointer pull-xs-right"></div>
 			<button type="button" class="btn btn-warning btn-block btn-sm" data-toggle="modal" data-target="#addFriends"><span class="addIcon"> Add Friends</span></button>
 			<div class="modal fade" id="addFriends" tabindex="-1" role="dialog" aria-labelledby="addFriends" aria-hidden="true" style="z-index:2000">
@@ -48,7 +46,7 @@
 			<ul class="list-group" id="pendingPart"></ul>
 		</div>
 		<div class="sidebar">
-			<div class="close-menu hidden-sm-up cursor-pointer pull-xs-right"></div><br>
+			<div class="close-menu cursor-pointer pull-xs-right"></div><br>
 			<ul class="nav nav-sidebar">
 				<li>
 					<div class="btn-group">
@@ -61,46 +59,33 @@
 				</li>
 			</ul>
 			<ul class="nav nav-sidebar">
-				<li class="primary-nav active"><a class="active-a" href="userhome.html"><strong>To-do list</a></strong></li>
-			</ul>
-			<ul class="nav nav-sidebar">
-				<li onclick="addPlan()"><span class="add cursor-pointer"> Add a plan</span></li>
-				<li onclick="sync('All')"><span class="sync cursor-pointer"> Syncronize</span></li>
-			</ul>
-			<ul class="nav nav-sidebar" id="timeFilter" value="All">
-				<li class="cursor-pointer timeTag active">All</li>
-				<li class="cursor-pointer timeTag">Today</li>
-				<li class="cursor-pointer timeTag">Tomorrow</li>
-				<li class="cursor-pointer timeTag">Next 7 days</li>
-			</ul>
-			<ul class="nav nav-sidebar">
-				<li class="primary-nav"><a href="timer.html"><strong>Pomodoro Timer</a></strong></li>
+				<li class="primary-nav"><a href="userhome.html"><strong>To-do list</a></strong></li>
+				<li class="active primary-nav"><a class="active-a" href="timer.html"><strong>Pomodoro Timer</strong></a></li>
 			</ul>
 		</div>
 		<div class="main">
-			<span class="menu hidden-sm-up pull-xs-left cursor-pointer"> Menu </span>
-			<span class="friends hidden-md-up pull-xs-right cursor-pointer"> Friends</span><br>
-			<h3 class="extra-padding" id="welcomeMsg"></h3>
-			<div class="extra-padding">
-				<div class="btn btn-danger btnAddPlan">Add a plan</div>
-				<div class="btn btn-danger btnUnfoldAll">Unfold all</div>
-				<div class="btn btn-danger btnFoldAll">Fold all</div>
-				<div class="pull-lg-right" id="tagFilter" value="All">
-					<div class="btn btn-danger btnTag btnAll">All</div>
-					<div class="btn btn-danger btnTag btnWork">Work</div>
-					<div class="btn btn-danger btnTag btnStudy">Study</div>
-					<div class="btn btn-danger btnTag btnFamily">Family</div>
-					<div class="btn btn-danger btnTag btnPersonal">Personal</div>
+			<span class="menu pull-xs-left cursor-pointer"> Menu </span>
+			<span class="friends pull-xs-right cursor-pointer"> Friends</span><br>
+			<img class="center-block tomato" src="Images/tomato.png" alt="tomato">
+			<input type="text" name="task" id="task" placeholder="What are you going to do?" class="form-control taskInput" autofocus="" onkeydown="enter()" />
+			<h2 id="taskName" class="taskName" hidden=""></h2>
+			<div class="time-item">
+				<strong class="digit" id="minute_tens">2</strong>
+				<strong class="digit" id="minute_single">5</strong>
+				<strong class="countDiv">:</strong>
+				<strong class="digit" id="second_tens">0</strong>
+				<strong class="digit" id="second_single">0</strong>
+				<span class="ctrl-btn start-btn center-block" onclick="ctrl()"></span>
+				<div class="options" hidden="">
+					<button type="button" class="btn btn-primary" id="next" onclick="next()">Continue</button>
+					<button type="button" class="btn btn-primary" id="exit" onclick="exit()">Exit</button>
 				</div>
 			</div>
-			<div class="extra-padding">
-				<ul class="plans list-group list-group-flush"></ul>
-			</div>			
 		</div>
+		<audio id="audio" src="alarm.mp3" loop="loop"></audio>
 	</div>
 	<script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script><!-- Tether for Bootstrap --> 
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="userhome.js"></script>
-	<script type="text/javascript" src="plan.js"></script>
+	<script type="text/javascript" src="timer.js"></script>
 </body>
 </html>

@@ -16,12 +16,6 @@
   border-right: 1px solid #eee;
 }
 
-@media (min-width: 544px) {
-  .sidebar {
-    left: 0;
-  }
-}
-
 /* Sidebar navigation */
 .nav-sidebar {
   margin-right: -21px; /* 20px padding + 1px border */
@@ -29,15 +23,11 @@
   margin-left: -20px;
   color: #ff5c33;
 }
+
 .nav-sidebar > li {
   padding-right: 20px;
   padding-left: 20px;
   line-height: 2.5rem;
-}
-
-.nav-sidebar > .active{
-  background-color: #ff5c33;
-  color: white;
 }
 
 .primary-nav{
@@ -52,6 +42,10 @@ a{
   text-decoration: none;
 }
 
+.nav-sidebar > .active{
+  background-color: #ff5c33;
+}
+
 .active-a, .active-a:hover, .active-a:active, .active-a:visited{
   color: white;
 }
@@ -60,7 +54,7 @@ a{
   position: absolute;
   top: 0;
   width: 16rem;
-  right: -16rem;
+  right: 0;
   bottom: 0;
   display: block;
   padding: 20px;
@@ -70,28 +64,13 @@ a{
   border-left: 1px solid #eee;
 }
 
-@media (min-width: 1176px) {
-  .friend-list {
-    right: 0;
-  }
-}
-
 /*
  * Icon
  */
 
-@font-face {
-  font-family: icon;
-  src: url(Fonts/icomoon.woff);
-}
-
-.add:before {
-  content: "\ea0a";
-  font-family: icon;
-}
-
-.add {
-  color: #ff5c33
+ @font-face {
+    font-family: icon;
+    src: url(Fonts/icomoon.woff);
 }
 
 .menu:before {
@@ -134,20 +113,6 @@ a{
   margin-bottom: 15px;
 }
 
-.sync:before{
-  content: "\ea2e";
-  font-family: icon;
-  color: #ff5c33;
-}
-
-.sync{
-  color: #ff5c33;
-}
-
-.cursor-pointer{
-  cursor: pointer;
-}
-
 /*
  * Main content
  */
@@ -156,63 +121,12 @@ a{
   padding: 20px;
   position: absolute;
   z-index: -2;
-  left: 12rem;
+  left: 0;
   right: 0;
 }
 
-@media (max-width: 543px) {
-  .main {
-    left: 0;
-  }
-}
-
-@media (min-width: 1176px) {
-  .main {
-    right: 16rem;
-  }
-}
-
-/* Add a plan */
-.main > .extra-padding > .btn{
-  color:white;
-  border-width: 0px;
-}
-
-.btnAddPlan {
-  background-color: #ffaa00;
-}
-.btnFoldAll {
-  background-color: #ff5c33;
-}
-.btnUnfoldAll {
-  background-color: #ff7f18;
-}
-
-.btn:hover, .btn:focus, .btn:active, .btn.active{
-  color: #f2f2f2;
-}
-
-.btnAddPlan:hover, .btnAddPlan:focus, .btnAddPlan:active, .btnAddPlan.active {
-  background-color: #ff7f18;
-}
-.btnFoldAll:hover, .btnFoldAll:focus, .btnFoldAll:active, .btnFoldAll.active {
-  background-color: #ff3300;
-}
-.btnUnfoldAll:hover, .btnUnfoldAll:focus, .btnUnfoldAll:active, .btnUnfoldAll.active {
-  background-color: #ff5c33;
-}
-
-.activeTag {
-  background-color: #b9332f;
-}
-
-.extra-padding{
-  padding-top: 1rem;
-}
-
-/* Display plans */
-.plans{
-  border: 2px solid #ff5c33;
+.cursor-pointer{
+  cursor: pointer;
 }
 
 .btn-username, .btn-username:hover{
