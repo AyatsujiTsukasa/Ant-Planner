@@ -108,10 +108,8 @@ function ctrl() {
         $('#second_single').html(0);
         $(".ctrl-btn").removeClass("stop-btn stop-btn-green stop-btn-blue");
         $(".ctrl-btn").addClass("start-btn");
-        if (!work) {
-            $(".digit").css("background-color", "#5cb85c");
-            $(".countDiv").css("color", "#5cb85c");
-        }
+        $(".digit").css("background-color", "#5cb85c");
+        $(".countDiv").css("color", "#5cb85c");
         $("#task").show();
         $('#taskName').prop("hidden", true);
         $(".friends").show();
