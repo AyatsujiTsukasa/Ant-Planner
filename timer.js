@@ -75,10 +75,10 @@ function timer(){
         }
         minute = Math.floor(diff / 60);
         second = Math.floor(diff) - (minute * 60);
-        $('#minute_tens').html(Math.floor(minute / 10));
-        $('#minute_single').html(minute % 10);
-        $('#second_tens').html(Math.floor(second / 10));
-        $('#second_single').html(second % 10);
+        toDigit($('#minute_tens'), Math.floor(minute / 10));
+        toDigit($('#minute_single'), minute % 10);
+        toDigit($('#second_tens'), Math.floor(second / 10));
+        toDigit($('#second_single'),second % 10);
         diff--;
     }, 1000);
 }
@@ -102,10 +102,10 @@ function ctrl() {
         audio.pause();
         clearInterval(timerId);
         timerId = undefined;
-        $('#minute_tens').html(2);
-        $('#minute_single').html(5);
-        $('#second_tens').html(0);
-        $('#second_single').html(0);
+        toDigit($('#minute_tens'), 2);
+        toDigit($('#minute_single'), 5);
+        toDigit($('#second_tens'), 0);
+        toDigit($('#second_single'), 0);
         $(".ctrl-btn").removeClass("stop-btn stop-btn-green stop-btn-blue");
         $(".ctrl-btn").addClass("start-btn");
         $(".digit").css("background-color", "#5cb85c");
@@ -168,5 +168,26 @@ function music() {
 }
 
 $(document).ready(toggleMenu);
+
+function piece(upDigit, bottomDigit, isUp) {
+    return "<div class='piece "+(isUp?'up':'bottom')+"'><div class='half front'>"+upDigit+"</div><div class='half back'>"+bottomDigit+"</div></div>";
+}
+
+function digit(number) {
+    return "<div class='digit'>"+piece(number, "", true) + piece("", number, false)+"</div>";
+}
+
+function toDigit(digitElement, number) {
+    if(digitElement.find('.up .front').html() !== number.toString()){
+        var newPiece = $(piece(number, '', true));
+        newPiece.css('z-index', -99);
+        digitElement.find('>:nth-child(2)').css('z-index', -100);
+        digitElement.prepend(newPiece);
+        digitElement.find('>:nth-child(2)').find('>:nth-child(2)').html(number);
+        digitElement.find('>:nth-child(2)').removeClass('up').addClass('bottom');
+        setTimeout(function(){newPiece.css('z-index', 99);}, 50);
+        setTimeout(function(){digitElement.find('>:nth-child(3)').remove();newPiece.css('z-index', 0);}, 1000);
+    }
+}
 
 // 以后要加的功能：Task可以直接从plan中选择；时间到时有notification
