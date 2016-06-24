@@ -93,15 +93,19 @@ $('.btnTag').on('click', function(){
 	sync();
 })
 function sync() {
-	$.post("sync.php", {ownerId: getCookie("ownerId"), 
-						password: getCookie("password"), 
-						tagFilter: $('#tagFilter').val() === "" ? "All" : $('#tagFilter').val(), 
-						timeFilter: $('#timeFilter').val() === "" ? "All" : $('#timeFilter').val()}, function(data){
-		if(data === "Success"){
-			$('.plans').html("");
-			syncAll();
-		}
-	})
+	if(getCookie('ownerId') === "" || getCookie('password') === "" || getCookie('username') === ""){
+		window.location = 'login.html';
+	} else {
+		$.post("sync.php", {ownerId: getCookie("ownerId"), 
+							password: getCookie("password"), 
+							tagFilter: $('#tagFilter').val() === "" ? "All" : $('#tagFilter').val(), 
+							timeFilter: $('#timeFilter').val() === "" ? "All" : $('#timeFilter').val()}, function(data){
+			if(data === "Success"){
+				$('.plans').html("");
+				syncAll();
+			}
+		});
+	}
 }
 
 $('#addFriendSearch').on('keyup', function(){
@@ -276,6 +280,16 @@ function syncAll() {
 	$('#friendsPart').html(friendHTML);
 	$('#pendingPart').html(requestHTML);
 }
+
+$('#logOut').on("click", function () {
+	var cookies = document.cookie.split(";");
+	for (var i = 0; i < cookies.length; i++)
+		document.cookie=cookies[i].split("=")[0]+"=; path=/";
+	sync();
+});
+$('#changePW').on("click", function () {
+	
+});
 
 // Initialization
 

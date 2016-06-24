@@ -29,7 +29,6 @@
 	<div class="myForm">
 		<form id="loginForm" method="post" action="login.php">
 			<h2 style="text-align:center">Log in to Ant Planner</h2><br/>
-			<!-- Ajax Message box here!!! -->
 			<div class="ajaxMsg"></div>
 			<fieldset class="form-group">
 				<input type="email" name="email" id="email" placeholder="Email" class="validateLocally form-control" autofocus="" />
@@ -40,16 +39,16 @@
 				<span id="passwordWarning" class="warning"></span>
 			</fieldset>
 			<div class="checkbox">
-        			<label><input type="checkbox" name="remember" value="remember" id="remember" checked> Remember me</label>
-     			</div>
-			<input class="btn btn-primary btn-block" type="submit" name="loginButton" value="Login" id="loginButton" />
+    			<label><input type="checkbox" name="remember" value="remember" id="remember" checked> Remember me</label>
+ 			</div>
+			<input class="btn btn-primary btn-block" type="button" name="loginButton" value="Login" id="loginButton" />
 		</form>
 		<p class="lineWithWords"><span>Or</span></p><br/>
 		<div class="g-signin2 col-xs-offset-4 col-xs-4" data-onsuccess="onSignIn"></div><br/><br/><br/>
 		<div style="text-align:center">Don't have an account? <a href="register.html">Sign up</a></div>
 	</div>
-	<script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script><!-- Tether for Bootstrap --> 
+	<script type="text/javascript" src="login.js"></script>
+	<script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script>
  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
- 	<script type="text/javascript" src="login.js"></script>
 </body>
 </html>

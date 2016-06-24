@@ -60,9 +60,7 @@ if($valid){
 	setcookie("username", $username, time()+$time, "/");
 	setcookie("ownerId", $id, time()+$time, "/");
 	setcookie("password", $password, time()+$time, "/");
-	echo "<script>
-			window.location = 'userhome.html';
-		  </script>";
+	echo "Verified";
 } else {
 	echo $errorMsg."</ul><div>";
 }

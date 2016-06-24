@@ -63,8 +63,7 @@ if($EmailResult->num_rows > 0){
 if($valid){
 	$sql = "insert into Users (username, email, password, friends) values('".$username."','".$email."','".$password."','')";
 	if($conn->query($sql) === true) {
-		echo "<div class='alert alert-success' role='alert'><strong>Account Created!</strong><ul><li>Username: ".$username."</li><li>Email: ".$email."</li></ul></div>";
-		//能不能再加上三秒后自动登录，并跳转到userhome的功能？谢谢！
+		echo "<div class='alert alert-success' role='alert'><strong>Account Created!</strong><ul><li>Username: ".$username."</li><li>Email: ".$email."</li></ul><strong id='redirect'></strong></div>";
 	} else {
 		echo "<div class='alert alert-danger' role='alert'><p>Connection error. Please try again later.</p></div>";
 	}
