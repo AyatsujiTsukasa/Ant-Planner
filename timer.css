@@ -1,24 +1,29 @@
 .time-item { 
-    margin-right:5px;  
-    line-height: 49px;
-    font-size: 36px;
+    margin: 0 auto;
+    height: 125px;
+    text-align: center;
+    width: 380px;
+}
+
+.control-area {
+	margin: 0 auto;
+    line-height: 60px;
+    font-size: 60px;
     text-align: center;
 }
 
-.digit{	
+.digit{
+	display: inline-grid;
+	position: relative;
     padding: 8px;
     border-radius: 8px;
     color: #fff;
     background: #5cb85c;
 }
 
-.countDiv{
-	color: #5cb85c;
-}
-
 @media screen and (min-width: 544px) {
 	.time-item{
-		line-height: 120px;
+		line-height: 100px;
     	font-size: 88px; 
 	}
 
@@ -87,4 +92,47 @@
 .taskName{
 	text-align: center;
 	margin-bottom: 20px;
+}
+
+.piece {
+	position:absolute;
+    -moz-transform-style:perserve-3d;
+    -webkit-transform-style:preserve-3d;
+    transform-style:preserve-3d;
+    -webkit-transition:all 0.2s;
+    -moz-transition:all 0.2s;
+    transition:all 0.2s;
+}
+
+.half {
+    background-color: #5cb85c;
+    width: 75px;
+    height: 60px;
+    font-size: 75px;
+    text-align: center;
+    font-family: arial;
+    color: white;
+    overflow: hidden;
+    -moz-backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;
+    backface-visibility:hidden;
+}
+
+.front {
+	line-height: 120px;
+	border-radius: 5px 5px 0px 0px;
+}
+
+.back {
+	line-height: 0px;
+	border-radius: 0px 0px 5px 5px;
+	-moz-transform:translate(0px,0px) rotateX(180deg);
+    -webkit-transform:translate(0px,0px) rotateX(180deg);
+    transform:translate(0px,0px) rotateX(180deg);
+}
+
+.bottom {
+	-moz-transform:translate(0px,61px) rotateX(180deg);
+    -webkit-transform:translate(0px,61px) rotateX(180deg);
+    transform:translate(0px,61px) rotateX(180deg);
 }

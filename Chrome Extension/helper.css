@@ -13,7 +13,6 @@ button {
 
 #toMainPage {
 	border-width: 1px 0px 1px 0px;
-	margin-bottom: 8px;
 }
 
 #signIn {
@@ -22,6 +21,7 @@ button {
 
 #signUp {
 	border-width: 1px 0px 1px 0px;
+	margin-bottom: 8px;
 }
 
 * {

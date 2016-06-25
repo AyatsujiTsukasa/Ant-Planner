@@ -1,9 +1,12 @@
-$('#loginForm').submit(function (e) {
-	e.preventDefault();
-	var _this = $(this),
+$('#loginButton').on("click", function () {
+	var _this = $(this).parent(),
 		action = _this.attr("action");
 	$.post(action, _this.serialize(), function (data) {
-		$('.ajaxMsg').html(data).show();
+		if(data === "Verified"){
+			window.location = 'userhome.html';
+		} else {
+			$('.ajaxMsg').html(data).show();
+		}
 	});
 });
 
