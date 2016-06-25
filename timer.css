@@ -135,6 +135,9 @@
 	-moz-transform:translate(0px,61px) rotateX(180deg);
     -webkit-transform:translate(0px,61px) rotateX(180deg);
     transform:translate(0px,61px) rotateX(180deg);
+    -moz-backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;
+    backface-visibility:hidden;
 }
 
 .modal-block{

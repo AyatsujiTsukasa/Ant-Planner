@@ -178,7 +178,7 @@ function toDigit(digitElement, number) {
         digitElement.find('>:nth-child(2)').find('>:nth-child(2)').html(number);
         digitElement.find('>:nth-child(2)').removeClass('up').addClass('bottom');
         setTimeout(function(){newPiece.css('z-index', 99);}, 50);
-        setTimeout(function(){digitElement.find('>:nth-child(3)').remove();newPiece.css('z-index', 0);}, 1000);
+        setTimeout(function(){digitElement.find('>:nth-child(3)').remove();newPiece.css('z-index', 0);}, 200);
     }
 }
 
