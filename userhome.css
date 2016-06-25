@@ -57,7 +57,7 @@ a{
 }
 
 .friend-list {
-  position: absolute;
+  position: fixed;
   top: 0;
   width: 16rem;
   right: -16rem;
@@ -218,4 +218,8 @@ a{
 .btn-username, .btn-username:hover{
   color: #ff5c33;
   border-color: #ff5c33;
+}
+
+.modal-block{
+  z-index: 1000;
 }

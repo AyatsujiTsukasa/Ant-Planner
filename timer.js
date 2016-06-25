@@ -1,25 +1,9 @@
-function getCookie(c_name){
-    if (document.cookie.length>0){
-        c_start=document.cookie.indexOf(c_name + "=");
-        if (c_start!=-1){
-            c_start=c_start + c_name.length+1;
-            c_end=document.cookie.indexOf(";",c_start);
-            if (c_end==-1) {
-                c_end=document.cookie.length;
-            }
-            return unescape(document.cookie.substring(c_start,c_end).replace(/\+/g, " "));
-        }
-    }
-    return "";
-}
-
-$("#usernameSide").html(getCookie("username"));
-
 var workTime = 25 * 60;
 var breakTime = 5 * 60;
 var longBreak = 25 * 60;
 var timerId = undefined;
 var val;
+var notify;
 
 function timer(){
     var diff = workTime;
@@ -47,8 +31,10 @@ function timer(){
                 count++;
                 if (count % 4 === 0) {
                     diff = longBreak;
+                    showNotificatioin("Break", "Take a 25-minute break");
                 } else {
                     diff = breakTime;
+                    showNotificatioin("Break", "Take a 5-minute break");
                 }
                 $(".digit").css("background-color", "#428bca");
                 $(".countDiv").css("color", "#428bca");
@@ -67,8 +53,13 @@ function timer(){
                 $(".stop-btn").addClass("stop-btn-green");
                 val = $('#task').val();
                 $("#task").hide();
+                showNotificatioin("Work", val);
                 $('#taskName').html(val);
                 // Disable friends during work time
+                $(".friend-list").prop("hidden", true);
+                $(".main").animate({
+                    right: "0rem"
+                }, 0);
                 $(".friends").hide();
             }
             end.setTime(current.getTime() + diff * 1000);
@@ -100,6 +91,7 @@ function ctrl() {
         timer();
     } else {
         audio.pause();
+        notify.close();
         clearInterval(timerId);
         timerId = undefined;
         toDigit($('#minute_tens'), 2);
@@ -154,8 +146,8 @@ function toggleMenu() {
     });
 }
 
-function enter(){
-    if (timerId === undefined && event.keyCode === 13) {
+function enter(e){
+    if (timerId === undefined && e.keyCode === 13) {
         ctrl();
     }
 }
@@ -190,4 +182,23 @@ function toDigit(digitElement, number) {
     }
 }
 
-// 以后要加的功能：Task可以直接从plan中选择；时间到时有notification
+function requestPermission(){
+    if (Notification) {
+        Notification.requestPermission();
+        console.log(Notification.permission);
+    }
+}
+
+$(document).ready(requestPermission);
+
+function showNotificatioin(title, body){
+    var options = {body: body, icon: "Images/AntPlannerIcon.png", tag: "timer"};
+    if (Notification) {
+        requestPermission();
+        if (Notification.permission === "granted") {
+            notify = new Notification(title, options);
+        }
+    }
+}
+
+// 以后要加的功能：Task可以直接从plan中选择
