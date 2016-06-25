@@ -18,6 +18,75 @@
 		<div class="friend-list" hidden="">
 			<div class="close-friend cursor-pointer pull-xs-right"></div>
 			<button type="button" class="btn btn-warning btn-block btn-sm" data-toggle="modal" data-target="#addFriends"><span class="addIcon"> Add Friends</span></button>
+			<form class="searchForm" autocomplete="off">
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon searchIcon"></span>
+					<input type="search" name="friendsearch" class="form-control" placeholder="Search your friends" aria-describedby="search">
+				</div>
+			</form>
+			<ul class="list-group" id="friendsPart"></ul>
+			<ul class="list-group" id="pendingPart"></ul>
+		</div>
+		<div class="sidebar">
+			<div class="close-menu cursor-pointer pull-xs-right"></div><br>
+			<ul class="nav nav-sidebar">
+				<li>
+					<div class="btn-group">
+						<button type="button" class="btn btn-secondary dropdown-toggle btn-username btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span id="usernameSide"></span></button>
+						<div class="dropdown-menu">
+							<span class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#changePW-modal">Change Password</span>
+							<span class="dropdown-item cursor-pointer" id="logOut">Log Out</span>
+						</div>
+					</div>
+				</li>
+			</ul>
+			<ul class="nav nav-sidebar">
+				<li class="primary-nav"><a href="userhome.html"><strong>To-do list</a></strong></li>
+				<li class="active primary-nav"><a class="active-a" href="timer.html"><strong>Pomodoro Timer</strong></a></li>
+			</ul>
+		</div>
+		<div class="main">
+			<span class="menu pull-xs-left cursor-pointer"> Menu </span>
+			<span class="friends pull-xs-right cursor-pointer"> Friends</span><br>
+			<img class="center-block tomato" src="Images/tomato.png" alt="tomato">
+			<input type="text" name="task" id="task" placeholder="What are you going to do?" class="form-control taskInput" autofocus="" onkeydown="enter(event)" />
+			<h2 id="taskName" class="taskName" hidden=""></h2>
+			<div class="time-item">
+				<div class="digit" id="minute_tens" style="left: 0px"><div class="piece up" style="z-index: 0;"><div class="half front">2</div><div class="half back"></div></div><div class="piece bottom" style="z-index: 0;"><div class="half front">7</div><div class="half back">2</div></div></div>
+				<div class="digit" id="minute_single" style="left: 80px"><div class="piece up" style="z-index: 0;"><div class="half front">5</div><div class="half back"></div></div><div class="piece bottom" style="z-index: 0;"><div class="half front">7</div><div class="half back">5</div></div></div>
+				<div class="digit" id="second_tens" style="left: 205px"><div class="piece up" style="z-index: 0;"><div class="half front">0</div><div class="half back"></div></div><div class="piece bottom" style="z-index: 0;"><div class="half front">7</div><div class="half back">0</div></div></div>
+				<div class="digit" id="second_single" style="left: 285px"><div class="piece up" style="z-index: 0;"><div class="half front">0</div><div class="half back"></div></div><div class="piece bottom" style="z-index: 0;"><div class="half front">7</div><div class="half back">0</div></div></div>
+			</div>
+			<div class='control-area'>
+				<span class="ctrl-btn start-btn center-block" onclick="ctrl()"></span>
+			</div>
+		</div>
+		<div class="modal-block">
+			<div class="modal fade" id="changePW-modal" tabindex="-1" role="dialog" aria-labelledby="changePassword" aria-hidden="true" style="z-index:2010">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-body">
+							<button type="button" class="close reset" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button><br/>
+							<form id="changePW-form" autocomplete="off">
+								<fieldset class="form-group">
+									<label for="password">New Password</label>
+									<input type="password" name="newPassword" id="newPassword" maxlength="15" class="form-control" />
+								</fieldset>
+								<fieldset class="form-group">
+									<label for="password2">Confirm your password</label>
+									<input type="password" name="newPassword2" id="newPassword2" maxlength="15" class="form-control" />
+								</fieldset>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary reset" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary" id="changePW">Save changes</button>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div class="modal fade" id="addFriends" tabindex="-1" role="dialog" aria-labelledby="addFriends" aria-hidden="true" style="z-index:2000">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
@@ -36,57 +105,11 @@
 					</div>
 				</div>
 			</div>
-			<form class="searchForm" autocomplete="off">
-				<div class="input-group input-group-sm">
-					<span class="input-group-addon searchIcon"></span>
-					<input type="search" name="friendsearch" class="form-control" placeholder="Search your friends" aria-describedby="search">
-				</div>
-			</form>
-			<ul class="list-group" id="friendsPart"></ul>
-			<ul class="list-group" id="pendingPart"></ul>
-		</div>
-		<div class="sidebar">
-			<div class="close-menu cursor-pointer pull-xs-right"></div><br>
-			<ul class="nav nav-sidebar">
-				<li>
-					<div class="btn-group">
-						<button type="button" class="btn btn-secondary dropdown-toggle btn-username btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span id="usernameSide"></span></button>
-						<div class="dropdown-menu">
-							<!-- Log out功能待添加 -->
-							<span class="dropdown-item cursor-pointer">Log out</span>
-						</div>
-					</div>
-				</li>
-			</ul>
-			<ul class="nav nav-sidebar">
-				<li class="primary-nav"><a href="userhome.html"><strong>To-do list</a></strong></li>
-				<li class="active primary-nav"><a class="active-a" href="timer.html"><strong>Pomodoro Timer</strong></a></li>
-			</ul>
-		</div>
-		<div class="main">
-			<span class="menu pull-xs-left cursor-pointer"> Menu </span>
-			<span class="friends pull-xs-right cursor-pointer"> Friends</span><br>
-			<img class="center-block tomato" src="Images/tomato.png" alt="tomato">
-			<input type="text" name="task" id="task" placeholder="What are you going to do?" class="form-control taskInput" autofocus="" onkeydown="enter()" />
-			<h2 id="taskName" class="taskName" hidden=""></h2>
-			<div class="time-item">
-				<div class="digit" id="minute_tens" style="left: 0px"><div class="piece up" style="z-index: 0;"><div class="half front">2</div><div class="half back"></div></div><div class="piece bottom" style="z-index: 0;"><div class="half front">7</div><div class="half back">2</div></div></div>
-				<div class="digit" id="minute_single" style="left: 80px"><div class="piece up" style="z-index: 0;"><div class="half front">5</div><div class="half back"></div></div><div class="piece bottom" style="z-index: 0;"><div class="half front">7</div><div class="half back">5</div></div></div>
-				<div class="digit" id="second_tens" style="left: 205px"><div class="piece up" style="z-index: 0;"><div class="half front">0</div><div class="half back"></div></div><div class="piece bottom" style="z-index: 0;"><div class="half front">7</div><div class="half back">0</div></div></div>
-				<div class="digit" id="second_single" style="left: 285px"><div class="piece up" style="z-index: 0;"><div class="half front">0</div><div class="half back"></div></div><div class="piece bottom" style="z-index: 0;"><div class="half front">7</div><div class="half back">0</div></div></div>
-			</div>
-			<div class='control-area'>
-				<span class="ctrl-btn start-btn center-block" onclick="ctrl()"></span>
-				<div class="options" hidden="">
-					<button type="button" class="btn btn-primary" id="next" onclick="next()">Continue</button>
-					<button type="button" class="btn btn-primary" id="exit" onclick="exit()">Exit</button>
-				</div>
-			</div>
-		</div>
 		<audio id="audio" src="alarm.mp3" loop="loop"></audio>
 	</div>
 	<script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script><!-- Tether for Bootstrap --> 
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="utility.js"></script>
 	<script type="text/javascript" src="timer.js"></script>
 </body>
 </html>

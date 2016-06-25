@@ -20,24 +20,6 @@
 		<div class="friend-list">
 			<div class="close-friend cursor-pointer pull-xs-right"></div>
 			<button type="button" class="btn btn-warning btn-block btn-sm" data-toggle="modal" data-target="#addFriends"><span class="addIcon"> Add Friends</span></button>
-			<div class="modal fade" id="addFriends" tabindex="-1" role="dialog" aria-labelledby="addFriends" aria-hidden="true" style="z-index:2000">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-body">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button><br/>
-							<form class="searchForm" autocomplete="off">
-								<div class="input-group input-group-sm" style="margin-bottom: 3px">
-									<span class="input-group-addon searchIcon"></span>
-									<input type="search" id="addFriendSearch" class="form-control" placeholder="Username" aria-describedby="search">
-								</div>
-								<ul id="addFriendSearchResults"></ul>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
 			<form class="searchForm" autocomplete="off">
 				<div class="input-group input-group-sm">
 					<span class="input-group-addon searchIcon"></span>
@@ -54,8 +36,8 @@
 					<div class="btn-group">
 						<button type="button" class="btn btn-secondary dropdown-toggle btn-username btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span id="usernameSide"></span></button>
 						<div class="dropdown-menu">
-							<span class="dropdown-item cursor-pointer" id="logOut">Log out</span>
-							<span class="dropdown-item cursor-pointer" id="changePW">Change Password</span>
+							<span class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#changePW-modal">Change Password</span>
+							<span class="dropdown-item cursor-pointer" id="logOut">Log Out</span>
 						</div>
 					</div>
 				</li>
@@ -97,10 +79,55 @@
 				<ul class="plans list-group list-group-flush"></ul>
 			</div>			
 		</div>
-	</div>
-	<script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script><!-- Tether for Bootstrap --> 
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="userhome.js"></script>
-	<script type="text/javascript" src="plan.js"></script>
-</body>
-</html>
+		<div class="modal-block">
+			<div class="modal fade" id="changePW-modal" tabindex="-1" role="dialog" aria-labelledby="changePassword" aria-hidden="true" style="z-index:2010">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-body">
+							<button type="button" class="close reset" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button><br/>
+							<form id="changePW-form" autocomplete="off">
+								<fieldset class="form-group">
+									<label for="password">New Password</label>
+									<input type="password" name="newPassword" id="newPassword" maxlength="15" class="form-control" />
+								</fieldset>
+								<fieldset class="form-group">
+									<label for="password2">Confirm your password</label>
+									<input type="password" name="newPassword2" id="newPassword2" maxlength="15" class="form-control" />
+								</fieldset>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary reset" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary" id="changePW">Save changes</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="addFriends" tabindex="-1" role="dialog" aria-labelledby="addFriends" aria-hidden="true" style="z-index:2000">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-body">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button><br/>
+							<form class="searchForm" autocomplete="off">
+								<div class="input-group input-group-sm" style="margin-bottom: 3px">
+									<span class="input-group-addon searchIcon"></span>
+									<input type="search" id="addFriendSearch" class="form-control" placeholder="Username" aria-describedby="search">
+								</div>
+								<ul id="addFriendSearchResults"></ul>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script><!-- Tether for Bootstrap --> 
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="utility.js"></script>
+		<script type="text/javascript" src="userhome.js"></script>
+		<script type="text/javascript" src="plan.js"></script>
+	</body>
+	</html>

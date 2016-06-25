@@ -136,3 +136,7 @@
     -webkit-transform:translate(0px,61px) rotateX(180deg);
     transform:translate(0px,61px) rotateX(180deg);
 }
+
+.modal-block{
+  z-index: 1000;
+}
