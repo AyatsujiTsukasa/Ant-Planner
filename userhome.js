@@ -154,7 +154,7 @@ function syncAll() {
 	$('#syncLoading').modal('show');
 	var numPlans = parseInt(getCookie("numPlans"));
 	for (var i=0; i<numPlans; i++) {
-		var plan = $(planHTML);s
+		var plan = $(planHTML);
 		plan.find("[name='ownerId']").val(getCookie("ownerId_"+i));
 		plan.find("[name='planId']").val(getCookie("planId_"+i));
 		plan.find("[name='name']").val(getCookie("name_"+i));
