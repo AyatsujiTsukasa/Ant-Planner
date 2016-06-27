@@ -43,7 +43,7 @@
 				</li>
 			</ul>
 			<ul class="nav nav-sidebar">
-				<li class="primary-nav active"><a class="active-a" href="userhome.html"><strong>My plans</a></strong></li>
+				<li class="primary-nav active"><a class="active-a" href="userhome.html"><strong>My plans</strong></a></li>
 			</ul>
 			<ul class="nav nav-sidebar">
 				<li onclick="addPlan()"><span class="add cursor-pointer"> Add a plan</span></li>
@@ -57,7 +57,7 @@
 				<li class="cursor-pointer timeTag">Archive</li>
 			</ul>
 			<ul class="nav nav-sidebar">
-				<li class="primary-nav"><a href="timer.html"><strong>Pomodoro Timer</a></strong></li>
+				<li class="primary-nav"><a href="timer.html"><strong>Pomodoro Timer</strong></a></li>
 			</ul>
 		</div>
 		<div class="main">
@@ -88,20 +88,19 @@
 							<button type="button" class="close reset" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button><br/>
-							<form id="changePW-form" autocomplete="off">
+							<form id="changePW-form" autocomplete="off" method="post" action="changePW.php">
+								<div class="ajaxMsg"></div>
 								<fieldset class="form-group">
-									<label for="password">New Password</label>
+									<label for="newPassword">New Password</label>
 									<input type="password" name="newPassword" id="newPassword" maxlength="15" class="form-control" />
 								</fieldset>
 								<fieldset class="form-group">
-									<label for="password2">Confirm your password</label>
-									<input type="password" name="newPassword2" id="newPassword2" maxlength="15" class="form-control" />
+									<label for="newPassword2">Confirm your password</label>
+									<input type="password" name="newPassword2" id="newPassword2" maxlength="15" class="form-control" onkeydown="confirm(event)" />
 								</fieldset>
+								<button type="button" class="btn btn-secondary reset" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-primary" id="changePW">Save changes</button>
 							</form>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary reset" data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary" id="changePW">Save changes</button>
 						</div>
 					</div>
 				</div>
@@ -134,10 +133,11 @@
 				</div>
 			</div>
 		</div>
-		<script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script><!-- Tether for Bootstrap --> 
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
-		<script type="text/javascript" src="utility.js"></script>
-		<script type="text/javascript" src="userhome.js"></script>
-		<script type="text/javascript" src="plan.js"></script>
-	</body>
-	</html>
+	</div>
+	<script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script><!-- Tether for Bootstrap --> 
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="utility.js"></script>
+	<script type="text/javascript" src="userhome.js"></script>
+	<script type="text/javascript" src="plan.js"></script>
+</body>
+</html>

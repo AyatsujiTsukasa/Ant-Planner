@@ -69,20 +69,19 @@
 							<button type="button" class="close reset" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button><br/>
-							<form id="changePW-form" autocomplete="off">
+							<form id="changePW-form" autocomplete="off" method="post" action="changePW.php">
+								<div class="ajaxMsg"></div>
 								<fieldset class="form-group">
-									<label for="password">New Password</label>
+									<label for="newPassword">New Password</label>
 									<input type="password" name="newPassword" id="newPassword" maxlength="15" class="form-control" />
 								</fieldset>
 								<fieldset class="form-group">
-									<label for="password2">Confirm your password</label>
-									<input type="password" name="newPassword2" id="newPassword2" maxlength="15" class="form-control" />
+									<label for="newPassword2">Confirm your password</label>
+									<input type="password" name="newPassword2" id="newPassword2" maxlength="15" class="form-control" onkeydown="confirm(event)" />
 								</fieldset>
+								<button type="button" class="btn btn-secondary reset" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-primary" id="changePW">Save changes</button>
 							</form>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary reset" data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary" id="changePW">Save changes</button>
 						</div>
 					</div>
 				</div>

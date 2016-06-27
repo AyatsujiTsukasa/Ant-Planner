@@ -15,6 +15,11 @@ $username = $_POST["username"];
 $email = $_POST["email"];
 $password = $_POST["password"];
 $password2 = $_POST["password2"];
+if(isset($_POST["remember"])) {
+	$time = 3600*24*90;
+} else {
+	$time = 300;
+}
 
 $valid = true;
 $errorMsg = "<div class='alert alert-danger' role='alert'><ul>";
@@ -63,6 +68,11 @@ if($EmailResult->num_rows > 0){
 if($valid){
 	$sql = "insert into Users (username, email, password, friends) values('".$username."','".$email."','".$password."','')";
 	if($conn->query($sql) === true) {
+		$getID = "select id from Users where email='".$email."'";
+		$id = mysqli_fetch_array($conn->query($getID))["id"];
+		setcookie("username", $username, time()+$time, "/");
+		setcookie("ownerId", $id, time()+$time, "/");
+		setcookie("password", $password, time()+$time, "/");
 		echo "<div class='alert alert-success' role='alert'><strong>Account Created!</strong><ul><li>Username: ".$username."</li><li>Email: ".$email."</li></ul><strong id='redirect'></strong></div>";
 	} else {
 		echo "<div class='alert alert-danger' role='alert'><p>Connection error. Please try again later.</p></div>";
