@@ -39,7 +39,7 @@ $('#changePW').on("click", function () {
 });
 
 function confirm(e) {
-	if (e.keycode === 13) {
+	if (e.keyCode === 13) {
         $("#changePW").click();
     }
 }
