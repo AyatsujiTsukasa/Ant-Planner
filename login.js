@@ -20,3 +20,9 @@ function onSignIn(googleUser) {
 	};
 	xhr.send("username=" + profile.getName() + "&email=" + profile.getEmail());
 }
+
+function enter(e){
+    if (e.keyCode === 13) {
+        $("#loginButton").click();
+    }
+}

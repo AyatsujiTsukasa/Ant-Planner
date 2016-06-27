@@ -12,11 +12,11 @@ if(!$_POST) {
 }
 $username = $_POST['username'];
 $email = $_POST['email'];
-$password = "google";
 $EmailCheckQuery = "select * from Users where email='".$email."'";
 $EmailResult = $conn->query($EmailCheckQuery);
 if($EmailResult->num_rows === 0){
 	// If email does not match to any record, then register first
+	$password = "google";
 	$sql = "insert into Users (username, email, password, friends) values('".$username."','".$email."','".$password."','')";
 	if($conn->query($sql) === true) {
 		$EmailCheckQuery = "select * from Users where email='".$email."'";

@@ -4,6 +4,7 @@ var longBreak = 25 * 60;
 var timerId = undefined;
 var val;
 var notify;
+var work = false;
 
 function timer(){
     var diff = workTime;
@@ -14,7 +15,6 @@ function timer(){
     var second = 0;
     var correctedDiff = 0;
     var count = 0;
-    var work = true;
     timerId = setInterval(function(){
         // 每过5秒钟校对一下，以防进入待机状态后，js不再运行，倒计时不正确。
         if (second % 5 === 0) {
@@ -36,8 +36,8 @@ function timer(){
                     diff = breakTime;
                     showNotificatioin("Break", "Take a 5-minute break");
                 }
-                $(".digit").css("background-color", "#428bca");
-                $(".countDiv").css("color", "#428bca");
+                $(".half").removeClass("half-green");
+                $(".half").addClass("half-blue");
                 $(".stop-btn").removeClass("stop-btn-green");
                 $(".stop-btn").addClass("stop-btn-blue");
                 $("#task").show();
@@ -47,8 +47,8 @@ function timer(){
             } else {
                 work = true;
                 diff = workTime;
-                $(".digit").css("background-color", "#5cb85c");
-                $(".countDiv").css("color", "#5cb85c");
+                $(".half").removeClass("half-blue");
+                $(".half").addClass("half-green");
                 $(".stop-btn").removeClass("stop-btn-blue");
                 $(".stop-btn").addClass("stop-btn-green");
                 val = $('#task').val();
@@ -88,20 +88,24 @@ function ctrl() {
         $(".main").animate({
             right: "0rem"
         }, 0);
+        work = true;
         timer();
     } else {
         audio.pause();
-        notify.close();
+        if (notify !== undefined) {
+            notify.close();
+        }
         clearInterval(timerId);
         timerId = undefined;
+        work = false;
         toDigit($('#minute_tens'), 2);
         toDigit($('#minute_single'), 5);
         toDigit($('#second_tens'), 0);
         toDigit($('#second_single'), 0);
         $(".ctrl-btn").removeClass("stop-btn stop-btn-green stop-btn-blue");
         $(".ctrl-btn").addClass("start-btn");
-        $(".digit").css("background-color", "#5cb85c");
-        $(".countDiv").css("color", "#5cb85c");
+        $(".half").removeClass("half-blue");
+        $(".half").addClass("half-green");
         $("#task").show();
         $('#taskName').prop("hidden", true);
         $(".friends").show();
@@ -162,7 +166,13 @@ function music() {
 $(document).ready(toggleMenu);
 
 function piece(upDigit, bottomDigit, isUp) {
-    return "<div class='piece "+(isUp?'up':'bottom')+"'><div class='half front'>"+upDigit+"</div><div class='half back'>"+bottomDigit+"</div></div>";
+    var color;
+    if (work) {
+        color = "half-green";
+    } else {
+        color = "half-blue";
+    }
+    return "<div class='piece "+(isUp?'up':'bottom')+"'><div class='half front "+color+"'>"+upDigit+"</div><div class='half back "+color+"'>"+bottomDigit+"</div></div>";
 }
 
 function digit(number) {
@@ -185,7 +195,6 @@ function toDigit(digitElement, number) {
 function requestPermission(){
     if (Notification) {
         Notification.requestPermission();
-        console.log(Notification.permission);
     }
 }
 

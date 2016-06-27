@@ -16,16 +16,40 @@ function getCookie(c_name){
 $("#usernameSide").html(getCookie("username"));
 
 $('#logOut').on("click", function () {
-	var cookies = document.cookie.split(";");
-	for (var i = 0; i < cookies.length; i++)
-		document.cookie=cookies[i].split("=")[0]+"=; path=/";
+	clearCookie();
 	window.location = 'login.html';
 });
 
 $('#changePW').on("click", function () {
-
+	var _this = $(this).parent(),
+		action = _this.attr("action");
+	$.post(action, _this.serialize()+"&id="+getCookie("ownerId"), function (data) {
+		$('.ajaxMsg').html(data).show();
+		if(/Password Changed!/.test(data)){
+			clearCookie();
+			$('#redirect').html("Redirecting to login page...3");
+			setTimeout(function () {$('#redirect').html("Redirecting to login page...2");}, 1000);
+			setTimeout(function () {$('#redirect').html("Redirecting to login page...1");}, 2000);
+			setTimeout(function () {
+				$('#redirect').html("Redirecting to login page...0");
+				window.location = 'login.html';
+			}, 3000);
+		}
+	});
 });
+
+function confirm(e) {
+	if (e.keyCode === 13) {
+        $("#changePW").click();
+    }
+}
 
 $(".reset").on("click", function() {
 	$("#changePW-form")[0].reset();
 })
+
+function clearCookie() {
+	var cookies = document.cookie.split(";");
+	for (var i = 0; i < cookies.length; i++)
+		document.cookie=cookies[i].split("=")[0]+"=; path=/";
+}
