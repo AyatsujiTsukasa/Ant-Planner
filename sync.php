@@ -40,39 +40,36 @@ if($pw === $password){
 	}
 	$date = getdate();
 	$formattedDate = $date['year']."-".$date['mon']."-".$date['mday'];
+	$formattedDateTime = $formattedDate." ".$date['hours'].":".$date['minutes'].":".$date['seconds'];
+	$conn->query("delete from Plans where ownerId='".$ownerId."' and due <= date_add('".$formattedDateTime."', interval -7 day)");
 	switch ($timeFilter) {
 		case 'Today':
-			$getPlans .= " and due <= date_add('".$formattedDate."', interval 1 day)";
+			$getPlans .= " and due <= date_add('".$formattedDate."', interval 1 day) and due >= '".$formattedDate."'";
 			break;
 		case 'Tomorrow':
-			$getPlans .= " and due <= date_add('".$formattedDate."', interval 2 day)";
+			$getPlans .= " and due <= date_add('".$formattedDate."', interval 2 day) and due >= '".$formattedDate."'";
 			break;
 		case 'Next 7 days':
-			$getPlans .= " and due <= date_add('".$formattedDate."', interval 8 day)";
+			$getPlans .= " and due <= date_add('".$formattedDate."', interval 8 day) and due >= '".$formattedDate."'";
+			break;
+		case 'All future plans':
+			$getPlans .= " and due >= '".$formattedDateTime."'";
+			break;
+		case 'Archive':
+			$getPlans .= " and due <= '".$formattedDateTime."'";
 			break;
 		default:
 			break;
 	}
 	$plans = $conn->query($getPlans);
-	for($i=0; $plan = mysqli_fetch_array($plans); $i++){
-		setcookie("planId_".$i, $plan['id'], time()+$time, "/");
-		setcookie("ownerId_".$i, $plan['ownerId'], time()+$time, "/");
-		setcookie("name_".$i, $plan['name'], time()+$time, "/");
-		setcookie("description_".$i, $plan['description'], time()+$time, "/");
-		setcookie("due_".$i, $plan['due'], time()+$time, "/");
-		setcookie("importance_".$i, $plan['importance'], time()+$time, "/");
-		setcookie("phonePush_".$i, $plan['phonePush'], time()+$time, "/");
-		setcookie("phoneAlarm_".$i, $plan['phoneAlarm'], time()+$time, "/");
-		setcookie("desktopPush_".$i, $plan['desktopPush'], time()+$time, "/");
-		setcookie("tags_".$i, $plan['customTags'], time()+$time, "/");
-		setcookie("url_".$i, $plan['url'], time()+$time, "/");
-		setcookie("lat_".$i, $plan['lat'], time()+$time, "/");
-		setcookie("lng_".$i, $plan['lng'], time()+$time, "/");
-		setcookie("location_".$i, $plan['location'], time()+$time, "/");
-		setcookie("rep_".$i, $plan['rep'], time()+$time, "/");
+	$rows = array();
+	$i=0;
+	while($r = mysqli_fetch_assoc($plans)) {
+	    $rows[] = $r;
+	    $i++;
 	}
 	setcookie("numPlans", $i, time()+$time, "/");
-	echo "Success";
+	echo json_encode($rows);
 } else {
 	echo "Error";
 }
