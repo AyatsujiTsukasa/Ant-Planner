@@ -1,9 +1,29 @@
-$('#signUp').on('click', function () {
-	chrome.tabs.create({'url':'https://www.antplanner.org/register.html', 'selected':true});
-})
-$('#toMainPage').on('click', function () {
-	chrome.tabs.create({'url':'https://www.antplanner.org', 'selected':true});
-})
+function initialze() {
+	$('#signUp').on('click', function () {
+		chrome.tabs.create({'url':'https://www.antplanner.org/register.html', 'selected':true});
+	});
+	$('#toMainPage').on('click', function () {
+		chrome.tabs.create({'url':'https://www.antplanner.org', 'selected':true});
+	});
+	$('#signIn').on('click', function () {
+		var form = $("<input type='text' name='email' id='email' placeholder='Email'><input type='password' id='password' name='password' placeholder='Password'><br><input type='button' value='Login' id='loginButton'><br><input type='checkbox' checked='checked' id='remember' name='remember'><label for='remember'>Remember Me</label>");
+		$('.main').html(form);
+		form.on('keydown', function (event) {
+			if (event.keyCode === 13) {
+		        $("#loginButton").click();
+		    }
+		})
+		$("#loginButton").on('click', function () {
+			email = $('#email').val();
+			password = $('#password').val();
+			if($('#remember').is(':checked')){
+				chrome.cookies.set({"url": "https://www.antplanner.org", "name": "email", "value": email, "expirationDate": (new Date().getTime()/1000) + 3600*24*30});
+				chrome.cookies.set({"url": "https://www.antplanner.org", "name": "password", "value": password, "expirationDate": (new Date().getTime()/1000) + 3600*24*30});
+			}
+			signIn();
+		});
+	});
+}
 
 function signIn() {
 	if(password !== "" && (username !== "" || email !== "")){
@@ -54,20 +74,38 @@ function tagFilter(type) {
 }
 
 function loadPlans(response) {
-	test = response;
 	var plans = "";
-	for(var i in response){
-		plans += planFrame(response[i]);
+	ownerId = response.ownerId;
+	username = response.username;
+	chrome.cookies.set({"url": "https://www.antplanner.org", "name": "username", "value": username, "expirationDate": (new Date().getTime()/1000) + 3600*24*30});
+			chrome.cookies.set({"url": "https://www.antplanner.org", "name": "ownerId", "value": ownerId, "expirationDate": (new Date().getTime()/1000) + 3600*24*30});
+	var planArr = response.contents;
+	for(var i in planArr){
+		plans += planFrame(planArr[i]);
 	}
 	var head = tagFilter('Personal') + tagFilter('Work') + tagFilter('Family') + tagFilter('Study');
-	$('.main').html(head + plans);
+	var btn1 = planArr.length > 0 ? "Manage My Plans" : "Add My First Plan";
+	var tail = "<div id='toUserhome'>"+btn1+"</div><div id='logOut'>Log Out</div>";
+	$('.main').html(head + plans + tail);
+	$('#toUserhome').on('click', function () {
+		chrome.tabs.create({'url':'https://www.antplanner.org/userhome.html', 'selected':true});
+	});
+	$('#logOut').on('click', function () {
+		chrome.cookies.remove({"url": "https://www.antplanner.org", "name": "username"});
+		chrome.cookies.remove({"url": "https://www.antplanner.org", "name": "password"});
+		chrome.cookies.remove({"url": "https://www.antplanner.org", "name": "email"});
+		chrome.cookies.remove({"url": "https://www.antplanner.org", "name": "ownerId"});
+		$('.main').html("<button id='toMainPage'>Go to Ant Planner</button><button id='signUp'>To Sign Up Page</button><button id='signIn'>Sign In</button>");
+		initialze();
+	})
 }
 
 //Initialization
 
 var username = "",
 	email = "",
-	password = "";
+	password = "",
+	ownerId = "";
 
 chrome.cookies.getAll({"url": "https://www.antplanner.org"}, function (cookie) {
 
@@ -76,6 +114,9 @@ chrome.cookies.getAll({"url": "https://www.antplanner.org"}, function (cookie) {
 		switch(cookie[i].name){
 			case "username":
 			username = cookie[i].value.replace(/\+/g, " ");
+			break;
+			case "email":
+			email = cookie[i].value.replace(/\+/g, " ");
 			break;
 			case "password":
 			password = cookie[i].value.replace(/\+/g, " ");
@@ -87,3 +128,5 @@ chrome.cookies.getAll({"url": "https://www.antplanner.org"}, function (cookie) {
 	// And sign in
 	signIn();
 });
+
+initialze();

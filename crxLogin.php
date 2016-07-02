@@ -18,10 +18,11 @@ $password = $_GET["password"];
 
 $verified = false;
 
-$PWResult = $conn->query("select password, id from Users where email='".$email."' or username='".$username."'");
+$PWResult = $conn->query("select password, id, username from Users where email='".$email."' or username='".$username."'");
 if($PWResult->num_rows > 0){
 	$user = mysqli_fetch_array($PWResult);
 	$ownerId = $user['id'];
+	$username = $user['username'];
 	if($user['password'] === $password) {
 		$verified = true;
 	}
@@ -33,7 +34,7 @@ if($verified){
 	while($r = mysqli_fetch_assoc($result)) {
 	    $rows[] = $r;
 	}
-	echo json_encode($rows);
+	echo "{\"username\": \"".$username."\", \"ownerId\": \"".$ownerId."\", \"contents\": ".json_encode($rows)."}";
 } else {
 	echo "Not verified";
 }

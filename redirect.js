@@ -14,7 +14,7 @@ function getCookie(c_name){
 }
 
 function redirect(){
-	if(getCookie('ownerId') !== "" && getCookie('password') !== "" && getCookie('username') !== ""){
+	if(getCookie('password') !== "" && (getCookie('username') !== "" || getCookie('email') !== "")){
 		window.location = 'userhome.html';
 	}
 }
