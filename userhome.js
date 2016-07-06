@@ -87,7 +87,7 @@ function sync() {
 							timeFilter: $('#timeFilter').val() === "" ? "All future plans" : $('#timeFilter').val()}, function(data){
 			if(data !== "Error"){
 				$('.plans').html("");
-				syncAll(JSON.parse(data));
+				syncAll(JSON.parse(data).contents);
 			}
 		});
 	}

@@ -69,7 +69,7 @@ if($pw === $password){
 	    $i++;
 	}
 	setcookie("numPlans", $i, time()+$time, "/");
-	echo json_encode($rows);
+	echo "{\"contents\": ".json_encode($rows)."}";
 } else {
 	echo "Error";
 }
