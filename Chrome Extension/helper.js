@@ -6,7 +6,7 @@ function initialze() {
 		chrome.tabs.create({'url':'https://www.antplanner.org', 'selected':true});
 	});
 	$('#signIn').on('click', function () {
-		var form = $("<input type='text' name='email' id='email' placeholder='Email'><input type='password' id='password' name='password' placeholder='Password'><br><input type='button' value='Login' id='loginButton'><br><input type='checkbox' checked='checked' id='remember' name='remember'><label for='remember'>Remember Me</label>");
+		var form = $("<div style='padding:5px'><input type='text' name='email' id='email' placeholder='Email'><input type='password' id='password' name='password' placeholder='Password'><br/><input type='checkbox' checked='checked' id='remember' name='remember'><label for='remember'>Remember Me</label><br/><input type='button' value='Login' id='loginButton'></div>");
 		$('.main').html(form);
 		form.on('keydown', function (event) {
 			if (event.keyCode === 13) {
@@ -66,7 +66,7 @@ function planFrame(planObj) {
 		break;
 	}
 	rep = rep === "" ? "" : "<p class='repeat'>Repeat: "+rep+"</p>";
-	return "<div class='plan'>"+a_head+"<p class='planName "+planObj.customTags+"'>"+planObj.name+"</p>"+a_tail+"<p class='due'>"+planObj.due+"</p>"+rep+"</div>";
+	return "<div class='plan'>"+a_head+"<p class='planName "+planObj.customTags+"'>"+" "+planObj.name+"</p>"+a_tail+"<p class='due'>"+planObj.due+"</p>"+rep+"</div>";
 }
 
 function tagFilter(type) {
@@ -85,7 +85,7 @@ function loadPlans(response) {
 	}
 	var head = tagFilter('Personal') + tagFilter('Work') + tagFilter('Family') + tagFilter('Study');
 	var btn1 = planArr.length > 0 ? "Manage My Plans" : "Add My First Plan";
-	var tail = "<div id='toUserhome'>"+btn1+"</div><div id='logOut'>Log Out</div>";
+	var tail = "<div style='padding-left: 5px'><p id='toUserhome' style='cursor:pointer'>"+btn1+"</p><p id='logOut' style='cursor:pointer'>Log Out</p></div>";
 	$('.main').html(head + plans + tail);
 	$('#toUserhome').on('click', function () {
 		chrome.tabs.create({'url':'https://www.antplanner.org/userhome.html', 'selected':true});
