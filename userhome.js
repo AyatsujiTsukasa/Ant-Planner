@@ -78,16 +78,16 @@ $('.btnTag').on('click', function(){
 	sync();
 })
 function sync() {
-	if(getCookie('ownerId') === "" || getCookie('password') === "" || getCookie('username') === ""){
+	if(getCookie('password') === "" || (getCookie('username') === "" && getCookie('email') === "")){
 		window.location = 'login.html';
 	} else {
-		$.post("sync.php", {ownerId: getCookie("ownerId"), 
-							password: getCookie("password"), 
+		$.post("sync.php", {ownerId: getCookie("ownerId"),
+							password: getCookie("password"),
 							tagFilter: $('#tagFilter').val() === "" ? "All" : $('#tagFilter').val(), 
-							timeFilter: $('#timeFilter').val() === "" ? "All" : $('#timeFilter').val()}, function(data){
-			if(data === "Success"){
+							timeFilter: $('#timeFilter').val() === "" ? "All future plans" : $('#timeFilter').val()}, function(data){
+			if(data !== "Error"){
 				$('.plans').html("");
-				syncAll();
+				syncAll(JSON.parse(data).contents);
 			}
 		});
 	}
@@ -150,16 +150,16 @@ function friendAction(Fid, action){
 	});
 }
 
-function syncAll() {
+function syncAll(data) {
 	$('#syncLoading').modal('show');
 	var numPlans = parseInt(getCookie("numPlans"));
 	for (var i=0; i<numPlans; i++) {
 		var plan = $(planHTML);
-		plan.find("[name='ownerId']").val(getCookie("ownerId_"+i));
-		plan.find("[name='planId']").val(getCookie("planId_"+i));
-		plan.find("[name='name']").val(getCookie("name_"+i));
-		plan.find("[name='planDesc']").val(getCookie("description_"+i));
-		var importanceVal = getCookie("importance_"+i);
+		plan.find("[name='ownerId']").val(data[i].ownerId);
+		plan.find("[name='planId']").val(data[i].planId);
+		plan.find("[name='name']").val(data[i].name);
+		plan.find("[name='planDesc']").val(data[i].description);
+		var importanceVal = data[i].importance;
 		plan.find("[name='importance']").val(importanceVal);
 		switch (importanceVal){
 			case "1":
@@ -171,14 +171,14 @@ function syncAll() {
 			case "3":
 				plan.find(".importance").removeClass("importance1").removeClass("importance2").addClass("importance3");
 		}
-		var dueVal = getCookie("due_"+i).replace(/\-/g, "/");
+		var dueVal = data[i].due.replace(/\-/g, "/");
 		dueVal = dueVal === "0000/00/00 00:00:00" ? "" : dueVal;
 		plan.find("[name='due']").val(dueVal);
-		var repVal = getCookie("rep_"+i);
+		var repVal = data[i].rep;
 		plan.find("[name='repeat']").val(repVal === "0" ? "never" : repVal === "1" ? "day" : repVal === "2" ? "week" : repVal === "3" ? "month" : "year");
-		var phoneAlarmVal = getCookie("phoneAlarm_"+i);
-		var phonePushVal = getCookie("phonePush_"+i);
-		var desktopPushVal = getCookie("desktopPush_"+i);
+		var phoneAlarmVal = data[i].phoneAlarm;
+		var phonePushVal = data[i].phonePush;
+		var desktopPushVal = data[i].desktopPush;
 		if(phoneAlarmVal === "1"){
 			plan.find(".phoneAlarmIcon").removeClass("reminderDisabled").addClass("reminderEnabled");
 		}
@@ -191,14 +191,14 @@ function syncAll() {
 		plan.find("[name='phoneAlarm']").val(phoneAlarmVal);
 		plan.find("[name='phonePush']").val(phonePushVal);
 		plan.find("[name='desktopPush']").val(desktopPushVal);
-		plan.find("[name='url']").val(getCookie("url_"+i));
-		var locationVal = getCookie("location_"+i);
+		plan.find("[name='url']").val(data[i].url);
+		var locationVal = data[i].location;
 		plan.find("[name='location']").val(locationVal);
 		var map = undefined;
 		var marker = undefined;
 		if(locationVal !== ""){
-			var latVal = getCookie("lat_"+i);
-			var lngVal = getCookie("lng_"+i);
+			var latVal = data[i].lat;
+			var lngVal = data[i].lng;
 			var latInput = plan.find("[name='lat']");
 			var lngInput = plan.find("[name='lng']");
 			latInput.val(latVal);
@@ -241,7 +241,7 @@ function syncAll() {
                 });
             }
 		}
-		plan.find("[name='tags']").val(getCookie("tags_"+i));
+		plan.find("[name='tags']").val(data[i].tags);
 		plan.find("#datetimepicker").datetimepicker();
 		$('ul.plans').append(plan);
 		if(locationVal !== ""){
