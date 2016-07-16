@@ -173,8 +173,21 @@ function pushMsg(content, isMine, msgsDiv) {
 }
 
 function syncMessage() {
-	
+	$.get("syncMessage.php", {username: getCookie("username"), password: getCookie("password")}, function (data) {
+		var contents = JSON.parse(data).contents;
+		$('.msgs').html("")
+		for(var i in contents) {
+			if(contents[i].from === getCookie("username")){
+				var msgsDiv = $('.friend').filter(function() {return $(this).html() === contents[i].to;}).next().children().first();
+				msgsDiv.append("<div class='msgBubble msgBubbleMine'>" + contents[i].content + "</div>");
+			} else {
+				var msgsDiv = $('.friend').filter(function() {return $(this).html() === contents[i].from;}).next().children().first();
+				msgsDiv.append("<div class='msgBubble msgBubbleOther'>" + contents[i].content + "</div>");
+			}
+		}
+	});
 }
+setInterval(syncMessage, 10000);
 
 function addFriend(element) {
 	$.get("addFriend.php", {id: getCookie('ownerId'), password: getCookie('password'), friendName: $(element).siblings()[0].innerHTML}, sync);
@@ -333,3 +346,4 @@ $("#usernameBar").html(getCookie("username"));
 $("#welcomeMsg").html("Hi " + getCookie("username") + "! Have a productive day :)");
 $(document).ready(toggleMenu);
 sync();
+syncMessage();
