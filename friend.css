@@ -154,26 +154,28 @@
 
 .friendItem {
   list-style-type: none;
+  width: 216px;
   border: #ccc solid 1px;
   border-radius: 5px;
+  margin-bottom: 10px;
 }
 
 .friendBtn {
-  display: inline-table;
-  width: 71px;
+  display: inline-block;
   border-width: 0px;
   border-radius: 0px;
 }
 
 .pendingBtn {
   display: inline-table;
-  width: 106px;
+  width: 107px;
   border-width: 0px;
   border-radius: 0px;
 }
 
 .btn-share {
   background-color: #0275d8;
+  width: 33%;
   border-radius: 0px 0px 0px 4px;
 }
 .btn-share:hover {
@@ -182,12 +184,14 @@
 
 .btn-msg {
   background-color: #5bc0de;
+  width: 34%;
 }
 .btn-msg:hover {
   background-color: #31b0d5;
 }
 
 .btn-delete {
+  width: 33%;
   background-color: #d9534f;
   border-radius: 0px 0px 4px 0px;
 }
@@ -209,4 +213,105 @@
 }
 .btn-refuse:hover {
   background-color: #bbb;
+}
+
+.PersonalIcon:before {
+  font-family: icon;
+  content: "\e971";
+  color: #D72C41;
+}
+
+.WorkIcon:before {
+  font-family: icon;
+  content: "\e903";
+  color: #ff9900;
+}
+
+.FamilyIcon:before {
+  font-family: icon;
+  content: "\e902";
+  color: #82D282;
+}
+
+.StudyIcon:before {
+  font-family: icon;
+  content: "\e905";
+  color: #4DABEA;
+}
+
+.msgs {
+  height: 0px;
+  overflow-y: auto;
+}
+
+.msgBottom {
+  display: flex;
+  margin: 3px;
+  margin-top: -40px;
+  opacity: 0;
+}
+
+.msgSender {
+  flex: 1;
+  border-radius: 5px 0px 0px 5px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ccc;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 21px;
+  font-size: 13px;
+  padding: 5px;
+}
+
+.msgSender:not(:last-child) {
+  border-right: 0;
+}
+
+.msgSender:focus {
+  outline: none;
+  border-color: #66afe9;
+}
+
+.msgSendBtn {
+  display: inline-flex;
+  background-color: #99da9e;
+  width: 34px;
+  border-radius: 0px 5px 5px 0px;
+}
+
+.msgSendBtn:before {
+  padding: 0px 8px;
+  font-family: icon;
+  content: "\e96a";
+  text-align: center;
+}
+
+.msgSendBtn:hover {
+  background-color: #77ba7e;
+  color: white;
+}
+
+.msgBubble {
+  max-width: 150px;
+  margin: 2px 8px 2px 8px;
+  padding: 4px 3px 4px 3px;
+  font-size: 13px;
+  line-height: 20px;
+  clear: both;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.msgBubbleOther {
+  border: solid 1px #eee;
+  float: left;
+  background-color: #eee;
+}
+
+.msgBubbleMine {
+  border: solid 1px #feb;
+  float: right;
+  background-color: #feb;
 }
