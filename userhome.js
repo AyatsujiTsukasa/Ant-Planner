@@ -178,10 +178,10 @@ function syncMessage() {
 		$('.msgs').html("")
 		for(var i in contents) {
 			if(contents[i].from === getCookie("username")){
-				var msgsDiv = $('.friend').filter(function() {return $(this).html() === contents[i].to;}).next().children().first();
+				var msgsDiv = $('#friendsPart .friend').filter(function() {return $(this).html() === contents[i].to;}).next().children().first();
 				msgsDiv.append("<div class='msgBubble msgBubbleMine'>" + contents[i].content + "</div>");
 			} else {
-				var msgsDiv = $('.friend').filter(function() {return $(this).html() === contents[i].from;}).next().children().first();
+				var msgsDiv = $('#friendsPart .friend').filter(function() {return $(this).html() === contents[i].from;}).next().children().first();
 				msgsDiv.append("<div class='msgBubble msgBubbleOther'>" + contents[i].content + "</div>");
 			}
 		}
@@ -214,7 +214,7 @@ function syncAll(data) {
 	for (var i=0; i<numPlans; i++) {
 		var plan = $(planHTML);
 		plan.find("[name='ownerId']").val(data[i].ownerId);
-		plan.find("[name='planId']").val(data[i].planId);
+		plan.find("[name='planId']").val(data[i].id);
 		plan.find("[name='name']").val(data[i].name);
 		plan.find("[name='planDesc']").val(data[i].description);
 		var importanceVal = data[i].importance;
@@ -299,7 +299,7 @@ function syncAll(data) {
                 });
             }
 		}
-		plan.find("[name='tags']").val(data[i].tags);
+		plan.find("[name='tags']").val(data[i].customTags);
 		plan.find("#datetimepicker").datetimepicker();
 		$('ul.plans').append(plan);
 		if(locationVal !== ""){

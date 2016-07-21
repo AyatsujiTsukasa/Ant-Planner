@@ -27,7 +27,6 @@ if($pw === $password){
 	$conn->query("update Users set friends='".$op."' where id='".$friendId."'");
 	$conn->query("delete from Requests where Requests.from='".$friendId."' and Requests.to='".$id."'");
 	$conn->query("delete from Requests where Requests.from='".$id."' and Requests.to='".$friendId."'");
-	break;
 }
 
 ?>

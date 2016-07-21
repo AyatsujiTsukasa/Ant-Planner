@@ -23,7 +23,6 @@ if($pw === $password){
 	$friendId = mysqli_fetch_array($conn->query("select id from Users where username='".$friendName."'"))['id'];
 	$conn->query("delete from Requests where Requests.from='".$friendId."' and Requests.to='".$id."'");
 	$conn->query("delete from Requests where Requests.from='".$id."' and Requests.to='".$friendId."'");
-	break;
 }
 
 ?>
