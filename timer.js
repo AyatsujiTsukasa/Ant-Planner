@@ -154,14 +154,7 @@ function enter(e){
     if (timerId === undefined && e.keyCode === 13) {
         ctrl();
     }
-}
-
-var audio = $("#audio")[0];  
-
-function music() {
-    audio.play();
-    setTimeout("audio.pause()", 5000);
-}
+} 
 
 $(document).ready(toggleMenu);
 
@@ -192,22 +185,6 @@ function toDigit(digitElement, number) {
     }
 }
 
-function requestPermission(){
-    if (Notification) {
-        Notification.requestPermission();
-    }
-}
-
-$(document).ready(requestPermission);
-
-function showNotificatioin(title, body){
-    var options = {body: body, icon: "Images/AntPlannerIcon.png", tag: "timer"};
-    if (Notification) {
-        requestPermission();
-        if (Notification.permission === "granted") {
-            notify = new Notification(title, options);
-        }
-    }
-}
+setNotification();
 
 // 以后要加的功能：Task可以直接从plan中选择
