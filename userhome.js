@@ -123,13 +123,71 @@ $('#addFriendSearch').on('keyup', function(){
 	}
 })
 
+$('#friendsearch').on('keyup', function () {
+	var key = $.trim($(this).val());
+	if(key !== ""){
+		key = new RegExp(key, 'i');
+		$('.friend').filter(function() {return !key.test($(this).html());}).parent().addClass('subHidden');
+		$('.friend').filter(function() {return key.test($(this).html());}).parent().removeClass('subHidden');
+	} else {
+		$('.friendItem').removeClass('subHidden');
+	}
+})
+
 function share(element) {
-	console.log(element);
+	var target = element.previousElementSibling.previousElementSibling.innerHTML;
+	$.get('crxLogin.php', {username: getCookie('username'), password: getCookie('password')}, function (data) {
+		var plans = JSON.parse(data).contents;
+		var sharePlanHTML = "";
+		plans.map(function (x) {
+			var due = (x.due === "0000-00-00 00:00:00" ? "" : "<span style='float: right' class='afterIcon'>" + x.due + "</span>");
+			sharePlanHTML += "<div class='planForShare list-group-item cursor-pointer' onclick='sharePlan(this)' planId='" + x.id + "' target='" + target + "'><span class='" + x.customTags + "Icon '> " + x.name + "</span>" + due + "</div>";
+		});
+		$('.planShareContainer').html(sharePlanHTML);
+	})
+}
+
+function sharePlan(element) {
+	$.get('share.php', {username: getCookie('username'), password: getCookie('password'), planId: element.attributes.planId.value, target: element.attributes.target.value});
+	$('#sendPlan').modal('hide');
 }
 
 function sendMessage(element) {
-	console.log(element);
+	if($(element).attr('expanded') === "true"){
+		$(element).attr('expanded', 'false');
+		var a = $(element).prev().prev();
+		a.children().first().animate({height: '0px'}, 200);
+		a.children().first().next().animate({'margin-top': '-=40px', 'opacity': 0}, 160);
+	} else {
+		$(element).attr('expanded', 'true');
+		var a = $(element).prev().prev();
+		a.children().first().animate({height: '160px'}, 200);
+		a.children().first().next().animate({'margin-top': '+=40px', 'opacity': 1}, 160);
+		a.children().first().next().children().focus();
+	}
 }
+
+function pushMsg(content, isMine, msgsDiv) {
+	msgsDiv.append("<div class='msgBubble " + (isMine ? "msgBubbleMine" : "msgBubbleOther") + "'>" + content + "</div>");
+	msgsDiv.animate({scrollTop: msgsDiv.prop("scrollHeight")}, 100);
+}
+
+function syncMessage() {
+	$.get("syncMessage.php", {username: getCookie("username"), password: getCookie("password")}, function (data) {
+		var contents = JSON.parse(data).contents;
+		$('.msgs').html("")
+		for(var i in contents) {
+			if(contents[i].from === getCookie("username")){
+				var msgsDiv = $('#friendsPart .friend').filter(function() {return $(this).html() === contents[i].to;}).next().children().first();
+				msgsDiv.append("<div class='msgBubble msgBubbleMine'>" + contents[i].content + "</div>");
+			} else {
+				var msgsDiv = $('#friendsPart .friend').filter(function() {return $(this).html() === contents[i].from;}).next().children().first();
+				msgsDiv.append("<div class='msgBubble msgBubbleOther'>" + contents[i].content + "</div>");
+			}
+		}
+	});
+}
+setInterval(syncMessage, 10000);
 
 function addFriend(element) {
 	$.get("addFriend.php", {id: getCookie('ownerId'), password: getCookie('password'), friendName: $(element).siblings()[0].innerHTML}, sync);
@@ -156,7 +214,7 @@ function syncAll(data) {
 	for (var i=0; i<numPlans; i++) {
 		var plan = $(planHTML);
 		plan.find("[name='ownerId']").val(data[i].ownerId);
-		plan.find("[name='planId']").val(data[i].planId);
+		plan.find("[name='planId']").val(data[i].id);
 		plan.find("[name='name']").val(data[i].name);
 		plan.find("[name='planDesc']").val(data[i].description);
 		var importanceVal = data[i].importance;
@@ -241,7 +299,7 @@ function syncAll(data) {
                 });
             }
 		}
-		plan.find("[name='tags']").val(data[i].tags);
+		plan.find("[name='tags']").val(data[i].customTags);
 		plan.find("#datetimepicker").datetimepicker();
 		$('ul.plans').append(plan);
 		if(locationVal !== ""){
@@ -254,7 +312,7 @@ function syncAll(data) {
 	var friends = getCookie("friends").split("&");
 	for(var i in friends){
 		if(friends[i] !== "") {
-			friendHTML += "<li class='friendItem input-group'><div class='friend'>" + friends[i] + "</div><div class='btn btn-share friendBtn' onclick='share(this)' data-toggle='tooltip' data-placement='bottom' title='Share plans'><span class='shareIcon'></span></div><div class='btn btn-msg friendBtn' onclick='sendMessage(this)' data-toggle='tooltip' data-placement='bottom' title='Send messages'><span class='messageIcon'></span></div><div class='btn btn-delete friendBtn' onclick='deleteFriend(this)' data-toggle='tooltip' data-placement='bottom' title='Delete friend'><span class='deleteIcon'></span></div></li>";
+			friendHTML += "<li class='friendItem input-group'><div class='friend'>" + friends[i] + "</div><div class='msgBox'><div class='msgs'></div><div class='msgBottom'><input type='text' placeholder='Message Here' class='msgSender' onkeydown='enter(event, this)' /><div class='msgSendBtn cursor-pointer'></div></div></div><div class='btn btn-share friendBtn' onclick='share(this)' data-toggle='modal' data-toggle='tooltip' data-target='#sendPlan' data-placement='bottom' title='Share plans'><span class='shareIcon'></span></div><div class='btn btn-msg friendBtn' onclick='sendMessage(this)' expanded='false' data-toggle='tooltip' data-placement='bottom' title='Send messages'><span class='messageIcon'></span></div><div class='btn btn-delete friendBtn' onclick='deleteFriend(this)' data-toggle='tooltip' data-placement='bottom' title='Delete friend'><span class='deleteIcon'></span></div></li>";
 		}
 	}
 	var requests = getCookie("requests").split("&");
@@ -266,6 +324,20 @@ function syncAll(data) {
 	$('#friendsPart').html(friendHTML);
 	$('#pendingPart').html(requestHTML);
 	$('#syncLoading').modal('hide');
+	$('.msgSendBtn').on('click', function () {
+		var content = $(this).prev().val();
+		if(content !== ""){
+			$.get('sendMessage.php', {username: getCookie('username'), to: $(this).parent().parent().parent().children().first().html(), content: content, password: getCookie('password')});
+			$(this).prev().val("");
+			pushMsg(content, true, $(this).parent().prev());
+		}
+	})
+}
+
+function enter(e, element){
+    if (e.keyCode === 13) {
+        $(element).next().click();
+    }
 }
 
 // Initialization
@@ -274,3 +346,4 @@ $("#usernameBar").html(getCookie("username"));
 $("#welcomeMsg").html("Hi " + getCookie("username") + "! Have a productive day :)");
 $(document).ready(toggleMenu);
 sync();
+syncMessage();

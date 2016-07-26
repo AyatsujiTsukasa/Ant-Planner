@@ -42,11 +42,9 @@ function signIn() {
 }
 
 function planFrame(planObj) {
-	var a_head = "",
-		a_tail = "";
+	var clickable = "";
 	if(planObj.url !== ""){
-		a_head = "<a href='"+planObj.url+"'>";
-		a_tail = "</a>";
+		clickable = "style='cursor: pointer'";
 	}
 	var rep = "";
 	switch(planObj.rep){
@@ -66,11 +64,7 @@ function planFrame(planObj) {
 		break;
 	}
 	rep = rep === "" ? "" : "<p class='repeat'>Repeat: "+rep+"</p>";
-	return "<div class='plan'>"+a_head+"<p class='planName "+planObj.customTags+"'>"+" "+planObj.name+"</p>"+a_tail+"<p class='due'>"+planObj.due+"</p>"+rep+"</div>";
-}
-
-function tagFilter(type) {
-	return "<div class='tagFilter'><p class='"+type+"'></p><p>"+type+"</p></div>";
+	return "<div class='plan' " + clickable + " url=" + planObj.url + "><p class='planName "+planObj.customTags+"'> "+planObj.name+"</p><p class='due'>"+planObj.due+"</p>"+rep+"</div>";
 }
 
 function loadPlans(response) {
@@ -83,10 +77,12 @@ function loadPlans(response) {
 	for(var i in planArr){
 		plans += planFrame(planArr[i]);
 	}
-	var head = tagFilter('Personal') + tagFilter('Work') + tagFilter('Family') + tagFilter('Study');
 	var btn1 = planArr.length > 0 ? "Manage My Plans" : "Add My First Plan";
 	var tail = "<div style='padding-left: 5px'><p id='toUserhome' style='cursor:pointer'>"+btn1+"</p><p id='logOut' style='cursor:pointer'>Log Out</p></div>";
-	$('.main').html(head + plans + tail);
+	$('.main').html(plans + tail);
+	$('.plan').on('click', function () {
+		if($(this).attr('url') !== "") chrome.tabs.create({url: $(this).attr('url')});
+	});
 	$('#toUserhome').on('click', function () {
 		chrome.tabs.create({'url':'https://www.antplanner.org/userhome.html', 'selected':true});
 	});
@@ -108,8 +104,6 @@ var username = "",
 	ownerId = "";
 
 chrome.cookies.getAll({"url": "https://www.antplanner.org"}, function (cookie) {
-
-	// Get cookies from antplanner.org
 	for(var i in cookie){
 		switch(cookie[i].name){
 			case "username":
@@ -125,7 +119,6 @@ chrome.cookies.getAll({"url": "https://www.antplanner.org"}, function (cookie) {
 			break;
 		}
 	}
-	// And sign in
 	signIn();
 });
 
