@@ -36,6 +36,7 @@ switch ($_POST["repeat"]) {
 		$repeat = 0;
 		break;
 }
+$reminder = $_POST["reminder"];
 $phoneAlarm = $_POST["phoneAlarm"];
 $phonePush = $_POST["phonePush"];
 $desktopPush = $_POST["desktopPush"];
@@ -50,7 +51,7 @@ $pw = mysqli_fetch_array($conn->query($verificationPW))["password"];
 
 if($pw === $password){
 	if($id === "-1"){
-		$sql = "insert into Plans (ownerId, name, description, due, importance, phonePush, phoneAlarm, desktopPush, customTags, url, lat, lng, location, rep) values('".$ownerId."','".$planName."','".$planDesc."','".$due."','".$importance."','".$phonePush."','".$phoneAlarm."','".$desktopPush."','".$tags."','".$url."','".$lat."','".$lng."','".$location."','".$repeat."');";
+		$sql = "insert into Plans (ownerId, name, description, due, importance, reminder, phonePush, phoneAlarm, desktopPush, customTags, url, lat, lng, location, rep) values('".$ownerId."','".$planName."','".$planDesc."','".$due."','".$importance."','".$reminder."','".$phonePush."','".$phoneAlarm."','".$desktopPush."','".$tags."','".$url."','".$lat."','".$lng."','".$location."','".$repeat."');";
 		$conn->query($sql);
 		$id = $conn->insert_id;
 		echo $id;
@@ -58,7 +59,7 @@ if($pw === $password){
 		$verificationID = "select ownerId from Plans where id='".$id."'";
 		$oI = mysqli_fetch_array($conn->query($verificationID))["ownerId"];
 		if(intval($oI) === intval($ownerId)){
-			$sql = "update Plans set ownerId='".$ownerId."',name='".$planName."',description='".$planDesc."',due='".$due."',importance='".$importance."',phonePush='".$phonePush."',phoneAlarm='".$phoneAlarm."',desktopPush='".$desktopPush."',customTags='".$tags."',url='".$url."',lat='".$lat."',lng='".$lng."',location='".$location."',rep='".$repeat."' where id='".$id."'";
+			$sql = "update Plans set ownerId='".$ownerId."',name='".$planName."',description='".$planDesc."',due='".$due."',importance='".$importance."',reminder='".$reminder."',phonePush='".$phonePush."',phoneAlarm='".$phoneAlarm."',desktopPush='".$desktopPush."',customTags='".$tags."',url='".$url."',lat='".$lat."',lng='".$lng."',location='".$location."',rep='".$repeat."' where id='".$id."'";
 			$conn->query($sql);
 		}
 		echo $id;

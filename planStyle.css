@@ -138,6 +138,15 @@
     color: #5353c6;
 }
 
+.reminder-active-input{
+    border-color: #5353c6;
+}
+
+.reminder-input:focus{
+    border-color: #5353c6;
+    box-shadow: 0 0 2px slateblue;
+}
+
 .reminder{
     text-align: center;
     cursor: pointer;

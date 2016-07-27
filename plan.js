@@ -187,9 +187,11 @@ function repeatMouseleave(ele){
 
 function reminderRowMouseenter(ele){
     $(ele).addClass("reminderTagIcon-active");
+    $(ele).children().children().addClass("reminder-active-input");
 }
 function reminderRowMouseleave(ele){
     $(ele).removeClass("reminderTagIcon-active");
+    $(ele).children().children().removeClass("reminder-active-input");
 }
 
 
@@ -235,6 +237,7 @@ function submitForm(ele) {
             $.post(action, form.serialize()+"&password="+getCookie("password"), function (data) {
                 planId.val(data);
             });
+            setNotification();
         } else {
             alert("The name of this plan is empty.");
         }
