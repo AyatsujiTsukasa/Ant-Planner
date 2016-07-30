@@ -336,6 +336,9 @@ function syncAll(data) {
 			pushMsg(content, true, $(this).parent().prev());
 		}
 	})
+	if(notify){
+		setNotification();
+	}
 }
 
 function enter(e, element){
@@ -346,9 +349,18 @@ function enter(e, element){
 
 // Initialization
 
+var notify = true;
+
 $("#usernameBar").html(getCookie("username"));
 $("#welcomeMsg").html("Hi " + getCookie("username") + "! Have a productive day :)");
 $(document).ready(toggleMenu);
+if( /iPhone|iPad|iPod/i.test(navigator.userAgent) ) {
+	$('.btnTag').css({marginTop: '3px', padding: '6px 13px 6px 13px', fontSize: '12px'})
+	$('ul:contains("Pomo")').remove()
+	$('.plans form').children().css('margin-bottom', '0px')
+	$('.plans li').css('padding', '0px 0px')
+	$('.plans li').children().css('padding', '0px')
+	notify = false;
+}
 sync();
 syncMessage();
-setNotification();
