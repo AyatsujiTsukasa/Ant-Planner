@@ -344,6 +344,7 @@ function syncAll(data) {
 		$('.plans li').css('padding', '0px 0px')
 		$('.plans li').children().css('padding', '0px')
 		$('.dummy').remove()
+		$('ul #usernameSide').parent().parent().parent().remove()
 	} else {
 		setNotification()
 	}
