@@ -7,15 +7,15 @@ $conn = mysqli_connect($servername, $name, $password, $dbname);
 if (!$conn) {
     die("Connection failed: ".mysqli_connect_error());
 }
-if(!$_POST) {
+if(!$_GET) {
 	die("This file cannot be accessed directly!");
 }
 
-$username = $_POST["username"];
-$email = $_POST["email"];
-$password = $_POST["password"];
-$password2 = $_POST["password2"];
-if(isset($_POST["remember"])) {
+$username = $_GET["username"];
+$email = $_GET["email"];
+$password = $_GET["password"];
+$password2 = $_GET["password2"];
+if(isset($_GET["remember"])) {
 	$time = 3600*24*90;
 } else {
 	$time = 300;

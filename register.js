@@ -123,7 +123,7 @@ function validate() {
 $('#registerButton').on("click", function () {
 	var _this = $(this).parent(),
 		action = _this.attr("action");
-	$.post(action, _this.serialize(), function (data) {
+	$.get(action, _this.serialize(), function (data) {
 		$('.ajaxMsg').html(data).show();
 		if(/Account Created!/.test(data)){
 			$('#redirect').html("Redirecting to your home page...3");
