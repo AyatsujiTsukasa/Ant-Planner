@@ -7,13 +7,13 @@ $conn = mysqli_connect($servername, $name, $password, $dbname);
 if (!$conn) {
     die("Connection failed: ".mysqli_connect_error());
 }
-if(!$_POST) {
+if(!$_GET) {
 	die("This file cannot be accessed directly!");
 }
 
-$email = $_POST["email"];
-$password = $_POST["password"];
-if(isset($_POST["remember"])) {
+$email = $_GET["email"];
+$password = $_GET["password"];
+if(isset($_GET["remember"])) {
 	$time = 3600*24*90;
 } else {
 	$time = 300;
@@ -60,7 +60,7 @@ if($valid){
 	setcookie("username", $username, time()+$time, "/");
 	setcookie("ownerId", $id, time()+$time, "/");
 	setcookie("password", $password, time()+$time, "/");
-	echo "Verified";
+	echo "V";
 } else {
 	echo $errorMsg."</ul><div>";
 }

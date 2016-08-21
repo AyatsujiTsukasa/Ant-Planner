@@ -61,7 +61,7 @@ if($pw === $password){
 		default:
 			break;
 	}
-	$plans = $conn->query($getPlans);
+	$plans = $conn->query($getPlans . " order by due");
 	$rows = array();
 	$i=0;
 	while($r = mysqli_fetch_assoc($plans)) {
