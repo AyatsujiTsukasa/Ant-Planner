@@ -18,7 +18,17 @@ $("#usernameSide").html(getCookie("username"));
 $('#logOut').on("click", function () {
 	clearCookie();
 	window.location = 'login.html';
+	var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
 });
+
+function onLoad() {
+	gapi.load('auth2', function() {
+		gapi.auth2.init();
+	});
+}
 
 $('#changePW').on("click", function () {
 	var _this = $(this).parent(),

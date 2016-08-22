@@ -238,6 +238,7 @@ function submitForm(ele) {
                 planId.val(data);
             });
             setNotification();
+            alert("Plan added!");
         } else {
             alert("The name of this plan is empty.");
         }
