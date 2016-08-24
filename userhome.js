@@ -59,9 +59,9 @@ function addPlan() {
 function setDefaultTime() {
 	var date = new Date();
 	var year = date.getFullYear();
-	var month = date.getMonth();
+	var month = date.getMonth() + 1;
 	var day = date.getDate();
-	return year + "/" + month + "/" + day + " 23:59";
+	return year + "/0" + month + "/" + day + " 23:59";
 }
 
 $('.btnAddPlan').on("click", addPlan);
