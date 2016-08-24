@@ -38,6 +38,7 @@ if($pw === $password){
 	if($tagFilter !== "All"){
 		$getPlans .= " and customTags='".$tagFilter."'";
 	}
+	date_default_timezone_set("Asia/Singapore");
 	$date = getdate();
 	$formattedDate = $date['year']."-".$date['mon']."-".$date['mday'];
 	$formattedDateTime = $formattedDate." ".$date['hours'].":".$date['minutes'].":".$date['seconds'];
