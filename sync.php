@@ -48,7 +48,7 @@ if($pw === $password){
 			$getPlans .= " and due <= date_add('".$formattedDate."', interval 1 day) and due >= '".$formattedDate."'";
 			break;
 		case 'Tomorrow':
-			$getPlans .= " and due <= date_add('".$formattedDate."', interval 2 day) and due >= '".$formattedDate."'";
+			$getPlans .= " and due <= date_add('".$formattedDate."', interval 2 day) and due >= date_add('".$formattedDate."', interval 1 day)";
 			break;
 		case 'Next 7 days':
 			$getPlans .= " and due <= date_add('".$formattedDate."', interval 8 day) and due >= '".$formattedDate."'";
