@@ -38,6 +38,7 @@ if($pw === $password){
 	if($tagFilter !== "All"){
 		$getPlans .= " and customTags='".$tagFilter."'";
 	}
+	date_default_timezone_set("Asia/Singapore");
 	$date = getdate();
 	$formattedDate = $date['year']."-".$date['mon']."-".$date['mday'];
 	$formattedDateTime = $formattedDate." ".$date['hours'].":".$date['minutes'].":".$date['seconds'];
@@ -47,7 +48,7 @@ if($pw === $password){
 			$getPlans .= " and due <= date_add('".$formattedDate."', interval 1 day) and due >= '".$formattedDate."'";
 			break;
 		case 'Tomorrow':
-			$getPlans .= " and due <= date_add('".$formattedDate."', interval 2 day) and due >= '".$formattedDate."'";
+			$getPlans .= " and due <= date_add('".$formattedDate."', interval 2 day) and due >= date_add('".$formattedDate."', interval 1 day)";
 			break;
 		case 'Next 7 days':
 			$getPlans .= " and due <= date_add('".$formattedDate."', interval 8 day) and due >= '".$formattedDate."'";

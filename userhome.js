@@ -47,6 +47,7 @@ var planHTML = "<li class='list-group-item'><div><form autocomplete='off' class=
 function addPlan() {
 	var newPlan = $(planHTML);
 	newPlan.find("#datetimepicker").datetimepicker();
+	newPlan.find("#datetimepicker").val(setDefaultTime());
 	newPlan.find("#datetimepicker2").datetimepicker();
 	$('ul.plans').append(newPlan);
     $('html, body').animate({
@@ -55,12 +56,22 @@ function addPlan() {
 	getLocation(newPlan.find("#map")[0]);
 }
 
+function setDefaultTime() {
+	var date = new Date();
+	var year = date.getFullYear();
+	var month = date.getMonth() + 1;
+	var day = date.getDate();
+	return year + "/0" + month + "/" + day + " 23:59";
+}
+
 $('.btnAddPlan').on("click", addPlan);
 $('.btnFoldAll').on("click", function () {
 	$('.header').siblings().addClass('subHidden');
+	$('.planTagHeader').children().removeClass("planTagHeaderIconUp").addClass("planTagHeaderIconDown");
 });
 $('.btnUnfoldAll').on("click", function () {
 	$('.header').siblings().removeClass('subHidden');
+	$('.planTagHeader').children().removeClass("planTagHeaderIconDown").addClass("planTagHeaderIconUp");
 });
 $('.timeTag').on('click', function(){
 	if(!/active/.test($(this).attr('class'))){
